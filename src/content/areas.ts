@@ -1,0 +1,21 @@
+export const areas = {
+  primary: 'Aarhus og omegn',
+  description: 'Vi hjælper kunder i Aarhus og omegn. Ved større eller faste opgaver kører vi også uden for Aarhus efter aftale.',
+  cities: [
+    'Aarhus C',
+    'Viby J',
+    'Risskov',
+    'Højbjerg',
+    'Brabrand',
+    'Tilst',
+    'Skejby',
+    'Egå',
+    'Lystrup',
+    'Skødstrup',
+    'Malling',
+    'Beder',
+    'Mårslet',
+    'Solbjerg',
+    'Harlev',
+  ],
+} as const;
