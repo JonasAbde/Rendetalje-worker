@@ -115,24 +115,24 @@ export default function Pricing() {
               <div className="bg-green-50 rounded-2xl p-6 border border-green-100">
                 <h3 className="font-semibold text-slate-900 mb-3">Fast rengøring — to faser</h3>
                 <p className="text-sm text-slate-600 mb-4">
-                  Tilbagevendende rengøring opdeles altid i to priser:
+                  Tilbagevendende rengøring varierer efter kundens behov. Første gang kræver altid ekstra:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-white rounded-xl p-4 border border-green-200">
                     <p className="text-xs text-green-700 font-medium mb-1">FØRSTE GANG</p>
-                    <p className="text-lg font-bold text-slate-900">
-                      {pricing.recurring.firstCleaning.hours} timer = {pricing.recurring.firstCleaning.price} kr
+                    <p className="text-sm font-bold text-slate-900 mb-1">
+                      Ekstra tid for at få standen til tops
                     </p>
-                    <p className="text-xs text-slate-600 mt-1">
+                    <p className="text-xs text-slate-600">
                       {pricing.recurring.firstCleaning.description}
                     </p>
                   </div>
                   <div className="bg-white rounded-xl p-4 border border-green-200">
-                    <p className="text-xs text-green-700 font-medium mb-1">DEREFTER HVER UGE</p>
-                    <p className="text-lg font-bold text-slate-900">
-                      {pricing.recurring.ongoing.hours} timer = {pricing.recurring.ongoing.weeklyPrice} kr/uge
+                    <p className="text-xs text-green-700 font-medium mb-1">DEREFTER</p>
+                    <p className="text-sm font-bold text-slate-900 mb-1">
+                      Vedligeholdelse efter dit ønske
                     </p>
-                    <p className="text-xs text-slate-600 mt-1">
+                    <p className="text-xs text-slate-600">
                       {pricing.recurring.ongoing.description}
                     </p>
                   </div>

@@ -67,10 +67,8 @@ export function PriceCalculator() {
     const totalHours = baseHours + extraHours;
     const estimatedPrice = Math.round(totalHours * pricing.hourlyRate);
 
-    // For recurring services: show both first cleaning (higher) and ongoing (lower)
+    // Check if recurring service
     const isRecurring = state.frequency !== "once";
-    const firstCleaningHours = totalHours * 1.5; // First cleaning takes ~50% more time
-    const firstCleaningPrice = Math.round(firstCleaningHours * pricing.hourlyRate);
 
     // Min/max range for estimate (±20% for uncertainty)
     const minPrice = Math.max(pricing.minimumPrice, Math.round(estimatedPrice * 0.8));
@@ -78,12 +76,9 @@ export function PriceCalculator() {
 
     return {
       hours: Math.round(totalHours * 10) / 10,
-      firstHours: Math.round(firstCleaningHours * 10) / 10,
       minPrice,
       maxPrice,
-      firstPrice: firstCleaningPrice,
       isRecurring,
-      frequencyLabel: frequencyLabels[state.frequency],
     };
   };
 
@@ -263,16 +258,10 @@ export function PriceCalculator() {
                 {result.isRecurring && (
                   <div className="mb-4 p-3 bg-white rounded-xl border border-green-200">
                     <p className="text-sm font-medium text-slate-700 mb-2">Fast rengøring:</p>
-                    <div className="space-y-1 text-sm">
-                      <p className="flex justify-between">
-                        <span className="text-slate-600">Første grundige rengøring:</span>
-                        <span className="font-medium">ca. {result.firstPrice.toLocaleString("da-DK")} kr ({result.firstHours} timer)</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span className="text-slate-600">Derefter {result.frequencyLabel.toLowerCase()}:</span>
-                        <span className="font-medium">ca. {(result.minPrice + result.maxPrice) / 2 / 2} kr/uge</span>
-                      </p>
-                    </div>
+                    <p className="text-sm text-slate-600">
+                      Første gang tager altid ekstra tid for at få standen til tops.
+                      Derefter vedligeholdes efter dit ønske — timer og frekvens aftales individuelt.
+                    </p>
                   </div>
                 )}
 

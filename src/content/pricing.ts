@@ -25,14 +25,10 @@ export const pricing = {
   // Recurring cleaning breakdown
   recurring: {
     firstCleaning: {
-      hours: 4,
-      price: 1396,
-      description: "Første grundige rengøring tager længere tid for at bygge niveauet op",
+      description: "Første gang tager altid ekstra tid for at få standen af rengøring til tops",
     },
     ongoing: {
-      hours: 2,
-      weeklyPrice: 698,
-      description: "Derefter lavere og mere stabilt tidsforbrug ved fast vedligeholdelse",
+      description: "Derefter vedligeholdes efter dit ønske — timer og frekvens aftales individuelt",
     },
   },
   wording:
