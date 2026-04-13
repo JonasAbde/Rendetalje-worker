@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { MapPin, Phone, Mail, CheckCircle2, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { company } from "@/content/company";
+import MultiStepForm from "@/components/contact/MultiStepForm";
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true);
     setError(null);
 
-    const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
     try {
-      // Attempt to call the Cloudflare Worker API
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: {
@@ -137,289 +135,12 @@ export default function Contact() {
 
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm">
-                {isSubmitted ? (
-                  <div className="text-center py-12">
-                    <div className="w-20 h-20 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-6">
-                      <CheckCircle2 size={40} />
-                    </div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-4">
-                      Tak for din forespørgsel!
-                    </h2>
-                    <p className="text-lg text-slate-600 mb-8 max-w-md mx-auto">
-                      Vi har modtaget dine oplysninger og vender tilbage til dig
-                      hurtigst muligt.
-                    </p>
-                    <p className="text-slate-500">
-                      Har du spørgsmål i mellemtiden, kan du ringe på{" "}
-                      <a
-                        href={`tel:${company.phone.replace(/\s+/g, "")}`}
-                        className="text-green-600 hover:underline"
-                      >
-                        {company.phone}
-                      </a>
-                      .
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {error && (
-                      <div className="p-4 bg-red-50 text-red-600 rounded-xl border border-red-100">
-                        {error}
-                      </div>
-                    )}
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="name"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Navn *
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          required
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="phone"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Telefon *
-                        </label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          required
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-slate-700"
-                      >
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="address"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Adresse
-                        </label>
-                        <input
-                          type="text"
-                          id="address"
-                          name="address"
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="city"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Postnr. / By
-                        </label>
-                        <input
-                          type="text"
-                          id="city"
-                          name="city"
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="type"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Type af opgave *
-                        </label>
-                        <select
-                          id="type"
-                          name="type"
-                          required
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
-                        >
-                          <option value="">Vælg type</option>
-                          <option value="fast">Fast rengøring</option>
-                          <option value="flytte">Flytterengøring</option>
-                          <option value="hoved">Hovedrengøring</option>
-                          <option value="erhverv">Erhvervsrengøring</option>
-                          <option value="andet">Andet</option>
-                        </select>
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="size"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Boligstørrelse / m²
-                        </label>
-                        <input
-                          type="text"
-                          id="size"
-                          name="size"
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="frequency"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Ønsket frekvens (ved fast aftale)
-                        </label>
-                        <select
-                          id="frequency"
-                          name="frequency"
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
-                        >
-                          <option value="">Vælg frekvens</option>
-                          <option value="ugentlig">Ugentlig</option>
-                          <option value="hver_14_dag">Hver 14. dag</option>
-                          <option value="andet">Andet</option>
-                        </select>
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="date"
-                          className="block text-sm font-medium text-slate-700"
-                        >
-                          Ønsket dato / tidsramme
-                        </label>
-                        <input
-                          type="text"
-                          id="date"
-                          name="date"
-                          placeholder="F.eks. snarest muligt, eller specifik dato"
-                          className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="description"
-                        className="block text-sm font-medium text-slate-700"
-                      >
-                        Kort beskrivelse af opgaven
-                      </label>
-                      <textarea
-                        id="description"
-                        name="description"
-                        rows={4}
-                        className="w-full p-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all resize-none"
-                      ></textarea>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium text-slate-700">
-                        Upload billeder (valgfrit)
-                      </label>
-                      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl hover:border-green-500 transition-colors cursor-pointer bg-slate-50">
-                        <div className="space-y-1 text-center">
-                          <svg
-                            className="mx-auto h-12 w-12 text-slate-400"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 48 48"
-                            aria-hidden="true"
-                          >
-                            <path
-                              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          <div className="flex text-sm text-slate-600 justify-center">
-                            <span className="relative cursor-pointer bg-transparent rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
-                              Upload en fil
-                            </span>
-                            <p className="pl-1">eller træk og slip</p>
-                          </div>
-                          <p className="text-xs text-slate-500">
-                            PNG, JPG, GIF op til 10MB
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* GDPR Consent Checkbox */}
-                    <div className="space-y-3 pt-4 border-t border-slate-200">
-                      <div className="flex items-start gap-3">
-                        <input
-                          type="checkbox"
-                          id="gdprConsent"
-                          name="gdprConsent"
-                          required
-                          className="mt-1 w-4 h-4 text-green-600 rounded border-slate-300 focus:ring-green-500"
-                        />
-                        <div className="text-sm text-slate-600">
-                          <label htmlFor="gdprConsent" className="font-medium text-slate-700">
-                            Samtykke til behandling af persondata *
-                          </label>
-                          <p className="mt-1">
-                            Jeg accepterer, at Rendetalje må kontakte mig vedrørende mit rengøringsbehov og opbevarer mine oplysninger i henhold til{" "}
-                            <a 
-                              href="/privatlivspolitik" 
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-green-600 hover:underline"
-                            >
-                              privatlivspolitikken
-                            </a>
-                            . Jeg kan til enhver tid trække mit samtykke tilbage.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-4">
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full h-14 flex items-center justify-center rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Sender...
-                          </>
-                        ) : (
-                          "Send forespørgsel"
-                        )}
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </div>
+              <MultiStepForm
+                onSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                isSubmitted={isSubmitted}
+                error={error}
+              />
             </div>
           </div>
         </div>

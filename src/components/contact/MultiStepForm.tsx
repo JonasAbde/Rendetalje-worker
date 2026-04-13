@@ -1,0 +1,323 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Loader2, ChevronLeft } from "lucide-react";
+import StepIndicator from "./StepIndicator";
+import ServiceSelector from "./ServiceSelector";
+import PriceCalculator from "./PriceCalculator";
+import SuccessAnimation from "./SuccessAnimation";
+
+interface MultiStepFormProps {
+  onSubmit: (data: FormData) => Promise<void>;
+  isSubmitting: boolean;
+  isSubmitted: boolean;
+  error: string | null;
+}
+
+interface FormData {
+  type: string;
+  size: string;
+  frequency: string;
+  date: string;
+  description: string;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+}
+
+export default function MultiStepForm({
+  onSubmit,
+  isSubmitting,
+  isSubmitted,
+  error,
+}: MultiStepFormProps) {
+  const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState<FormData>({
+    type: "",
+    size: "",
+    frequency: "",
+    date: "",
+    description: "",
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    city: "",
+  });
+
+  const updateField = (field: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleNext = () => {
+    if (step < 2) setStep(step + 1);
+  };
+
+  const handleBack = () => {
+    if (step > 0) setStep(step - 1);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value);
+    });
+    await onSubmit(data);
+  };
+
+  // Validation for each step
+  const canProceed = () => {
+    switch (step) {
+      case 0:
+        return formData.type !== "";
+      case 1:
+        return formData.size !== "" && parseInt(formData.size) > 0;
+      case 2:
+        return (
+          formData.name !== "" &&
+          formData.phone !== "" &&
+          formData.email !== ""
+        );
+      default:
+        return false;
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm">
+        <SuccessAnimation name={formData.name || "dig"} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm">
+      <StepIndicator currentStep={step} totalSteps={3} />
+
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-xl border border-red-100">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={step === 2 ? handleSubmit : (e) => e.preventDefault()}>
+        <AnimatePresence mode="wait">
+          {/* Step 1: Service Selection */}
+          {step === 0 && (
+            <motion.div
+              key="step1"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ServiceSelector
+                selected={formData.type}
+                onSelect={(value) => updateField("type", value)}
+              />
+
+              <div className="mt-8 flex justify-end">
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={!canProceed()}
+                  className="h-14 px-8 rounded-full bg-green-600 text-white font-medium transition-colors hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Næste: Detaljer & pris →
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 2: Details & Price Calculator */}
+          {step === 1 && (
+            <motion.div
+              key="step2"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              <PriceCalculator
+                type={formData.type}
+                size={formData.size}
+                frequency={formData.frequency}
+                onSizeChange={(value) => updateField("size", value)}
+                onFrequencyChange={(value) => updateField("frequency", value)}
+              />
+
+              {/* Additional fields */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-slate-700">
+                  Ønsket dato / tidsramme
+                </label>
+                <input
+                  type="text"
+                  value={formData.date}
+                  onChange={(e) => updateField("date", e.target.value)}
+                  placeholder="F.eks. snarest muligt, eller specifik dato"
+                  className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-slate-700">
+                  Kort beskrivelse af opgaven
+                </label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => updateField("description", e.target.value)}
+                  rows={4}
+                  className="w-full p-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all resize-none"
+                />
+              </div>
+
+              <div className="flex justify-between mt-8">
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="h-14 px-6 rounded-full border-2 border-slate-300 text-slate-700 font-medium hover:border-slate-400 transition-colors flex items-center gap-2"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                  Tilbage
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={!canProceed()}
+                  className="h-14 px-8 rounded-full bg-green-600 text-white font-medium transition-colors hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Næste: Kontakt →
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 3: Contact Info */}
+          {step === 2 && (
+            <motion.div
+              key="step3"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              <div className="bg-green-50 rounded-xl p-4 mb-6">
+                <p className="text-sm text-green-800">
+                  <strong>Du er der næsten!</strong> Udfyld dine kontaktoplysninger, så vi kan ringe dig op med et tilbud.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-slate-700">
+                    Navn *
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => updateField("name", e.target.value)}
+                    required
+                    className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-slate-700">
+                    Telefon *
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => updateField("phone", e.target.value)}
+                    required
+                    className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-slate-700">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => updateField("email", e.target.value)}
+                  required
+                  className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-slate-700">
+                    Adresse (valgfri, hjælper med pris)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.address}
+                    onChange={(e) => updateField("address", e.target.value)}
+                    className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-slate-700">
+                    Postnr. / By
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.city}
+                    onChange={(e) => updateField("city", e.target.value)}
+                    className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Trust signals */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 pt-4">
+                <span className="inline-flex items-center gap-1">
+                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  CVR 45564096 · Etableret 2018
+                </span>
+                <span>|</span>
+                <span>Ingen binding · Gratis opstart</span>
+              </div>
+
+              <div className="flex justify-between mt-8">
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="h-14 px-6 rounded-full border-2 border-slate-300 text-slate-700 font-medium hover:border-slate-400 transition-colors flex items-center gap-2"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                  Tilbage
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting || !canProceed()}
+                  className="h-14 px-8 rounded-full bg-green-600 text-white font-medium transition-colors hover:bg-green-700 disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sender...
+                    </>
+                  ) : (
+                    "Få mit uforpligtende tilbud →"
+                  )}
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </form>
+    </div>
+  );
+}

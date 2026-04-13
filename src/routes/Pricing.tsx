@@ -46,10 +46,10 @@ export default function Pricing() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-12 text-center">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Beregn din pris
+              Få et estimat på forventede arbejdstimer og pris
             </h2>
             <p className="text-lg text-slate-600">
-              Få et hurtigt estimat på din rengøringsopgave
+              Beregn et estimat baseret på din opgaves type, størrelse og tilvalg
             </p>
           </div>
           <div className="max-w-2xl mx-auto">
@@ -61,11 +61,13 @@ export default function Pricing() {
       <section className="py-24 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
-            {/* Prislogik */}
+            {/* Prislogik - Sådan beregner vi prisen */}
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-8">
-                Vores prisfundament
+                Sådan beregner vi prisen
               </h2>
+
+              {/* Core pricing card */}
               <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 mb-8">
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-4xl font-bold text-slate-900">
@@ -78,57 +80,141 @@ export default function Pricing() {
                   moms (svarende til 2 timer)
                 </p>
 
-                <ul className="space-y-4">
-                  {[
-                    "Fast pris når det giver mening",
-                    "Estimat når opgaven varierer",
-                    "Klar logik altid",
-                    "Ingen skjulte overraskelser",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
-                      <span className="text-slate-700 font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="border-t border-slate-200 pt-6 mt-6">
+                  <h3 className="font-semibold text-slate-900 mb-3">Faktureringslogikken</h3>
+                  <div className="space-y-2 text-sm text-slate-700">
+                    <p><strong>{pricing.billingLogic.formula}</strong></p>
+                    <p className="text-slate-600">{pricing.billingLogic.workHours}</p>
+                  </div>
+                  <div className="mt-4 p-3 bg-white rounded-xl border border-slate-200">
+                    <p className="text-xs text-slate-500 mb-2">Eksempler:</p>
+                    <ul className="space-y-1 text-sm text-slate-600">
+                      <li>• {pricing.billingLogic.example1}</li>
+                      <li>• {pricing.billingLogic.example2}</li>
+                      <li>• {pricing.billingLogic.example3}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
-              <p className="text-slate-600 leading-relaxed">
+              {/* Estimate vs Final Price */}
+              <div className="bg-blue-50 rounded-2xl p-6 border border-blue-100 mb-6">
+                <h3 className="font-semibold text-slate-900 mb-3">Estimat vs. endelig pris</h3>
+                <p className="text-sm text-slate-700 leading-relaxed mb-3">
+                  <strong>Prisberegneren viser et estimat af forventede arbejdstimer.</strong>
+                  Den endelige pris beregnes ud fra de faktiske fakturerbare arbejdstimer.
+                </p>
+                <p className="text-sm text-slate-600">
+                  Især flytterengøring kan variere — vores data viser at den historisk har været
+                  undervurderet med 20-67%. Derfor giver vi altid et konkret tilbud på forhånd
+                  ved større eller mere særlige opgaver.
+                </p>
+              </div>
+
+              {/* Recurring cleaning breakdown */}
+              <div className="bg-green-50 rounded-2xl p-6 border border-green-100">
+                <h3 className="font-semibold text-slate-900 mb-3">Fast rengøring — to faser</h3>
+                <p className="text-sm text-slate-600 mb-4">
+                  Tilbagevendende rengøring opdeles altid i to priser:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-white rounded-xl p-4 border border-green-200">
+                    <p className="text-xs text-green-700 font-medium mb-1">FØRSTE GANG</p>
+                    <p className="text-lg font-bold text-slate-900">
+                      {pricing.recurring.firstCleaning.hours} timer = {pricing.recurring.firstCleaning.price} kr
+                    </p>
+                    <p className="text-xs text-slate-600 mt-1">
+                      {pricing.recurring.firstCleaning.description}
+                    </p>
+                  </div>
+                  <div className="bg-white rounded-xl p-4 border border-green-200">
+                    <p className="text-xs text-green-700 font-medium mb-1">DEREFTER HVER UGE</p>
+                    <p className="text-lg font-bold text-slate-900">
+                      {pricing.recurring.ongoing.hours} timer = {pricing.recurring.ongoing.weeklyPrice} kr/uge
+                    </p>
+                    <p className="text-xs text-slate-600 mt-1">
+                      {pricing.recurring.ongoing.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-slate-600 leading-relaxed mt-6">
                 {pricing.wording}
               </p>
             </div>
 
-            {/* Hvad påvirker prisen */}
+            {/* Estimatlogikken - Hvordan vi estimerer */}
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-8">
-                Hvad påvirker prisen?
+                Sådan estimerer vi
               </h2>
-              <div className="space-y-8">
+              <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 mb-8">
+                <p className="text-sm text-slate-600 mb-4">
+                  Vi estimerer først opgaven ud fra type, størrelse og tilvalg:
+                </p>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between items-center py-2 border-b border-slate-200">
+                    <span className="text-slate-700">Standard rengøring</span>
+                    <span className="font-mono text-slate-900">{pricing.estimation.standard}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-slate-200">
+                    <span className="text-slate-700">Hovedrengøring (dyb)</span>
+                    <span className="font-mono text-slate-900">{pricing.estimation.deep}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-slate-200">
+                    <span className="text-slate-700">Flytterengøring</span>
+                    <span className="font-mono text-slate-900">{pricing.estimation.moveOut}</span>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-200">
+                  <p className="text-xs text-slate-500 mb-2">Tilvalg (ekstra tid):</p>
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div className="bg-white rounded-lg p-2 text-center border border-slate-200">
+                      <p className="font-medium text-slate-700">Ovn</p>
+                      <p className="text-slate-500">{pricing.estimation.extras.oven}</p>
+                    </div>
+                    <div className="bg-white rounded-lg p-2 text-center border border-slate-200">
+                      <p className="font-medium text-slate-700">Køleskab</p>
+                      <p className="text-slate-500">{pricing.estimation.extras.fridge}</p>
+                    </div>
+                    <div className="bg-white rounded-lg p-2 text-center border border-slate-200">
+                      <p className="font-medium text-slate-700">Vinduer</p>
+                      <p className="text-slate-500">{pricing.estimation.extras.windows}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                Hvad påvirker prisen?
+              </h3>
+              <div className="space-y-6">
                 {[
                   {
                     title: "Boligens størrelse",
-                    desc: "Antal kvadratmeter og rum har naturligvis betydning for tidsforbruget.",
+                    desc: "m² er kun base. Antal kvadratmeter og rum har naturligvis betydning for tidsforbruget.",
                   },
                   {
                     title: "Opgavens type",
-                    desc: "En flytterengøring eller hovedrengøring tager længere tid end en fast vedligeholdelsesrengøring.",
+                    desc: "Flytterengøring og hovedrengøring kræver ekstra tid på grund af niveau og grundighed.",
                   },
                   {
-                    title: "Niveau og tilstand",
-                    desc: "Er der meget kalk på badeværelset, eller er der behov for ekstra grundig aftørring?",
+                    title: "Rumkompleksitet og tilstand",
+                    desc: "Meget kalk, snavs eller ekstra grundig aftørring påvirker det samlede tidsforbrug.",
                   },
                   {
-                    title: "Tilvalg",
-                    desc: "Rengøring af ovn, køleskab eller indvendige vinduer lægges oveni den normale tid.",
+                    title: "Tilvalg er reelle tidsdrivere",
+                    desc: "Ovn, køleskab og vinduer lægges som konkret ekstra tid — ikke bare små tillæg.",
                   },
                 ].map((factor, i) => (
                   <div key={i} className="flex gap-4">
-                    <div className="w-1.5 bg-green-600 rounded-full mt-1.5 mb-1"></div>
+                    <div className="w-1.5 bg-green-600 rounded-full mt-1.5 mb-1 shrink-0"></div>
                     <div>
-                      <h3 className="text-lg font-semibold text-slate-900 mb-1">
+                      <h4 className="text-base font-semibold text-slate-900 mb-1">
                         {factor.title}
-                      </h3>
-                      <p className="text-slate-600">{factor.desc}</p>
+                      </h4>
+                      <p className="text-slate-600 text-sm">{factor.desc}</p>
                     </div>
                   </div>
                 ))}
