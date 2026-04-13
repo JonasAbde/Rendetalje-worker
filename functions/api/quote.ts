@@ -13,6 +13,7 @@ export async function onRequestPost(context) {
     // Hent miljøvariabler fra Cloudflare
     const RESEND_API_KEY = context.env.RESEND_API_KEY;
     const DESTINATION_EMAIL = context.env.QUOTE_DESTINATION_EMAIL || 'info@rendetalje.dk';
+    const FROM_EMAIL = context.env.FROM_EMAIL || 'info@rendetalje.dk';
 
     // HTML skabelon til emailen
     const emailHtml = `
@@ -53,7 +54,7 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Rendetalje Hjemmeside <onboarding@resend.dev>', // Brug onboarding@resend.dev indtil domænet er verificeret hos Resend
+        from: `Rendetalje <${FROM_EMAIL}>`,
         to: DESTINATION_EMAIL,
         subject: `Ny forespørgsel: ${data.type} - ${data.name}`,
         html: emailHtml,
