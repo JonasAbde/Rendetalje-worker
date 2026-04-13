@@ -89,16 +89,128 @@ export default function Privacy() {
 
             <h2>5. Dine rettigheder</h2>
             <p>
-              Du har efter databeskyttelsesforordningen en række rettigheder i
-              forhold til vores behandling af oplysninger om dig. Hvis du vil
-              gøre brug af dine rettigheder, skal du kontakte os.
+              Du har efter databeskyttelsesforordningen (GDPR) en række rettigheder i
+              forhold til vores behandling af oplysninger om dig. Du kan gøre brug af
+              dine rettigheder ved at kontakte os på telefon {company.phone} eller
+              email {company.email}.
             </p>
             <ul>
-              <li>Ret til at se oplysninger (indsigtsret)</li>
-              <li>Ret til berigtigelse (rettelse)</li>
-              <li>Ret til sletning</li>
-              <li>Ret til begrænsning af behandling</li>
+              <li>
+                <strong>Ret til indsigt (Art. 15):</strong> Du har ret til at få
+                bekræftet, om vi behandler personoplysninger om dig, og i så fald
+                adgang til oplysningerne.
+              </li>
+              <li>
+                <strong>Ret til berigtigelse (Art. 16):</strong> Du har ret til at få
+                urigtige personoplysninger om dig rettet.
+              </li>
+              <li>
+                <strong>Ret til sletning ("retten til at blive glemt", Art. 17):</strong>{" "}
+                Du har under visse omstændigheder ret til at få slettet
+                personoplysninger om dig.
+              </li>
+              <li>
+                <strong>Ret til begrænsning af behandling (Art. 18):</strong> Du har
+                under visse omstændigheder ret til at få begrænset vores behandling
+                af dine personoplysninger.
+              </li>
+              <li>
+                <strong>Ret til dataportabilitet (Art. 20):</strong> Du har ret til
+                at modtage dine personoplysninger i et struktureret, almindeligt
+                anvendt og maskinlæsbart format.
+              </li>
+              <li>
+                <strong>Ret til indsigelse (Art. 21):</strong> Du har ret til at gøre
+                indsigelse mod vores behandling af dine personoplysninger.
+              </li>
+              <li>
+                <strong>Ret til at trække samtykke tilbage:</strong> Du kan til enhver
+                tid trække dit samtykke til behandling af personoplysninger tilbage.
+                Dette påvirker ikke lovligheden af behandlingen før tilbagetrækningen.
+              </li>
             </ul>
+
+            <h2>6. Retlig grundlag (Art. 6)</h2>
+            <p>Vi behandler dine personoplysninger på følgende retlige grundlag:</p>
+            <ul>
+              <li>
+                <strong>Art. 6, stk. 1, litra b (kontrakt):</strong> Behandling er
+                nødvendig for at kunne indgå eller opfylde en kontrakt med dig om
+                rengøringsydelser.
+              </li>
+              <li>
+                <strong>Art. 6, stk. 1, litra c (retslig forpligtelse):</strong>{" "}
+                Behandling er nødvendig for at overholde vores forpligtelser ifølge
+                bogføringsloven og skattelovgivningen.
+              </li>
+              <li>
+                <strong>Art. 6, stk. 1, litra f (berettiget interesse):</strong>{" "}
+                Behandling er nødvendig for vores berettigede interesser i at kunne
+                svare på henvendelser via kontaktformularen.
+              </li>
+              <li>
+                <strong>Art. 6, stk. 1, litra a (samtykke):</strong> Hvis du giver
+                samtykke via cookiebanneret til brug af ikke-nødvendige cookies.
+              </li>
+            </ul>
+
+            <h2>7. Databehandlere og tredjeparter</h2>
+            <p>
+              Vi bruger følgende databehandlere (underleverandører) til behandling af
+              personoplysninger:
+            </p>
+            <ul>
+              <li>
+                <strong>Resend (email-service):</strong> Bruges til at sende emails
+                fra kontaktformularen. Resend er etableret i USA og overholder
+                EU-U.S. Data Privacy Framework.
+              </li>
+              <li>
+                <strong>Cloudflare (hosting):</strong> Bruges til at hoste hjemmesiden
+                og sikre mod DDoS-angreb.
+              </li>
+            </ul>
+            <p>
+              Vi har indgået databehandlingsaftaler med alle vores databehandlere for
+              at sikre, at de behandler oplysninger i overensstemmelse med GDPR.
+            </p>
+
+            <h2>8. Cookies og tracking</h2>
+            <p>
+              Vi bruger cookies på vores hjemmeside. Du kan læse mere om vores brug
+              af cookies i vores{" "}
+              <a href="/cookiepolitik" className="text-green-600 hover:underline">
+                cookiepolitik
+              </a>
+              . Du kan til enhver tid ændre dine cookie-indstillinger ved at klikke
+              på cookie-ikonet nederst til venstre på siden.
+            </p>
+
+            <h2>9. Klage til Datatilsynet</h2>
+            <p>
+              Hvis du ønsker at klage over vores behandling af dine personoplysninger,
+              har du ret til at indgive en klage til Datatilsynet:
+            </p>
+            <p>
+              Datatilsynet
+              <br />
+              Carl Jacobsens Vej 35
+              <br />
+              2500 Valby
+              <br />
+              Telefon: 33 19 32 00
+              <br />
+              Email: dt@datatilsynet.dk
+              <br />
+              Website: www.datatilsynet.dk
+            </p>
+
+            <h2>10. Opdateringer af privatlivspolitikken</h2>
+            <p>
+              Vi kan opdatere denne privatlivspolitik fra tid til anden. Den aktuelle
+              version vil altid være tilgængelig på denne side. Sidst opdateret:
+              13. april 2025.
+            </p>
           </div>
         </div>
       </section>

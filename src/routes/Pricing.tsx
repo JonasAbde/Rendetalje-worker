@@ -244,13 +244,23 @@ export default function Pricing() {
             </div>
           </div>
 
+          {/* Important clarification box */}
+          <div className="mt-12 mb-12 bg-yellow-50 rounded-2xl p-6 border border-yellow-200">
+            <h3 className="font-semibold text-slate-900 mb-2">Vigtigt at forstå</h3>
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Når flere medarbejdere er på opgaven samtidig, beregnes prisen ud fra den samlede arbejdstid —
+              ikke kun hvor længe opgaven varer på adressen. Det betyder at "2 timer på stedet" med 2 medarbejdere
+              bliver til 4 arbejdstimer og dermed en pris på 1.396 kr, ikke 698 kr.
+            </p>
+          </div>
+
           <div className="mt-16 text-center">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">
-              Få en præcis pris på din opgave
+              Få et præcist tilbud på din opgave
             </h2>
             <p className="text-slate-600 mb-8 max-w-xl mx-auto">
-              Prisberegneren giver et estimat. Kontakt os for et præcist tilbud 
-              tilpasset dine specifikke behov.
+              Prisberegneren viser et estimat baseret på forventet samlet arbejdstid.
+              Kontakt os for et konkret tilbud tilpasset dine specifikke behov.
             </p>
             <Link
               to="/kontakt"
