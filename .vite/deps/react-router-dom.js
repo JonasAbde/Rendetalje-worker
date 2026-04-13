@@ -1,13 +1,11 @@
 import {
   require_react_dom
-} from "./chunk-V5ZBRE6L.js";
-import {
-  require_react
-} from "./chunk-UTASZXHG.js";
+} from "./chunk-UO3Q43PT.js";
 import {
   __commonJS,
-  __toESM
-} from "./chunk-2TUXWMP5.js";
+  __toESM,
+  require_react
+} from "./chunk-6WDWFKQD.js";
 
 // node_modules/react-router/node_modules/cookie/dist/index.js
 var require_dist = __commonJS({
@@ -14370,8 +14368,41 @@ export {
 /*! Bundled license information:
 
 react-router/dist/development/chunk-QFMPRPBF.mjs:
+  (**
+   * react-router v7.14.0
+   *
+   * Copyright (c) Remix Software Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE.md file in the root directory of this source tree.
+   *
+   * @license MIT
+   *)
+
 react-router/dist/development/chunk-2UH5WJXA.mjs:
+  (**
+   * react-router v7.14.0
+   *
+   * Copyright (c) Remix Software Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE.md file in the root directory of this source tree.
+   *
+   * @license MIT
+   *)
+
 react-router/dist/development/dom-export.mjs:
+  (**
+   * react-router v7.14.0
+   *
+   * Copyright (c) Remix Software Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE.md file in the root directory of this source tree.
+   *
+   * @license MIT
+   *)
+
 react-router/dist/development/index.mjs:
   (**
    * react-router v7.14.0

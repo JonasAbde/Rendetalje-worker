@@ -9,6 +9,7 @@ import Flytterengoering from "./routes/services/Flytterengoering";
 import Hovedrengoering from "./routes/services/Hovedrengoering";
 import Erhvervsrengoering from "./routes/services/Erhvervsrengoering";
 import Pricing from "./routes/Pricing";
+import ServiceAreas from "./routes/ServiceAreas";
 import FAQ from "./routes/FAQ";
 import Contact from "./routes/Contact";
 import Terms from "./routes/Terms";
@@ -43,6 +44,7 @@ export default function App() {
               element={<Erhvervsrengoering />}
             />
             <Route path="priser" element={<Pricing />} />
+            <Route path="service-omraade" element={<ServiceAreas />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="kontakt" element={<Contact />} />
             <Route path="handelsbetingelser" element={<Terms />} />

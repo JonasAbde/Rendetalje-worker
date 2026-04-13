@@ -2,8 +2,9 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import { company } from "@/content/company";
-import { pricing } from "@/content/pricing";
+import { company } from "../content/company";
+import { pricing } from "../content/pricing";
+import { PriceCalculator } from "../components/PriceCalculator";
 
 export default function Pricing() {
   return (
@@ -40,7 +41,24 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Price Calculator */}
       <section className="py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto mb-12 text-center">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Beregn din pris
+            </h2>
+            <p className="text-lg text-slate-600">
+              Få et hurtigt estimat på din rengøringsopgave
+            </p>
+          </div>
+          <div className="max-w-2xl mx-auto">
+            <PriceCalculator />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
             {/* Prislogik */}
@@ -144,6 +162,10 @@ export default function Pricing() {
             <h2 className="text-2xl font-bold text-slate-900 mb-6">
               Få en præcis pris på din opgave
             </h2>
+            <p className="text-slate-600 mb-8 max-w-xl mx-auto">
+              Prisberegneren giver et estimat. Kontakt os for et præcist tilbud 
+              tilpasset dine specifikke behov.
+            </p>
             <Link
               to="/kontakt"
               className="inline-flex h-14 items-center justify-center rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700"

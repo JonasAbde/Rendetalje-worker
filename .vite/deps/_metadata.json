@@ -1,8 +1,52 @@
 {
-  "hash": "1ce2649e",
+  "hash": "887468bb",
   "configHash": "6b07b5fc",
-  "lockfileHash": "ad22a859",
-  "browserHash": "d94480dc",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "62117b4d",
+  "browserHash": "500705ee",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "a8155aef",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "dad5eacf",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "9cb6d3e9",
+      "needsInterop": false
+    },
+    "react-helmet-async": {
+      "src": "../../node_modules/react-helmet-async/lib/index.esm.js",
+      "file": "react-helmet-async.js",
+      "fileHash": "c496c058",
+      "needsInterop": false
+    },
+    "motion/react": {
+      "src": "../../node_modules/motion/dist/es/react.mjs",
+      "file": "motion_react.js",
+      "fileHash": "64e2ef8d",
+      "needsInterop": false
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "f4bdd251",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-UO3Q43PT": {
+      "file": "chunk-UO3Q43PT.js"
+    },
+    "chunk-6WDWFKQD": {
+      "file": "chunk-6WDWFKQD.js"
+    }
+  }
 }
