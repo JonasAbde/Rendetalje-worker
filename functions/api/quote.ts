@@ -1,3 +1,18 @@
+// CORS headers for all responses
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+// Handle OPTIONS preflight requests
+export async function onRequestOptions() {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
 export async function onRequestPost(context) {
   try {
     const data = await context.request.json();
@@ -6,7 +21,7 @@ export async function onRequestPost(context) {
     if (!data.name || !data.phone || !data.email || !data.type) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
 
@@ -42,7 +57,7 @@ export async function onRequestPost(context) {
       console.warn("RESEND_API_KEY mangler. Simulerer afsendelse i udviklingsmiljø.");
       return new Response(JSON.stringify({ success: true, message: 'Simulated success (Missing API Key)' }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
 
@@ -70,14 +85,14 @@ export async function onRequestPost(context) {
 
     return new Response(JSON.stringify({ success: true, message: 'Email sendt succesfuldt' }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
     console.error("Worker Error:", error);
     return new Response(JSON.stringify({ error: 'Der opstod en serverfejl' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     });
   }
 }
