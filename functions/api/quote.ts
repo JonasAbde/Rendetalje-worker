@@ -1,9 +1,34 @@
 // CORS headers for all responses
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://rendetalje.dk',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
 };
+
+// Input sanitization to prevent XSS
+function sanitizeInput(input) {
+  if (typeof input !== 'string') return input;
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+}
+
+// Sanitize all object values recursively
+function sanitizeObject(obj) {
+  const sanitized = {};
+  for (const key in obj) {
+    if (typeof obj[key] === 'string') {
+      sanitized[key] = sanitizeInput(obj[key]);
+    } else {
+      sanitized[key] = obj[key];
+    }
+  }
+  return sanitized;
+}
 
 // Handle OPTIONS preflight requests
 export async function onRequestOptions() {
@@ -15,7 +40,8 @@ export async function onRequestOptions() {
 
 export async function onRequestPost(context) {
   try {
-    const data = await context.request.json();
+    const rawData = await context.request.json();
+    const data = sanitizeObject(rawData);
     
     // Basic validation
     if (!data.name || !data.phone || !data.email || !data.type) {
@@ -54,7 +80,6 @@ export async function onRequestPost(context) {
     `;
 
     if (!RESEND_API_KEY) {
-      console.warn("RESEND_API_KEY mangler. Simulerer afsendelse i udviklingsmiljø.");
       return new Response(JSON.stringify({ success: true, message: 'Simulated success (Missing API Key)' }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -78,8 +103,6 @@ export async function onRequestPost(context) {
     });
 
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error("Resend API Error:", errorData);
       throw new Error('Kunne ikke sende email via Resend');
     }
 
@@ -89,7 +112,6 @@ export async function onRequestPost(context) {
     });
 
   } catch (error) {
-    console.error("Worker Error:", error);
     return new Response(JSON.stringify({ error: 'Der opstod en serverfejl' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
