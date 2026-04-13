@@ -33,11 +33,7 @@ export default function Contact() {
 
       setIsSubmitted(true);
     } catch (err) {
-      // In development without the worker running, we'll simulate success
-      // In production, this should show the error
-      console.warn("API call failed, simulating success for development:", err);
-      setIsSubmitted(true);
-      // To show actual error: setError(err instanceof Error ? err.message : 'Der opstod en fejl');
+      setError(err instanceof Error ? err.message : 'Der opstod en fejl. Prøv venligst igen.');
     } finally {
       setIsSubmitting(false);
     }
