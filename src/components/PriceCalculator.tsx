@@ -22,18 +22,24 @@ const serviceIcons: Record<ServiceType, typeof Home> = {
   erhverv: Building2,
 };
 
-const serviceMultipliers: Record<ServiceType, number> = {
-  fast: 1,
-  hoved: 1.8,
-  flytter: 2.2,
-  erhverv: 1.2,
+// Estimation formula based on Drive docs:
+// Standard: m² / 25
+// Deep cleaning (hoved): (m² / 20) + 1-2 hours
+// Move-out (flytter): (m² / 18) + 2-3 hours
+const serviceHourCalculators: Record<ServiceType, (m2: number) => number> = {
+  fast: (m2) => m2 / 25,
+  hoved: (m2) => m2 / 20 + 1.5, // +1-2 hours, using 1.5 as average
+  flytter: (m2) => m2 / 18 + 2.5, // +2-3 hours, using 2.5 as average
+  erhverv: (m2) => m2 / 25, // Same as standard for commercial
 };
 
-const frequencyMultipliers: Record<string, number> = {
-  weekly: 0.9,
-  biweekly: 1,
-  monthly: 1.3,
-  once: 1,
+// Note: Frequency affects ongoing maintenance pricing, not initial estimate
+// First cleaning always takes more time than ongoing maintenance
+const frequencyLabels: Record<string, string> = {
+  weekly: "Ugentlig vedligeholdelse",
+  biweekly: "Hver 14. dag",
+  monthly: "Månedlig vedligeholdelse",
+  once: "Engangsopgave",
 };
 
 export function PriceCalculator() {
@@ -49,21 +55,36 @@ export function PriceCalculator() {
   const [showResult, setShowResult] = useState(false);
 
   const calculateEstimate = () => {
-    const baseHours = Math.max(2, state.squareMeters / 35);
-    const serviceMult = serviceMultipliers[state.serviceType];
-    const freqMult = frequencyMultipliers[state.frequency];
-    
+    // Calculate base hours based on service type and m²
+    const baseHours = Math.max(2, serviceHourCalculators[state.serviceType](state.squareMeters));
+
+    // Add extra hours for add-ons (from Drive docs)
     let extraHours = 0;
-    if (state.extraOven) extraHours += 0.5;
-    if (state.extraFridge) extraHours += 0.5;
-    if (state.extraWindows) extraHours += 1;
+    if (state.extraOven) extraHours += 0.5; // +0.5 hour
+    if (state.extraFridge) extraHours += 0.5; // +0.5 hour
+    if (state.extraWindows) extraHours += 1; // +1 hour (0.5-1 hour per 30m², using 1 as average)
 
-    const totalHours = (baseHours * serviceMult * freqMult) + extraHours;
+    const totalHours = baseHours + extraHours;
     const estimatedPrice = Math.round(totalHours * pricing.hourlyRate);
-    const minPrice = Math.max(pricing.minimumPrice, estimatedPrice - 200);
-    const maxPrice = estimatedPrice + 300;
 
-    return { hours: Math.round(totalHours * 10) / 10, minPrice, maxPrice };
+    // For recurring services: show both first cleaning (higher) and ongoing (lower)
+    const isRecurring = state.frequency !== "once";
+    const firstCleaningHours = totalHours * 1.5; // First cleaning takes ~50% more time
+    const firstCleaningPrice = Math.round(firstCleaningHours * pricing.hourlyRate);
+
+    // Min/max range for estimate (±20% for uncertainty)
+    const minPrice = Math.max(pricing.minimumPrice, Math.round(estimatedPrice * 0.8));
+    const maxPrice = Math.round(estimatedPrice * 1.2);
+
+    return {
+      hours: Math.round(totalHours * 10) / 10,
+      firstHours: Math.round(firstCleaningHours * 10) / 10,
+      minPrice,
+      maxPrice,
+      firstPrice: firstCleaningPrice,
+      isRecurring,
+      frequencyLabel: frequencyLabels[state.frequency],
+    };
   };
 
   const result = calculateEstimate();
@@ -78,7 +99,7 @@ export function PriceCalculator() {
           </div>
           <div>
             <h3 className="text-xl font-bold text-slate-900">Prisberegner</h3>
-            <p className="text-sm text-slate-600">Få et estimat på din rengøring</p>
+            <p className="text-sm text-slate-600">Få et estimat på forventede arbejdstimer og pris</p>
           </div>
         </div>
 
@@ -198,12 +219,22 @@ export function PriceCalculator() {
           </div>
         </div>
 
+        {/* Worker explanation */}
+        <div className="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+          <p className="text-sm text-blue-800">
+            <strong>Sådan beregnes prisen:</strong> Når flere medarbejdere er på opgaven samtidig,
+            beregnes prisen ud fra den samlede arbejdstid — ikke kun hvor længe opgaven varer på adressen.
+            <br /><br />
+            Eksempel: 2 personer × 2 timer på stedet = 4 arbejdstimer = 1.396 kr
+          </p>
+        </div>
+
         {/* Calculate Button */}
         <button
           onClick={() => setShowResult(true)}
           className="w-full py-4 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
         >
-          Beregn pris
+          Få et estimat
           <ArrowRight className="w-5 h-5" />
         </button>
 
@@ -228,12 +259,34 @@ export function PriceCalculator() {
                     </p>
                   </div>
                 </div>
+
+                {result.isRecurring && (
+                  <div className="mb-4 p-3 bg-white rounded-xl border border-green-200">
+                    <p className="text-sm font-medium text-slate-700 mb-2">Fast rengøring:</p>
+                    <div className="space-y-1 text-sm">
+                      <p className="flex justify-between">
+                        <span className="text-slate-600">Første grundige rengøring:</span>
+                        <span className="font-medium">ca. {result.firstPrice.toLocaleString("da-DK")} kr ({result.firstHours} timer)</span>
+                      </p>
+                      <p className="flex justify-between">
+                        <span className="text-slate-600">Derefter {result.frequencyLabel.toLowerCase()}:</span>
+                        <span className="font-medium">ca. {(result.minPrice + result.maxPrice) / 2 / 2} kr/uge</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-2 text-sm text-slate-600">
-                  <p>Estimeret tid: ca. {result.hours} timer</p>
-                  <p>Timepris: {pricing.hourlyRate} kr inkl. moms</p>
-                  <p className="text-xs text-slate-500">
-                    * Dette er et estimat. Få et præcist tilbud ved at kontakte os.
-                  </p>
+                  <p>Estimeret arbejdstid: ca. {result.hours} timer</p>
+                  <p>Timepris: {pricing.hourlyRate} kr inkl. moms | Minimum: {pricing.minimumPrice} kr</p>
+                  <div className="mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <p className="text-xs text-yellow-800">
+                      <strong>Dette er et estimat baseret på forventet samlet arbejdstid.</strong>
+                      <br />
+                      Den endelige pris afhænger af faktisk omfang, tilstand og eventuelle ekstra behov på opgaven.
+                      Især flytterengøring kan variere og har historisk været undervurderet.
+                    </p>
+                  </div>
                 </div>
                 <Link
                   to="/kontakt"

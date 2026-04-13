@@ -371,6 +371,36 @@ export default function Contact() {
                       </div>
                     </div>
 
+                    {/* GDPR Consent Checkbox */}
+                    <div className="space-y-3 pt-4 border-t border-slate-200">
+                      <div className="flex items-start gap-3">
+                        <input
+                          type="checkbox"
+                          id="gdprConsent"
+                          name="gdprConsent"
+                          required
+                          className="mt-1 w-4 h-4 text-green-600 rounded border-slate-300 focus:ring-green-500"
+                        />
+                        <div className="text-sm text-slate-600">
+                          <label htmlFor="gdprConsent" className="font-medium text-slate-700">
+                            Samtykke til behandling af persondata *
+                          </label>
+                          <p className="mt-1">
+                            Jeg accepterer, at Rendetalje må kontakte mig vedrørende mit rengøringsbehov og opbevarer mine oplysninger i henhold til{" "}
+                            <a 
+                              href="/privatlivspolitik" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-600 hover:underline"
+                            >
+                              privatlivspolitikken
+                            </a>
+                            . Jeg kan til enhver tid trække mit samtykke tilbage.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="pt-4">
                       <button
                         type="submit"
