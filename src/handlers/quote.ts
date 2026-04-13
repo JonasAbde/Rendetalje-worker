@@ -1,13 +1,5 @@
-import type { EventContext } from '@cloudflare/workers-types';
+import type { Env, QuoteData } from '../types';
 
-// CORS headers for all responses
-const getCorsHeaders = (origin: string) => ({
-  'Access-Control-Allow-Origin': origin,
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-});
-
-// Allowed origins
 const allowedOrigins = [
   'https://rendetalje.dk',
   'https://www.rendetalje.dk',
@@ -15,7 +7,12 @@ const allowedOrigins = [
   'http://localhost:8788',
 ];
 
-// Input sanitization to prevent XSS
+const getCorsHeaders = (origin: string) => ({
+  'Access-Control-Allow-Origin': origin,
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+});
+
 function sanitizeInput(input: unknown): unknown {
   if (typeof input !== 'string') return input;
   return input
@@ -27,28 +24,6 @@ function sanitizeInput(input: unknown): unknown {
     .replace(/\//g, '&#x2F;');
 }
 
-interface QuoteData {
-  name?: string;
-  phone?: string;
-  email?: string;
-  type?: string;
-  address?: string;
-  city?: string;
-  size?: string;
-  frequency?: string;
-  date?: string;
-  description?: string;
-  [key: string]: unknown;
-}
-
-// Environment variables type
-type Env = {
-  RESEND_API_KEY?: string;
-  QUOTE_DESTINATION_EMAIL?: string;
-  FROM_EMAIL?: string;
-};
-
-// Sanitize all object values
 function sanitizeObject(obj: Record<string, unknown>): QuoteData {
   const sanitized: QuoteData = {};
   for (const key in obj) {
@@ -62,9 +37,7 @@ function sanitizeObject(obj: Record<string, unknown>): QuoteData {
   return sanitized;
 }
 
-// Main handler - handles all methods
-export async function onRequest(context: EventContext<Env, string, unknown>): Promise<Response> {
-  const request = context.request;
+export async function handleQuoteRequest(request: Request, env: Env): Promise<Response> {
   const origin = request.headers.get('Origin') || 'https://rendetalje.dk';
   const corsHeaders = getCorsHeaders(allowedOrigins.includes(origin) ? origin : 'https://rendetalje.dk');
 
@@ -96,12 +69,10 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       });
     }
 
-    // Hent miljøvariabler fra Cloudflare
-    const RESEND_API_KEY = context.env.RESEND_API_KEY;
-    const DESTINATION_EMAIL = context.env.QUOTE_DESTINATION_EMAIL || 'info@rendetalje.dk';
-    const FROM_EMAIL = context.env.FROM_EMAIL || 'info@rendetalje.dk';
+    const RESEND_API_KEY = env.RESEND_API_KEY;
+    const DESTINATION_EMAIL = env.QUOTE_DESTINATION_EMAIL || 'info@rendetalje.dk';
+    const FROM_EMAIL = env.FROM_EMAIL || 'info@rendetalje.dk';
 
-    // HTML skabelon til emailen
     const emailHtml = `
       <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto;">
         <h2 style="color: #16a34a;">Ny forespørgsel fra Rendetalje.dk</h2>
@@ -131,7 +102,6 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       });
     }
 
-    // Send email via Resend API
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
