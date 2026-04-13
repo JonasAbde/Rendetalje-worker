@@ -15,6 +15,7 @@ import Contact from "./routes/Contact";
 import Terms from "./routes/Terms";
 import Privacy from "./routes/Privacy";
 import Cookies from "./routes/Cookies";
+import NotFound from "./routes/NotFound";
 import ScrollToTop from "./components/layout/ScrollToTop";
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="handelsbetingelser" element={<Terms />} />
             <Route path="privatlivspolitik" element={<Privacy />} />
             <Route path="cookiepolitik" element={<Cookies />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>
