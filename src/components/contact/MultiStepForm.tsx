@@ -152,10 +152,11 @@ export default function MultiStepForm({
 
               {/* Additional fields */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">
+                <label htmlFor="date" className="block text-sm font-medium text-slate-700">
                   Ønsket dato / tidsramme
                 </label>
                 <input
+                  id="date"
                   type="text"
                   value={formData.date}
                   onChange={(e) => updateField("date", e.target.value)}
@@ -165,10 +166,11 @@ export default function MultiStepForm({
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">
+                <label htmlFor="description" className="block text-sm font-medium text-slate-700">
                   Kort beskrivelse af opgaven
                 </label>
                 <textarea
+                  id="description"
                   value={formData.description}
                   onChange={(e) => updateField("description", e.target.value)}
                   rows={4}
@@ -215,10 +217,11 @@ export default function MultiStepForm({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-slate-700">
                     Navn *
                   </label>
                   <input
+                    id="name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => updateField("name", e.target.value)}
@@ -227,10 +230,11 @@ export default function MultiStepForm({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-700">
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
                     Telefon *
                   </label>
                   <input
+                    id="phone"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => updateField("phone", e.target.value)}
@@ -241,10 +245,11 @@ export default function MultiStepForm({
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700">
                   Email *
                 </label>
                 <input
+                  id="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) => updateField("email", e.target.value)}
@@ -255,10 +260,11 @@ export default function MultiStepForm({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-700">
+                  <label htmlFor="address" className="block text-sm font-medium text-slate-700">
                     Adresse (valgfri, hjælper med pris)
                   </label>
                   <input
+                    id="address"
                     type="text"
                     value={formData.address}
                     onChange={(e) => updateField("address", e.target.value)}
@@ -266,10 +272,11 @@ export default function MultiStepForm({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-700">
+                  <label htmlFor="city" className="block text-sm font-medium text-slate-700">
                     Postnr. / By
                   </label>
                   <input
+                    id="city"
                     type="text"
                     value={formData.city}
                     onChange={(e) => updateField("city", e.target.value)}

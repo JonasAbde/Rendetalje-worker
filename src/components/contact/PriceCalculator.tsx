@@ -66,11 +66,12 @@ export default function PriceCalculator({
     <div className="space-y-6">
       {/* Size input */}
       <div className="space-y-3">
-        <label className="block text-sm font-medium text-slate-700">
+        <label htmlFor="size-slider" className="block text-sm font-medium text-slate-700">
           Ca. størrelse (m²)
         </label>
         <div className="flex items-center gap-4">
           <input
+            id="size-slider"
             type="range"
             min="0"
             max="300"
@@ -84,6 +85,7 @@ export default function PriceCalculator({
               value={size}
               onChange={(e) => onSizeChange(e.target.value)}
               placeholder="m²"
+              aria-label="Ca. størrelse i kvadratmeter"
               className="w-full h-12 px-3 rounded-xl border border-slate-300 text-center font-semibold"
             />
           </div>
