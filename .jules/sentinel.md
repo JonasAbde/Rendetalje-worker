@@ -1,0 +1,4 @@
+## 2023-10-24 - Email Header Injection and Validation Missing
+**Vulnerability:** The quote form API backend passed user input directly into fields mapped to external email headers (Resend payload) without restricting the email format or removing CRLF characters.
+**Learning:** This missing validation introduced a potential vector for HTTP/Email Header Injection and abusive submissions by allowing line breaks in metadata fields. Additionally, the same logic was duplicated between `functions/api/quote.ts` and `src/handlers/quote.ts`, meaning vulnerabilities must be checked and fixed in both locations.
+**Prevention:** Apply dedicated validation (e.g. regex for emails) to reject malformed inputs early and implement a targeted sanitization function (`sanitizeHeaderField`) to strip `\r` and `\n` characters specifically from fields bound for email metadata, separating this logic from generic XSS sanitization to avoid stripping valid line breaks in user-provided body text.

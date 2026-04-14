@@ -15,6 +15,12 @@ const allowedOrigins = [
   'http://localhost:8788',
 ];
 
+// Helper to validate email
+function isValidEmail(email: string): boolean {
+  // Simple regex for email validation
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 // Input sanitization to prevent XSS
 function sanitizeInput(input: unknown): unknown {
   if (typeof input !== 'string') return input;
@@ -25,6 +31,12 @@ function sanitizeInput(input: unknown): unknown {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;')
     .replace(/\//g, '&#x2F;');
+}
+
+// Strip CRLF for fields used in headers to prevent header injection
+function sanitizeHeaderField(input: unknown): unknown {
+  if (typeof input !== 'string') return input;
+  return input.replace(/[\r\n]/g, '');
 }
 
 interface QuoteData {
@@ -87,10 +99,23 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
   try {
     const rawData = await request.json() as Record<string, unknown>;
     const data = sanitizeObject(rawData);
+
+    // Header injection prevention for fields specifically used in headers
+    data.name = sanitizeHeaderField(data.name) as string | undefined;
+    data.email = sanitizeHeaderField(data.email) as string | undefined;
+    data.type = sanitizeHeaderField(data.type) as string | undefined;
     
     // Basic validation
     if (!data.name || !data.phone || !data.email || !data.type) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Security enhancement: Verify email format to prevent abusive submissions
+    if (!isValidEmail(data.email || '')) {
+      return new Response(JSON.stringify({ error: 'Invalid email format' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
