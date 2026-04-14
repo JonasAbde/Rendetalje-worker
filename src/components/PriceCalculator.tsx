@@ -129,10 +129,11 @@ export function PriceCalculator() {
 
         {/* Square Meters */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-slate-700 mb-3">
+          <label htmlFor="square-meters-slider" className="block text-sm font-medium text-slate-700 mb-3">
             Størrelse: {state.squareMeters} m²
           </label>
           <input
+            id="square-meters-slider"
             type="range"
             min="30"
             max="300"
@@ -194,10 +195,12 @@ export function PriceCalculator() {
             ].map((extra) => (
               <label
                 key={extra.id}
+                htmlFor={`extra-${extra.id}`}
                 className="flex items-center justify-between p-3 rounded-xl border-2 border-slate-200 hover:border-green-300 cursor-pointer transition-all"
               >
                 <div className="flex items-center gap-3">
                   <input
+                    id={`extra-${extra.id}`}
                     type="checkbox"
                     checked={state[extra.id as keyof CalculatorState] as boolean}
                     onChange={(e) => {
