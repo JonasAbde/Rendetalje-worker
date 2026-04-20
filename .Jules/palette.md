@@ -1,0 +1,1 @@
+## 2024-05-18 - Form Accessibility Improvements\n**Learning:** Associated labels with inputs via `htmlFor` and `id` in `MultiStepForm.tsx`, and improved screen reader experience by adding `role="alert"` and `aria-live="assertive"` to error messages.\n**Action:** Remember to check for `htmlFor` on all labels and ARIA attributes for dynamic error messages.
