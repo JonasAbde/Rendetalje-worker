@@ -61,6 +61,8 @@ export default function Header() {
           className="md:hidden p-2 text-slate-600 hover:text-slate-900"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -68,7 +70,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-100 bg-white px-4 py-6 shadow-lg">
+        <div id="mobile-menu" className="md:hidden border-t border-slate-100 bg-white px-4 py-6 shadow-lg">
           <nav className="flex flex-col space-y-4">
             {navLinks.map((link) => (
               <Link
