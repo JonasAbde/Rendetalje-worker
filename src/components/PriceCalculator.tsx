@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Calculator, ArrowRight, Home, Sparkles, ArrowRightLeft, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -54,7 +54,7 @@ export function PriceCalculator() {
 
   const [showResult, setShowResult] = useState(false);
 
-  const calculateEstimate = () => {
+  const result = useMemo(() => {
     // Calculate base hours based on service type and m²
     const baseHours = Math.max(2, serviceHourCalculators[state.serviceType](state.squareMeters));
 
@@ -80,9 +80,7 @@ export function PriceCalculator() {
       maxPrice,
       isRecurring,
     };
-  };
-
-  const result = calculateEstimate();
+  }, [state]);
   const Icon = serviceIcons[state.serviceType];
 
   return (
