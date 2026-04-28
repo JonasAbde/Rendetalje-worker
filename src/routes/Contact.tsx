@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import Canonical from "@/components/Canonical";
 import { company } from "@/content/company";
 import MultiStepForm from "@/components/contact/MultiStepForm";
 
@@ -40,6 +41,7 @@ export default function Contact() {
   return (
     <div className="flex flex-col">
       <Helmet>
+      <Canonical path="/kontakt" />
         <title>Kontakt & Tilbud | {company.name}</title>
         <meta
           name="description"
