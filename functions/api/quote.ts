@@ -16,9 +16,9 @@ const allowedOrigins = [
 ];
 
 // Input sanitization to prevent XSS
-function sanitizeInput(input: unknown): unknown {
-  if (typeof input !== 'string') return input;
-  return input
+function sanitizeInput(input: unknown): string {
+  if (input === null || input === undefined) return '';
+  return String(input)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -52,14 +52,15 @@ type Env = {
 function sanitizeObject(obj: Record<string, unknown>): QuoteData {
   const sanitized: QuoteData = {};
   for (const key in obj) {
-    const value = obj[key];
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeInput(value) as string;
-    } else {
-      sanitized[key] = value;
-    }
+    sanitized[key] = sanitizeInput(obj[key]);
   }
   return sanitized;
+}
+
+// Validate email format and prevent CRLF injection
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && !/[\r\n]/.test(email);
 }
 
 // Main handler - handles all methods
@@ -91,6 +92,14 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
     // Basic validation
     if (!data.name || !data.phone || !data.email || !data.type) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Validate email
+    if (!isValidEmail(data.email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email format' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });

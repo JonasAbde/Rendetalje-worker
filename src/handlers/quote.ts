@@ -13,9 +13,9 @@ const getCorsHeaders = (origin: string) => ({
   'Access-Control-Allow-Headers': 'Content-Type',
 });
 
-function sanitizeInput(input: unknown): unknown {
-  if (typeof input !== 'string') return input;
-  return input
+function sanitizeInput(input: unknown): string {
+  if (input === null || input === undefined) return '';
+  return String(input)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -27,14 +27,14 @@ function sanitizeInput(input: unknown): unknown {
 function sanitizeObject(obj: Record<string, unknown>): QuoteData {
   const sanitized: QuoteData = {};
   for (const key in obj) {
-    const value = obj[key];
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeInput(value) as string;
-    } else {
-      sanitized[key] = value;
-    }
+    sanitized[key] = sanitizeInput(obj[key]);
   }
   return sanitized;
+}
+
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && !/[\r\n]/.test(email);
 }
 
 export async function handleQuoteRequest(request: Request, env: Env): Promise<Response> {
@@ -64,6 +64,14 @@ export async function handleQuoteRequest(request: Request, env: Env): Promise<Re
     // Basic validation
     if (!data.name || !data.phone || !data.email || !data.type) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Validate email
+    if (!isValidEmail(data.email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email format' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
