@@ -16,6 +16,20 @@ export default function FAQ() {
           name="description"
           content="Få svar på de mest almindelige spørgsmål om vores rengøringsservices, priser og praktiske forhold."
         />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          })}
+        </script>
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">
