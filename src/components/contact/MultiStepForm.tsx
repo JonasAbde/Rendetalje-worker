@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Loader2, ChevronLeft } from "lucide-react";
 import StepIndicator from "./StepIndicator";
@@ -33,6 +34,7 @@ export default function MultiStepForm({
   error,
 }: MultiStepFormProps) {
   const [step, setStep] = useState(0);
+  const [gdprAccepted, setGdprAccepted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     type: "",
     size: "",
@@ -78,7 +80,8 @@ export default function MultiStepForm({
         return (
           formData.name !== "" &&
           formData.phone !== "" &&
-          formData.email !== ""
+          formData.email !== "" &&
+          gdprAccepted
         );
       default:
         return false;
@@ -276,6 +279,14 @@ export default function MultiStepForm({
                     className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                   />
                 </div>
+              </div>
+
+              {/* GDPR checkbox */}
+              <div className="mb-6">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" checked={gdprAccepted} onChange={(e) => setGdprAccepted(e.target.checked)} required className="mt-1 w-4 h-4 rounded border-slate-300 text-green-600 focus:ring-green-500" />
+                  <span className="text-sm text-slate-600">Jeg accepterer at Rendetalje må kontakte mig omkring mit tilbud. Læs vores <Link to="/privatlivspolitik" className="text-green-600 hover:underline">privatlivspolitik</Link>.</span>
+                </label>
               </div>
 
               {/* Trust signals */}

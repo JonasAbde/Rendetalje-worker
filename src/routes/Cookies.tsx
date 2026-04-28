@@ -1,11 +1,13 @@
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
+import Canonical from "@/components/Canonical";
 import { company } from "@/content/company";
 
 export default function Cookies() {
   return (
     <div className="flex flex-col">
       <Helmet>
+      <Canonical path="/cookiepolitik" />
         <title>Cookiepolitik | {company.name}</title>
         <meta
           name="description"

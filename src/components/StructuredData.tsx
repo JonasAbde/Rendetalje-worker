@@ -8,7 +8,7 @@ export default function StructuredData() {
     "name": company.name,
     "image": "https://rendetalje.dk/logo.png",
     "url": "https://rendetalje.dk",
-    "telephone": "+4522650226",
+    "telephone": "+45 22 65 02 26",
     "email": company.email,
     "priceRange": "$$",
     "description": "Professionel rengøring i Aarhus med fokus på detaljen. Fast rengøring, flytterengøring, hovedrengøring og erhvervsrengøring.",
@@ -81,11 +81,6 @@ export default function StructuredData() {
         }
       ]
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "127"
-    },
     "paymentAccepted": ["Kontant", "Bankoverførsel", "MobilePay"]
   };
 
@@ -110,7 +105,10 @@ export default function StructuredData() {
     "name": company.name,
     "url": "https://rendetalje.dk",
     "logo": "https://rendetalje.dk/logo.png",
-    "sameAs": [],
+    "sameAs": [
+      "https://www.facebook.com/rendetalje",
+      "https://www.instagram.com/rendetalje"
+    ],
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+45-22-65-02-26",

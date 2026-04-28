@@ -1,5 +1,7 @@
 import type { Env, QuoteData } from '../types';
 
+const rateLimitMap = new Map<string, {count: number, resetAt: number}>();
+
 const allowedOrigins = [
   'https://rendetalje.dk',
   'https://www.rendetalje.dk',
@@ -40,6 +42,25 @@ function sanitizeObject(obj: Record<string, unknown>): QuoteData {
 export async function handleQuoteRequest(request: Request, env: Env): Promise<Response> {
   const origin = request.headers.get('Origin') || 'https://rendetalje.dk';
   const corsHeaders = getCorsHeaders(allowedOrigins.includes(origin) ? origin : 'https://rendetalje.dk');
+
+  // Rate limiting: max 3 requests per IP per minute
+  const clientId = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const now = Date.now();
+  const rateRecord = rateLimitMap.get(clientId);
+  if (rateRecord) {
+    if (now > rateRecord.resetAt) {
+      rateLimitMap.set(clientId, { count: 1, resetAt: now + 60_000 });
+    } else if (rateRecord.count >= 3) {
+      return new Response(JSON.stringify({ error: 'For mange forespørgsler. Prøv igen om et minut.' }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json', 'Retry-After': String(Math.ceil((rateRecord.resetAt - now) / 1000)) }
+      });
+    } else {
+      rateLimitMap.set(clientId, { count: rateRecord.count + 1, resetAt: rateRecord.resetAt });
+    }
+  } else {
+    rateLimitMap.set(clientId, { count: 1, resetAt: now + 60_000 });
+  }
 
   // Handle OPTIONS preflight
   if (request.method === 'OPTIONS') {

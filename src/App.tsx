@@ -1,29 +1,41 @@
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout/Layout";
-import Home from "./routes/Home";
-import About from "./routes/About";
-import Services from "./routes/Services";
-import FastRengoering from "./routes/services/FastRengoering";
-import Flytterengoering from "./routes/services/Flytterengoering";
-import Hovedrengoering from "./routes/services/Hovedrengoering";
-import Erhvervsrengoering from "./routes/services/Erhvervsrengoering";
-import Pricing from "./routes/Pricing";
-import ServiceAreas from "./routes/ServiceAreas";
-import FAQ from "./routes/FAQ";
-import Contact from "./routes/Contact";
-import Terms from "./routes/Terms";
-import Privacy from "./routes/Privacy";
-import Cookies from "./routes/Cookies";
-import NotFound from "./routes/NotFound";
 import ScrollToTop from "./components/layout/ScrollToTop";
+
+const Home = React.lazy(() => import("./routes/Home"));
+const About = React.lazy(() => import("./routes/About"));
+const Services = React.lazy(() => import("./routes/Services"));
+const FastRengoering = React.lazy(() => import("./routes/services/FastRengoering"));
+const Flytterengoering = React.lazy(() => import("./routes/services/Flytterengoering"));
+const Hovedrengoering = React.lazy(() => import("./routes/services/Hovedrengoering"));
+const Erhvervsrengoering = React.lazy(() => import("./routes/services/Erhvervsrengoering"));
+const Pricing = React.lazy(() => import("./routes/Pricing"));
+const ServiceAreas = React.lazy(() => import("./routes/ServiceAreas"));
+const FAQ = React.lazy(() => import("./routes/FAQ"));
+const Contact = React.lazy(() => import("./routes/Contact"));
+const Terms = React.lazy(() => import("./routes/Terms"));
+const Privacy = React.lazy(() => import("./routes/Privacy"));
+const Cookies = React.lazy(() => import("./routes/Cookies"));
+const NotFound = React.lazy(() => import("./routes/NotFound"));
+
+const Loading = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="text-center">
+      <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-green-600 border-r-transparent"></div>
+      <p className="mt-4 text-sm text-slate-500">Indlæser...</p>
+    </div>
+  </div>
+);
 
 export default function App() {
   return (
     <HelmetProvider>
       <Router>
         <ScrollToTop />
-        <Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="om-os" element={<About />} />
@@ -54,6 +66,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
+        </Suspense>
       </Router>
     </HelmetProvider>
   );

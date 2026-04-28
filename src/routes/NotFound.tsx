@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { Home, ArrowLeft, Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Canonical from "@/components/Canonical";
 import { company } from "@/content/company";
 
 export default function NotFound() {
@@ -10,6 +11,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-300px)]">
       <Helmet>
+      <Canonical path="/404" />
         <title>Side ikke fundet | {company.name}</title>
         <meta
           name="description"
