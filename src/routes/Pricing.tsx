@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import Canonical from "@/components/Canonical";
 import { company } from "../content/company";
 import { pricing } from "../content/pricing";
 import { PriceCalculator } from "../components/PriceCalculator";
@@ -10,6 +11,7 @@ export default function Pricing() {
   return (
     <div className="flex flex-col">
       <Helmet>
+      <Canonical path="/priser" />
         <title>Priser | {company.name}</title>
         <meta
           name="description"

@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Canonical from "@/components/Canonical";
 import { company } from "@/content/company";
 import { faqs } from "@/content/faq";
 
@@ -9,6 +10,7 @@ export default function FAQ() {
   return (
     <div className="flex flex-col">
       <Helmet>
+      <Canonical path="/faq" />
         <title>FAQ | {company.name}</title>
         <meta
           name="description"
