@@ -90,6 +90,20 @@ export async function handleQuoteRequest(request: Request, env: Env): Promise<Re
       });
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      return new Response(JSON.stringify({ error: 'Ugyldigt email format' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Strip CRLF to prevent Email Header Injection
+    const safeName = data.name.replace(/[\r\n]/g, '');
+    const safeType = data.type.replace(/[\r\n]/g, '');
+    const safeEmail = data.email.replace(/[\r\n]/g, '');
+
     const RESEND_API_KEY = env.RESEND_API_KEY;
     const DESTINATION_EMAIL = env.QUOTE_DESTINATION_EMAIL || 'info@rendetalje.dk';
     const FROM_EMAIL = env.FROM_EMAIL || 'info@rendetalje.dk';
@@ -132,9 +146,9 @@ export async function handleQuoteRequest(request: Request, env: Env): Promise<Re
       body: JSON.stringify({
         from: `Rendetalje <${FROM_EMAIL}>`,
         to: DESTINATION_EMAIL,
-        subject: `Ny forespørgsel: ${data.type} - ${data.name}`,
+        subject: `Ny forespørgsel: ${safeType} - ${safeName}`,
         html: emailHtml,
-        reply_to: data.email
+        reply_to: safeEmail
       })
     });
 
