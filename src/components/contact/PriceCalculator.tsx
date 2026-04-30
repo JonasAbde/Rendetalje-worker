@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PriceCalculatorProps {
@@ -45,10 +45,13 @@ export default function PriceCalculator({
   onSizeChange,
   onFrequencyChange,
 }: PriceCalculatorProps) {
-  const [estimate, setEstimate] = useState({ min: 0, max: 0 });
   const sizeNum = parseInt(size) || 0;
 
-  useEffect(() => {
+  // ⚡ Bolt Optimization: Replaced useEffect + useState with useMemo
+  // Impact: Eliminates 1 cascading re-render cycle every time inputs change.
+  // Previous implementation caused the component to render twice (initial state, then updated state).
+  // Now, the estimate is computed during the initial render pass synchronously.
+  const estimate = useMemo(() => {
     const base = basePrices[type] || 400;
     const perSqm = perSqmRates[type] || 20;
     const sizeCost = sizeNum * perSqm;
@@ -56,10 +59,10 @@ export default function PriceCalculator({
     const discount = subtotal * (frequencyDiscounts[frequency] || 0);
     const total = subtotal - discount;
     
-    setEstimate({
+    return {
       min: Math.round(total * 0.85),
       max: Math.round(total * 1.15),
-    });
+    };
   }, [type, sizeNum, frequency]);
 
   return (
