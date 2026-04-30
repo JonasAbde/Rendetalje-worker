@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import Canonical from "@/components/Canonical";
 import { company } from "../content/company";
 import { pricing } from "../content/pricing";
-import { PriceCalculator } from "../components/contact/PriceCalculator";
+import PriceCalculator from "../components/contact/PriceCalculator";
 
 export default function Pricing() {
   return (
