@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company } from "@/content/company";
 import { coreServices, extraServices } from "@/content/services";
 
@@ -10,7 +10,7 @@ export default function Services() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <Canonical path="/services" />
+<link rel="canonical" href="https://rendetalje.dk/services" />
         <title>Services | {company.name}</title>
         <meta
           name="description"

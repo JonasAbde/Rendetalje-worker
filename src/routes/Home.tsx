@@ -10,7 +10,7 @@ import {
   Building2,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company, positioning, geography } from "@/content/company";
 import { pricing } from "@/content/pricing";
 import { coreServices } from "@/content/services";
@@ -101,7 +101,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <Canonical path="/" />
+      <link rel="canonical" href="https://rendetalje.dk/" />
         <title>{company.name} | Professionel rengøring i Aarhus</title>
         <meta name="description" content={positioning.primary} />
       </Helmet>

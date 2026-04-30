@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { MapPin, Phone, ArrowRight, CheckCircle2, Navigation } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company } from "../content/company";
 
 const serviceAreas = [
@@ -68,7 +68,7 @@ export default function ServiceAreas() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <Canonical path="/service-omraade" />
+<link rel="canonical" href="https://rendetalje.dk/service-omraade" />
         <title>Serviceområde | {company.name} - Rengøring i Aarhus og omegn</title>
         <meta
           name="description"

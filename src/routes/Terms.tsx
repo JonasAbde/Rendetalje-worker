@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company, policies } from "@/content/company";
 import { pricing as pricingContent } from "@/content/pricing";
 
@@ -8,7 +8,7 @@ export default function Terms() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <Canonical path="/handelsbetingelser" />
+<link rel="canonical" href="https://rendetalje.dk/handelsbetingelser" />
         <title>Handelsbetingelser | {company.name}</title>
         <meta
           name="description"

@@ -2,14 +2,14 @@ import { motion } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company, positioning, geography, policies } from "@/content/company";
 
 export default function About() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <Canonical path="/om-os" />
+<link rel="canonical" href="https://rendetalje.dk/om-os" />
         <title>Om {company.name} | Professionel rengøring</title>
         <meta
           name="description"

@@ -1,6 +1,6 @@
 import ServicePageTemplate from "@/components/ui/ServicePageTemplate";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company } from "@/content/company";
 import { coreServices } from "@/content/services";
 
@@ -12,7 +12,7 @@ export default function Hovedrengoering() {
   return (
     <>
       <Helmet>
-      <Canonical path="/services/hovedrengoering" />
+<link rel="canonical" href="https://rendetalje.dk/services/hovedrengoering" />
         <title>
           {service.title} | {company.name}
         </title>

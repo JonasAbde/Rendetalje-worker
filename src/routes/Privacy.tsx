@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
-import Canonical from "@/components/Canonical";
+
 import { company } from "@/content/company";
 
 export default function Privacy() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <Canonical path="/privatlivspolitik" />
+<link rel="canonical" href="https://rendetalje.dk/privatlivspolitik" />
         <title>Privatlivspolitik | {company.name}</title>
         <meta
           name="description"
