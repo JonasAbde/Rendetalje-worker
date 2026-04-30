@@ -17,8 +17,8 @@ const allowedOrigins = [
 
 // Input sanitization to prevent XSS
 function sanitizeInput(input: unknown): unknown {
-  if (typeof input !== 'string') return input;
-  return input
+  if (input === null || input === undefined) return input;
+  return String(input)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -52,12 +52,7 @@ type Env = {
 function sanitizeObject(obj: Record<string, unknown>): QuoteData {
   const sanitized: QuoteData = {};
   for (const key in obj) {
-    const value = obj[key];
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeInput(value) as string;
-    } else {
-      sanitized[key] = value;
-    }
+    sanitized[key] = sanitizeInput(obj[key]);
   }
   return sanitized;
 }
@@ -91,6 +86,15 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
     // Basic validation
     if (!data.name || !data.phone || !data.email || !data.type) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email format' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
@@ -131,6 +135,11 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       });
     }
 
+    // Prevent Header Injection by removing CRLF characters
+    const safeType = (data.type || '').replace(/[\r\n]/g, '');
+    const safeName = (data.name || '').replace(/[\r\n]/g, '');
+    const safeEmail = (data.email || '').replace(/[\r\n]/g, '');
+
     // Send email via Resend API
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -141,9 +150,9 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       body: JSON.stringify({
         from: `Rendetalje <${FROM_EMAIL}>`,
         to: DESTINATION_EMAIL,
-        subject: `Ny forespørgsel: ${data.type} - ${data.name}`,
+        subject: `Ny forespørgsel: ${safeType} - ${safeName}`,
         html: emailHtml,
-        reply_to: data.email
+        reply_to: safeEmail
       })
     });
 
