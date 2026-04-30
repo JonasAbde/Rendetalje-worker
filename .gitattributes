@@ -1,0 +1,20 @@
+# Auto-detect text files
+* text=auto
+
+# Source
+*.tsx text diff=tsx
+*.ts text diff=typescript
+*.js text
+*.css text
+*.json text
+
+# Docs
+*.md text
+*.yml text
+*.yaml text
+
+# Build output
+dist/ -text
+*.png binary
+*.webp binary
+*.ico binary
