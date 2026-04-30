@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import {
@@ -14,6 +15,87 @@ import { company, positioning, geography } from "@/content/company";
 import { pricing } from "@/content/pricing";
 import { coreServices } from "@/content/services";
 import { faqs } from "@/content/faq";
+
+type FormState = "idle" | "submitting" | "submitted" | "error";
+
+function QuickQuoteForm() {
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormState("submitting");
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, message }),
+      });
+      if (!response.ok) throw new Error("Noget gik galt");
+      setFormState("submitted");
+    } catch {
+      setFormState("error");
+    }
+  };
+
+  if (formState === "submitted") {
+    return (
+      <div className="flex flex-col items-center justify-center py-12">
+        <CheckCircle2 className="h-16 w-16 text-green-600 mb-4" />
+        <p className="text-xl font-semibold text-slate-900">Tak!</p>
+        <p className="text-slate-600">Vi vender tilbage inden for 24 timer.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input
+          type="text"
+          placeholder="Navn"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          disabled={formState === "submitting"}
+          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+        <input
+          type="tel"
+          placeholder="Telefon"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+          disabled={formState === "submitting"}
+          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+      </div>
+      <textarea
+        placeholder="Fortæl kort om opgaven"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        rows={3}
+        required
+        disabled={formState === "submitting"}
+        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
+      />
+      <button
+        type="submit"
+        disabled={formState === "submitting"}
+        className="w-full h-12 rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {formState === "submitting" ? "Sender..." : "Send forespørgsel"}
+      </button>
+      {formState === "error" && (
+        <p className="text-sm text-red-600 text-center">
+          Noget gik galt. Prøv igen, eller kontakt os på {company.phone}.
+        </p>
+      )}
+    </form>
+  );
+}
 
 export default function Home() {
   return (
@@ -87,6 +169,21 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Quick Quote Form */}
+      <section className="py-20 bg-slate-50">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              Få et hurtigt tilbud
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Udfyld nedenfor, så vender vi tilbage indenfor 24 timer
+            </p>
+          </div>
+          <QuickQuoteForm />
         </div>
       </section>
 
