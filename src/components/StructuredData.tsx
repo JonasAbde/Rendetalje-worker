@@ -6,7 +6,7 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": company.name,
-    "image": "https://rendetalje.dk/logo.png",
+    "image": "https://rendetalje.dk/logo.webp",
     "url": "https://rendetalje.dk",
     "telephone": "+45 22 65 02 26",
     "email": company.email,
@@ -104,7 +104,7 @@ export default function StructuredData() {
     "@type": "Organization",
     "name": company.name,
     "url": "https://rendetalje.dk",
-    "logo": "https://rendetalje.dk/logo.png",
+    "logo": "https://rendetalje.dk/logo.webp",
     "sameAs": [
       "https://www.facebook.com/rendetalje",
       "https://www.instagram.com/rendetalje"

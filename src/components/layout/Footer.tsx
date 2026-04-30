@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block mb-6">
-              <img src="/logo.png" alt="Rendetalje Logo" className="h-12 w-auto" />
+              <img src="/logo.webp" alt="Rendetalje Logo" className="h-12 w-auto" />
             </Link>
             <p className="text-slate-600 mb-6 max-w-md leading-relaxed">
               Professionel rengøring med fokus på detaljen. Fast rengøring,

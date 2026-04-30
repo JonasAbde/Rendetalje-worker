@@ -28,7 +28,7 @@ export default function Header() {
           className="flex items-center gap-2"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <img src="/logo.png" alt="Rendetalje Logo" className="h-12 w-auto" />
+          <img src="/logo.webp" alt="Rendetalje Logo" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
