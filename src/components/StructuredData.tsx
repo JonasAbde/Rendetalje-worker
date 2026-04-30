@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 import { company } from "@/content/company";
 
 export default function StructuredData() {
@@ -117,17 +117,20 @@ export default function StructuredData() {
     }
   };
 
-  return (
-    <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(localBusinessSchema)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(websiteSchema)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(organizationSchema)}
-      </script>
-    </Helmet>
-  );
+  useEffect(() => {
+    const schemas = [localBusinessSchema, websiteSchema, organizationSchema];
+    schemas.forEach((schema) => {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(schema);
+      script.setAttribute("data-structured", "");
+      document.head.appendChild(script);
+    });
+
+    return () => {
+      document.querySelectorAll('script[data-structured]').forEach((s) => s.remove());
+    };
+  }, []);
+
+  return null;
 }
