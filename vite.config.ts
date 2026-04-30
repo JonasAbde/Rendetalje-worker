@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import sitemap from 'vite-plugin-sitemap'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 const routes = [
   '/', '/om-os', '/services',
   '/services/fast-rengoering', '/services/flytterengoering',
@@ -17,6 +19,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     sitemap({ hostname: 'https://rendetalje.dk', routes }),
+    cloudflare()
   ],
   resolve: {
     alias: {
