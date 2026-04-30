@@ -13,10 +13,15 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+.cloudflare-token
 
 # OS
 .DS_Store
 Thumbs.db
 
+# Editor
+.vscode/
+
 # TypeScript
 *.tsbuildinfo
+tsconfig.tsbuildinfo
