@@ -4,9 +4,6 @@ Allow: /
 # Sitemap location
 Sitemap: https://rendetalje.dk/sitemap.xml
 
-# Crawl delay for bots
-Crawl-delay: 1
-
 # Disallow admin areas (if any exist in future)
 # Disallow: /admin/
 # Disallow: /api/
