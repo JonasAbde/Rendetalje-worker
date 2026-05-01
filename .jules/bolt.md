@@ -1,0 +1,3 @@
+## 2025-02-27 - Replace useEffect derived state with useMemo
+**Learning:** In React components like `PriceCalculator.tsx`, using `useState` and `useEffect` to derive state from props (e.g., calculating an estimate when a range slider changes) causes a double re-render. This blocks the main thread and can make high-frequency events like sliders feel unresponsive.
+**Action:** Replace derived state `useEffect` chains with a single `useMemo` calculation. This computes the derived state synchronously during the initial render pass, improving responsiveness by preventing the redundant second render cycle.
