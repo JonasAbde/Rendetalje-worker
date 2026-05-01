@@ -10,6 +10,7 @@ interface FAQ {
 interface ServicePageProps {
   title: string;
   intro: string;
+  image?: string;
   includes: string[];
   whoIsItFor: string;
   pricingLogic: string;
@@ -20,6 +21,7 @@ interface ServicePageProps {
 export default function ServicePageTemplate({
   title,
   intro,
+  image,
   includes,
   whoIsItFor,
   pricingLogic,
@@ -29,14 +31,24 @@ export default function ServicePageTemplate({
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">
+      <section className="relative overflow-hidden bg-slate-900 pt-24 pb-24">
+        {image && (
+          <div className="absolute inset-0">
+            <img
+              src={image}
+              alt=""
+              className="h-full w-full object-cover opacity-30"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40" />
+          </div>
+        )}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6"
             >
               {title}
             </motion.h1>
@@ -44,7 +56,7 @@ export default function ServicePageTemplate({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-slate-600 leading-relaxed"
+              className="text-xl text-slate-300 leading-relaxed"
             >
               {intro}
             </motion.p>

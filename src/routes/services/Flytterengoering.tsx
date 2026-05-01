@@ -21,6 +21,7 @@ export default function Flytterengoering() {
       <ServicePageTemplate
         title={service.title}
         intro={service.desc}
+        image="/images/service-flyt.webp"
         includes={service.includes}
         whoIsItFor={service.whoIsItFor}
         pricingLogic={service.pricingLogic}

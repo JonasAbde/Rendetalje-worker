@@ -21,6 +21,7 @@ export default function Erhvervsrengoering() {
       <ServicePageTemplate
         title={service.title}
         intro={service.desc}
+        image="/images/service-erhverv.webp"
         includes={service.includes}
         whoIsItFor={service.whoIsItFor}
         pricingLogic={service.pricingLogic}

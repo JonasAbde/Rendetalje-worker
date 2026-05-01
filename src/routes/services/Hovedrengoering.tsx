@@ -21,6 +21,7 @@ export default function Hovedrengoering() {
       <ServicePageTemplate
         title={service.title}
         intro={service.desc}
+        image="/images/service-hoved.webp"
         includes={service.includes}
         whoIsItFor={service.whoIsItFor}
         pricingLogic={service.pricingLogic}
