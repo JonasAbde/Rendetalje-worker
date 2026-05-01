@@ -48,18 +48,19 @@ type Env = {
   FROM_EMAIL?: string;
 };
 
-// Sanitize all object values
-function sanitizeObject(obj: Record<string, unknown>): QuoteData {
-  const sanitized: QuoteData = {};
-  for (const key in obj) {
-    const value = obj[key];
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeInput(value) as string;
-    } else {
-      sanitized[key] = value;
-    }
+// Sanitize all object values recursively
+function sanitizeObject(obj: unknown): unknown {
+  if (Array.isArray(obj)) {
+    return obj.map(item => sanitizeObject(item));
   }
-  return sanitized;
+  if (obj !== null && typeof obj === 'object') {
+    const sanitized: Record<string, unknown> = {};
+    for (const key in obj as Record<string, unknown>) {
+      sanitized[key] = sanitizeObject((obj as Record<string, unknown>)[key]);
+    }
+    return sanitized;
+  }
+  return sanitizeInput(obj);
 }
 
 // Main handler - handles all methods
@@ -86,7 +87,7 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
 
   try {
     const rawData = await request.json() as Record<string, unknown>;
-    const data = sanitizeObject(rawData);
+    const data = sanitizeObject(rawData) as QuoteData;
     
     // Basic validation
     if (!data.name || !data.phone || !data.email || !data.type) {
