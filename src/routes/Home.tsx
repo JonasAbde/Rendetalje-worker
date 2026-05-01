@@ -107,14 +107,23 @@ export default function Home() {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-slate-50 pt-24 pb-32">
+      <section className="relative overflow-hidden bg-slate-900 pt-24 pb-32">
+        {/* Hero background image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-bg.webp"
+            alt=""
+            className="h-full w-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40" />
+        </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]"
+              className="text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]"
             >
               Professionel rengøring i Aarhus med fokus på detaljen
             </motion.h1>
@@ -122,7 +131,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mt-6 text-xl text-slate-600 leading-relaxed max-w-2xl"
+              className="mt-6 text-xl text-slate-300 leading-relaxed max-w-2xl"
             >
               Vi hjælper private og mindre virksomheder med fast rengøring,
               flytterengøring og hovedrengøring — med klare aftaler, stabil
@@ -202,26 +211,44 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coreServices.map((service, i) => {
               const Icon = service.icon;
+              const imgMap: Record<string, string> = {
+                "fast-rengoering": "/images/service-fast.webp",
+                "flytterengoering": "/images/service-flyt.webp",
+                "hovedrengoering": "/images/service-hoved.webp",
+                "erhvervsrengoering": "/images/service-erhverv.webp",
+              };
+              const imgSrc = imgMap[service.id];
               return (
                 <Link
                   key={i}
                   to={service.path}
-                  className="group block p-8 rounded-3xl bg-slate-50 hover:bg-green-50 transition-colors border border-slate-100 hover:border-green-100"
+                  className="group block rounded-3xl bg-slate-50 hover:bg-green-50 transition-colors border border-slate-100 hover:border-green-100 overflow-hidden"
                 >
-                  <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm mb-6 text-green-600 group-hover:scale-110 transition-transform">
-                    <Icon size={24} />
+                  {imgSrc && (
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img
+                        src={imgSrc}
+                        alt={service.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <div className="p-8 pt-6">
+                    <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm mb-6 text-green-600 group-hover:scale-110 transition-transform">
+                      <Icon size={24} />
+                    </div>
+                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-600 mb-6">{service.desc}</p>
+                    <span className="inline-flex items-center text-sm font-medium text-green-600">
+                      Læs mere{" "}
+                      <ArrowRight
+                        size={16}
+                        className="ml-1 group-hover:translate-x-1 transition-transform"
+                      />
+                    </span>
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-600 mb-6">{service.desc}</p>
-                  <span className="inline-flex items-center text-sm font-medium text-green-600">
-                    Læs mere{" "}
-                    <ArrowRight
-                      size={16}
-                      className="ml-1 group-hover:translate-x-1 transition-transform"
-                    />
-                  </span>
                 </Link>
               );
             })}
