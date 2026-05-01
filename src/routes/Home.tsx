@@ -22,6 +22,7 @@ function QuickQuoteForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,7 +32,7 @@ function QuickQuoteForm() {
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, message }),
+        body: JSON.stringify({ name, phone, email, type: "quick-quote", description: message }),
       });
       if (!response.ok) throw new Error("Noget gik galt");
       setFormState("submitted");
@@ -67,6 +68,15 @@ function QuickQuoteForm() {
           placeholder="Telefon"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
+          required
+          disabled={formState === "submitting"}
+          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
           disabled={formState === "submitting"}
           className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600"

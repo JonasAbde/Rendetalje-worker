@@ -82,4 +82,4 @@ npx wrangler pages dev
 ## Current Status
 - ✅ Live on rendetalje.dk
 - ✅ Contact form → email working
-- ✅ Monthly invoicing: 7 sent + 5 klar (#1288-#1292, 16.578 kr)
+- ✅ Monthly invoicing: 7 sent + 5 klar (#1288-#1292, 16.578 kr) *(manuelt noteret — verificér mod Billy.dk)*
