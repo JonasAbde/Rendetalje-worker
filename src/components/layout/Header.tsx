@@ -25,7 +25,7 @@ export default function Header() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <img src="/logo.webp" alt="Rendetalje Logo" className="h-12 w-auto" />
@@ -38,7 +38,7 @@ export default function Header() {
               key={link.name}
               to={link.path}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-green-600",
+                "text-sm font-medium transition-colors hover:text-green-600 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2",
                 (link.path === "/" && location.pathname === "/") ||
                   isActive(link.path)
                   ? "text-green-600"
@@ -50,7 +50,7 @@ export default function Header() {
           ))}
           <Link
             to="/kontakt"
-            className="inline-flex h-10 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+            className="inline-flex h-10 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
           >
             Få et tilbud
           </Link>
@@ -58,9 +58,9 @@ export default function Header() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 text-slate-600 hover:text-slate-900"
+          className="md:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? "Luk menu" : "Åbn menu"}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -75,7 +75,7 @@ export default function Header() {
                 key={link.name}
                 to={link.path}
                 className={cn(
-                  "text-base font-medium",
+                  "text-base font-medium rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2",
                   (link.path === "/" && location.pathname === "/") ||
                     isActive(link.path)
                     ? "text-green-600"
@@ -89,7 +89,7 @@ export default function Header() {
             <div className="pt-4">
               <Link
                 to="/kontakt"
-                className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-base font-medium text-white transition-colors hover:bg-green-700"
+                className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-base font-medium text-white transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Få et tilbud
