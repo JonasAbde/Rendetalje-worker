@@ -66,11 +66,12 @@ export default function PriceCalculator({
     <div className="space-y-6">
       {/* Size input */}
       <div className="space-y-3">
-        <label className="block text-sm font-medium text-slate-700">
+        <label htmlFor="size" className="block text-sm font-medium text-slate-700">
           Ca. størrelse (m²)
         </label>
         <div className="flex items-center gap-4">
           <input
+            id="size_range"
             type="range"
             min="0"
             max="300"
@@ -80,6 +81,7 @@ export default function PriceCalculator({
           />
           <div className="w-24">
             <input
+              id="size"
               type="number"
               value={size}
               onChange={(e) => onSizeChange(e.target.value)}
