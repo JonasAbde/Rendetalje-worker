@@ -120,7 +120,16 @@ export default function CookieConsent() {
                 </a>
               </div>
               <button
-                onClick={() => setIsVisible(false)}
+                onClick={() => {
+                  // Save minimal consent so banner doesn't reappear
+                  saveConsent({
+                    necessary: true,
+                    functional: false,
+                    analytics: false,
+                    marketing: false,
+                    timestamp: new Date().toISOString(),
+                  });
+                }}
                 className="p-1 hover:bg-slate-100 rounded-full transition-colors"
                 aria-label="Luk cookie banner"
               >

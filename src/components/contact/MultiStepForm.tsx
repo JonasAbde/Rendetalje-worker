@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Loader2, ChevronLeft } from "lucide-react";
@@ -6,6 +6,8 @@ import StepIndicator from "./StepIndicator";
 import ServiceSelector from "./ServiceSelector";
 import PriceCalculator from "./PriceCalculator";
 import SuccessAnimation from "./SuccessAnimation";
+
+const FORM_DRAFT_KEY = "rendetalje_contact_draft";
 
 interface MultiStepFormProps {
   onSubmit: (data: FormData) => Promise<void>;
@@ -35,18 +37,24 @@ export default function MultiStepForm({
 }: MultiStepFormProps) {
   const [step, setStep] = useState(0);
   const [gdprAccepted, setGdprAccepted] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    type: "",
-    size: "",
-    frequency: "",
-    date: "",
-    description: "",
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    city: "",
+  const [formData, setFormData] = useState<FormData>(() => {
+    // Restore draft from sessionStorage on mount
+    try {
+      const draft = sessionStorage.getItem(FORM_DRAFT_KEY);
+      if (draft) {
+        const parsed = JSON.parse(draft);
+        return { ...{ type: "", size: "", frequency: "", date: "", description: "", name: "", phone: "", email: "", address: "", city: "" }, ...parsed };
+      }
+    } catch {}
+    return { type: "", size: "", frequency: "", date: "", description: "", name: "", phone: "", email: "", address: "", city: "" };
   });
+
+  // Persist form draft to sessionStorage
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(FORM_DRAFT_KEY, JSON.stringify(formData));
+    } catch {}
+  }, [formData]);
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -67,6 +75,8 @@ export default function MultiStepForm({
       data.append(key, value);
     });
     await onSubmit(data);
+    // Clear draft on successful submit
+    try { sessionStorage.removeItem(FORM_DRAFT_KEY); } catch {}
   };
 
   // Validation for each step

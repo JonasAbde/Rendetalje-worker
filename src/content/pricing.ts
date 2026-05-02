@@ -59,6 +59,19 @@ export const pricing = {
   },
 
   // ============================================
+  // RECURRING CLEANING PHASES
+  // ============================================
+
+  recurring: {
+    firstCleaning: {
+      description: "Første rengøring tager typisk 30% længere end efterfølgende besøg, da der skal indhentes efterslæb og etableres en grundstandard.",
+    },
+    ongoing: {
+      description: "Efterfølgende besøg er vedligeholdelse — antal timer fastlægges efter aftale baseret på boligens størrelse og behov.",
+    },
+  },
+
+  // ============================================
   // RISK BUFFERS
   // ============================================
 
