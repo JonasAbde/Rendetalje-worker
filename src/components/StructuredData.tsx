@@ -103,6 +103,7 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": company.name,
+    "legalName": company.legalName,
     "url": "https://rendetalje.dk",
     "logo": "https://rendetalje.dk/logo.webp",
     "sameAs": [
