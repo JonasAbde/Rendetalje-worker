@@ -3,7 +3,11 @@ export const pricing = {
   minimumPrice: 698,
   currency: "kr",
   taxIncluded: true,
-  // Core pricing logic from Drive docs
+
+  // ============================================
+  // CORE BILLING LOGIC
+  // ============================================
+
   billingLogic: {
     formula: "Pris = fakturerbare arbejdstimer × 349 kr",
     workHours: "Fakturerbare arbejdstimer = antal medarbejdere × tid på stedet",
@@ -11,30 +15,88 @@ export const pricing = {
     example2: "2 personer × 2 timer = 4 arbejdstimer = 1.396 kr",
     example3: "2 personer × 3 timer = 6 arbejdstimer = 2.094 kr",
   },
-  // Estimation formula for calculator
+
+  // ============================================
+  // MINIMUM HOURS PER JOB TYPE
+  // Calibrated from 372 Rendetalje core jobs 2025-2026
+  // ============================================
+
+  minHours: {
+    standard: 1.0,
+    deep: 2.0,
+    moveOut: 3.0,
+    commercial: 1.0,
+  },
+
+  // ============================================
+  // ESTIMATION FORMULAS
+  // ============================================
+
   estimation: {
     standard: "m² / 25 timer",
-    deep: "(m² / 20) + 1-2 timer",
-    moveOut: "(m² / 18) + 2-3 timer",
+    deep: "(m² / 20) + 1-3 timer",
+    moveOut: "(m² / 18) + 2-4 timer",
     extras: {
       oven: "+0,5 time",
       fridge: "+0,5 time",
       windows: "+1 time pr. 30 m²",
+      cabinets: "+0,5 time",
+      descaling: "+1-2 timer",
     },
   },
-  // Recurring cleaning breakdown
-  recurring: {
-    firstCleaning: {
-      description: "Første gang tager altid ekstra tid for at få standen af rengøring til tops",
-    },
-    ongoing: {
-      description: "Derefter vedligeholdes efter dit ønske — timer og frekvens aftales individuelt",
+
+  // ============================================
+  // DEFAULT ESTIMATES (when m² is unknown)
+  // Based on historical Q1-Q3 intervals from 372 Rendetalje jobs
+  // ============================================
+
+  defaultEstimates: {
+    standard: { hours: "1.0-2.0", price: "349-698 kr", note: "Historisk median 2.0h" },
+    deep: { hours: "2.0-4.5", price: "698-1.571 kr", note: "Historisk median 3.0h, Q1-Q3 3.0-5.0h" },
+    moveOut: { hours: "2.5-7.0", price: "873-2.443 kr", note: "Historisk median 5.0h, Q1-Q3 4.0-7.0h" },
+    commercial: { hours: "1.0-2.0", price: "349-698 kr", note: "Historisk median 1.5h" },
+    firstCleaning: { multiplier: 1.3, note: "Første gang tager ca. 30% længere" },
+  },
+
+  // ============================================
+  // RISK BUFFERS
+  // ============================================
+
+  riskBuffer: {
+    moveOut: 0.25,
+    deep: 0.20,
+    conditionMultiplier: {
+      normal: 1.0,
+      poor: 1.3,
+      unknown: 1.15,
     },
   },
+
+  firstCleaningMultiplier: 1.3,
+
+  // ============================================
+  // VALIDATION
+  // ============================================
+
+  validation: {
+    warnIfPriceBelowMinimum: true,
+    warnIfM2unknown: true,
+    warnIfConditionUnknown: true,
+    stopIfDeepWithoutM2: true,
+    stopIfMoveOutWithoutCondition: true,
+    confidenceThreshold: 0.5,
+  },
+
+  // ============================================
+  // WORDING
+  // ============================================
+
   wording:
     "Vores timepris er 349 kr inkl. moms, og minimumsprisen er 698 kr inkl. moms (svarende til 2 timer). Vi estimerer først opgaven ud fra type, størrelse, tilstand, frekvens og eventuelle tilvalg. Den endelige pris beregnes derefter ud fra de faktiske fakturerbare arbejdstimer. Når flere medarbejdere er på opgaven samtidig, regnes den samlede arbejdstid sammen. Hvis to medarbejdere arbejder 2 timer på stedet, svarer det til 4 arbejdstimer i alt. Ved fast rengøring skelner vi typisk mellem første grundige rengøring og efterfølgende vedligeholdelse. Prisberegneren giver derfor et estimat — og ved større eller mere særlige opgaver giver vi altid et konkret tilbud på forhånd.",
+
   estimateNote:
-    "Dette er et estimat baseret på forventet samlet arbejdstid. Den endelige pris afhænger af faktisk omfang, tilstand og eventuelle ekstra behov på opgaven. Især flytterengøring kan variere og har historisk været undervurderet.",
+    "Dette er et estimat baseret på forventet samlet arbejdstid. Den endelige pris afhænger af faktisk omfang, tilstand og eventuelle ekstra behov på opgaven. Ved hoved- og flytterengøring kan omfanget variere afhængigt af boligens stand og eventuelle ekstraopgaver (ovn, køleskab, vinduer, kalk).",
+
   paymentLogic: {
     recurring: "Typisk månedlig samlet faktura.",
     oneOff: "Senest 24 timer efter udført opgave medmindre andet er aftalt.",
