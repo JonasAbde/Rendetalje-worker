@@ -11,7 +11,10 @@ function generateBookingRef() {
   const year = date.getFullYear().toString().slice(-2);
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-  const random = Math.floor(Math.random() * 900) + 100;
+  // Security Enhancement: Use cryptographically secure random values for identifiers
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  const random = (array[0] % 900) + 100;
   return `REN-${year}${month}${day}-${random}`;
 }
 
