@@ -1,5 +1,7 @@
 export const company = {
   name: "Rendetalje",
+  legalName: "Rendetalje.dk ApS",
+  legalForm: "ApS",
   address: "Gammel Viborgvej 40",
   postalCode: "8381",
   city: "Tilst",

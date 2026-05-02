@@ -16,7 +16,7 @@ export default function Footer() {
             </p>
             <div className="space-y-2 text-slate-600">
               <p>Gammel Viborgvej 40, 8381 Tilst</p>
-              <p>CVR 45564096</p>
+              <p>{company.legalName} · CVR {company.cvr}</p>
               <p>
                 <a
                   href="tel:+4522650226"
