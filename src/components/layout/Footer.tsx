@@ -20,7 +20,7 @@ export default function Footer() {
               <p>{company.legalName} · CVR {company.cvr}</p>
               <p>
                 <a
-                  href="tel:+4522650226"
+                  href={`tel:${company.phone.replace(/\s+/g, "")}`}
                   className="hover:text-green-600 transition-colors"
                 >
                   +45 22 65 02 26
@@ -28,7 +28,7 @@ export default function Footer() {
               </p>
               <p>
                 <a
-                  href="mailto:info@rendetalje.dk"
+                  href={`mailto:${company.email}`}
                   className="hover:text-green-600 transition-colors"
                 >
                   info@rendetalje.dk

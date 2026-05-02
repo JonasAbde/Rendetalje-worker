@@ -107,8 +107,7 @@ export default function StructuredData() {
     "url": "https://rendetalje.dk",
     "logo": "https://rendetalje.dk/logo.webp",
     "sameAs": [
-      "https://www.facebook.com/rendetalje",
-      "https://www.instagram.com/rendetalje"
+      "https://www.instagram.com/rendetalje/"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
