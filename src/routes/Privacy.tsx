@@ -168,6 +168,13 @@ export default function Privacy() {
                 EU-U.S. Data Privacy Framework.
               </li>
               <li>
+                <strong>Plausible Analytics (statistik):</strong> Bruges til at
+                indsamle anonymiseret statistik om brugen af hjemmesiden.
+                Plausible anvender ingen cookies og indsamler ikke
+                personhenførbare oplysninger. Deres servere er hostet i EU
+                (Tyskland).
+              </li>
+              <li>
                 <strong>Cloudflare (hosting):</strong> Bruges til at hoste hjemmesiden
                 og sikre mod DDoS-angreb.
               </li>
@@ -211,7 +218,7 @@ export default function Privacy() {
             <p>
               Vi kan opdatere denne privatlivspolitik fra tid til anden. Den aktuelle
               version vil altid være tilgængelig på denne side. Sidst opdateret:
-              13. april 2025.
+              2. maj 2026.
             </p>
           </div>
         </div>

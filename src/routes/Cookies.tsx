@@ -79,6 +79,70 @@ export default function Cookies() {
               services, du ikke kan bruge, fordi de forudsætter, at hjemmesiden
               kan huske de valg, du foretager.
             </p>
+
+            <h2>Cookies på denne hjemmeside</h2>
+            <p>
+              Rendetalje.dk sætter som udgangspunkt ingen HTTP-cookies. Vi
+              bruger udelukkende din browsers localStorage til at gemme dine
+              cookie-præferencer. Hvis du giver samtykke til analyse, indlæses
+              Plausible Analytics, som heller ikke bruger cookies.
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-slate-100">
+                    <th className="text-left p-3 border border-slate-200">Navn</th>
+                    <th className="text-left p-3 border border-slate-200">Type</th>
+                    <th className="text-left p-3 border border-slate-200">Formål</th>
+                    <th className="text-left p-3 border border-slate-200">Opbevaring</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 border border-slate-200 font-mono text-xs">
+                      rendetalje_cookie_consent
+                    </td>
+                    <td className="p-3 border border-slate-200">localStorage</td>
+                    <td className="p-3 border border-slate-200">
+                      Gemmer dine cookie-præferencer (nødvendig)
+                    </td>
+                    <td className="p-3 border border-slate-200">
+                      Indtil du sletter dine browserdata
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Plausible Analytics</h2>
+            <p>
+              Vi bruger{" "}
+              <a
+                href="https://plausible.io"
+                className="text-green-600 hover:underline"
+              >
+                Plausible Analytics
+              </a>{" "}
+              til at indsamle anonymiseret statistik om brugen af vores
+              hjemmeside. Plausible er et privatlivsvenligt analyseværktøj, der
+              <strong> ikke </strong> bruger cookies og ikke indsamler
+              personhenførbare oplysninger (ingen IP-adresser gemmes, ingen
+              browsingdata på tværs af sites). Dataene bruges udelukkende til at
+              forstå, hvilke sider der besøges, og hvordan hjemmesiden kan
+              forbedres.
+            </p>
+
+            <h2>Samtykke og tilbagetrækning</h2>
+            <p>
+              Når du besøger Rendetalje.dk første gang, vises et cookie-banner,
+              hvor du kan vælge mellem at acceptere alle, afvise alle eller
+              tilpasse dine indstillinger. Dit valg gemmes i din browsers
+              localStorage. Du kan til enhver tid ændre dine indstillinger ved
+              at klikke på cookie-ikonet nederst til venstre på siden. Hvis du
+              ønsker at trække dit samtykke tilbage, kan du gøre det via samme
+              ikon — dine præferencer nulstilles, og banneret vises igen.
+            </p>
           </div>
         </div>
       </section>
