@@ -1,3 +1,7 @@
 ## 2024-05-04 - Explicit ARIA Radiogroups for Custom Controls
 **Learning:** Custom input groups acting as radio buttons (like button-based selection arrays) are not inherently connected by standard HTML linkage (`htmlFor`). They require explicit ARIA grouping using `role="radiogroup"` and `aria-labelledby` on the container, and `role="radio"` and `aria-checked` on the items to ensure screen reader users understand the relationship and state of the options.
 **Action:** Always apply `role="radiogroup"`, `aria-labelledby`, `role="radio"`, and `aria-checked` to custom button-based selection options instead of relying on standard inputs, and pair this with clear `focus-visible` styling for keyboard navigators.
+
+## 2024-05-03 - Complex Form Labelling
+**Learning:** In step-based or dynamic forms like `MultiStepForm` and `PriceCalculator`, form elements and `<label>` tags are sometimes visually separated or functionally wrapped, causing developers to forget `htmlFor` and `id` linking. Furthermore, custom components acting like radio buttons (e.g. Frequency Selector) need explicitly defined `role="radiogroup"` on the wrapper and `role="radio"`, `aria-checked` on the buttons to remain accessible to screen readers, instead of standard `htmlFor` label linkage.
+**Action:** When adding new form fields or complex multi-step wizards, always ensure standard `<input>`/`<textarea>` elements use paired `htmlFor`/`id` combinations. For custom input groups (like button-based selection arrays), explicitly apply ARIA grouping (`radiogroup`) and states (`aria-checked`).
