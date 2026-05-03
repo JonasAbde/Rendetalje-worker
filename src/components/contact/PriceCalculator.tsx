@@ -66,11 +66,12 @@ export default function PriceCalculator({
     <div className="space-y-6">
       {/* Size input */}
       <div className="space-y-3">
-        <label className="block text-sm font-medium text-slate-700">
+        <label htmlFor="size" className="block text-sm font-medium text-slate-700">
           Ca. størrelse (m²)
         </label>
         <div className="flex items-center gap-4">
           <input
+            id="size"
             type="range"
             min="0"
             max="300"
@@ -95,14 +96,16 @@ export default function PriceCalculator({
 
       {/* Frequency selector */}
       <div className="space-y-3">
-        <label className="block text-sm font-medium text-slate-700">
+        <label id="frequency-label" className="block text-sm font-medium text-slate-700">
           Ønsket frekvens
         </label>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3" role="radiogroup" aria-labelledby="frequency-label">
           {Object.entries(frequencyLabels).map(([value, label]) => (
             <button
               key={value}
               type="button"
+              role="radio"
+              aria-checked={frequency === value}
               onClick={() => onFrequencyChange(value)}
               className={`py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all ${
                 frequency === value
