@@ -115,22 +115,25 @@ export default function Cookies() {
               </table>
             </div>
 
-            <h2>Plausible Analytics</h2>
+            <h2>Umami Analytics</h2>
             <p>
               Vi bruger{" "}
               <a
-                href="https://plausible.io"
+                href="https://umami.is/privacy"
                 className="text-green-600 hover:underline"
               >
-                Plausible Analytics
+                Umami Cloud
               </a>{" "}
               til at indsamle anonymiseret statistik om brugen af vores
-              hjemmeside. Plausible er et privatlivsvenligt analyseværktøj, der
+              hjemmeside. Umami er et privatlivsvenligt analyseværktøj, der
               <strong> ikke </strong> bruger cookies og ikke indsamler
               personhenførbare oplysninger (ingen IP-adresser gemmes, ingen
               browsingdata på tværs af sites). Dataene bruges udelukkende til at
               forstå, hvilke sider der besøges, og hvordan hjemmesiden kan
-              forbedres.
+              forbedres. Der sendes kun anonyme data som sidevisninger,
+              klik på knapper og interaktion med prisberegneren — vi
+              tracker <strong>ikke</strong> navn, email, telefon, adresse
+              eller fritekst fra formularer.
             </p>
 
             <h2>Samtykke og tilbagetrækning</h2>
