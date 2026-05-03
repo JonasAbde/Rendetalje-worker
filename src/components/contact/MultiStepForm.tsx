@@ -10,7 +10,7 @@ import SuccessAnimation from "./SuccessAnimation";
 const FORM_DRAFT_KEY = "rendetalje_contact_draft";
 
 interface MultiStepFormProps {
-  onSubmit: (data: FormData) => Promise<void>;
+  onSubmit: (data: globalThis.FormData) => Promise<void>;
   isSubmitting: boolean;
   isSubmitted: boolean;
   error: string | null;
@@ -70,7 +70,7 @@ export default function MultiStepForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = new FormData();
+    const data = new window.FormData();
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
