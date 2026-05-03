@@ -235,6 +235,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Price Block */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-green-50 rounded-3xl p-8 md:p-12 border border-green-100">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6">
+                Gennemskuelige priser
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-bold text-green-600">{pricing.hourlyRate} kr</span>
+                    <span className="text-slate-600">/time inkl. moms</span>
+                  </div>
+                  <p className="text-slate-600">
+                    Minimumspris: {pricing.minimumPrice} kr inkl. moms
+                  </p>
+                  <p className="text-slate-600">
+                    Typiske private rengøringer ligger ofte mellem 698 og 1.400 kr pr. besøg
+                  </p>
+                  <p className="text-sm text-slate-500">
+                    Endelig pris afhænger af størrelse, stand, adgang, ønsket niveau og tilvalg
+                  </p>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <Link
+                    to="/kontakt"
+                    className="inline-flex h-14 items-center justify-center rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700"
+                  >
+                    Få et tilbud <ArrowRight size={20} className="ml-2" />
+                  </Link>
+                  <Link
+                    to="/priser"
+                    className="inline-flex h-14 items-center justify-center rounded-full border-2 border-green-600 px-8 text-base font-medium text-green-600 transition-colors hover:bg-green-50"
+                  >
+                    Se priser
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Service Overview */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -349,21 +393,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Logic */}
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-6">
-            Gennemskuelige priser
+      {/* Trust & Credentials */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-12 text-center">
+            Tillid & tryghed
           </h2>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-10">
-            {pricing.wording}
-          </p>
-          <Link
-            to="/priser"
-            className="inline-flex items-center text-green-600 font-medium hover:text-green-700"
-          >
-            Se vores priser og logik <ArrowRight size={20} className="ml-2" />
-          </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { title: "CVR-registreret", desc: "Rendetalje.dk ApS — CVR 45564096" },
+              { title: "Lokal service", desc: "Aarhus og omegn siden 2018" },
+              { title: "Svanemærkede produkter", desc: "Miljømærket rengøring uden unødig kemi" },
+              { title: "Klare aftaler", desc: "Du ved altid hvad du får, og hvad det koster" },
+              { title: "Fast & engangsopgaver", desc: "Både løbende rengøring og enkeltstående opgaver" },
+              { title: "Gennemskuelig prislogik", desc: "349 kr/time inkl. moms — ingen skjulte gebyrer" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-1">{item.title}</h3>
+                  <p className="text-sm text-slate-600">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

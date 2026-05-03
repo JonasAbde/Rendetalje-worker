@@ -12,8 +12,9 @@ export const pricing = {
     formula: "Pris = fakturerbare arbejdstimer × 349 kr",
     workHours: "Fakturerbare arbejdstimer = antal medarbejdere × tid på stedet",
     example1: "1 person × 2 timer = 2 arbejdstimer = 698 kr",
-    example2: "2 personer × 2 timer = 4 arbejdstimer = 1.396 kr",
-    example3: "2 personer × 3 timer = 6 arbejdstimer = 2.094 kr",
+    example2: "2 personer × 1,5 time = 3 arbejdstimer = 1.047 kr",
+    example3: "2 personer × 2 timer = 4 arbejdstimer = 1.396 kr",
+    example4: "2 personer × 3 timer = 6 arbejdstimer = 2.094 kr",
   },
 
   // ============================================

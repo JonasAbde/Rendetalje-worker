@@ -11,12 +11,13 @@ export default function Pricing() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/priser" />
+        <link rel="canonical" href="https://rendetalje.dk/priser" />
         <title>Priser | {company.name}</title>
         <meta
           name="description"
-          content="Gennemskuelige priser på professionel rengøring. Vores timepris er 349 kr. inkl. moms."
+          content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 349 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring."
         />
+        <meta name="keywords" content="rengøring pris Aarhus, privat rengøring pris, flytterengøring pris Aarhus, hvad koster rengøring" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">
@@ -50,8 +51,11 @@ export default function Pricing() {
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
               Få et estimat på forventede arbejdstimer og pris
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-lg text-slate-600 mb-3">
               Beregn et estimat baseret på din opgaves type, størrelse og tilvalg
+            </p>
+            <p className="text-sm text-amber-600 font-medium">
+              ⓘ Estimat — ikke et bindende tilbud. Endelig pris fastsættes ved konkret vurdering.
             </p>
           </div>
           <div className="max-w-2xl mx-auto">
@@ -60,6 +64,62 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Typical Price Examples */}
+      <section className="py-16 bg-white border-t border-slate-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-10 text-center">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                Typiske priseksempler
+              </h2>
+              <p className="text-lg text-slate-600">
+                Vejledende priser baseret på erfaring. Prisen er et estimat, ikke et bindende tilbud.
+              </p>
+            </div>
+
+            <div className="overflow-hidden bg-white rounded-3xl border border-slate-200 shadow-sm">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200">
+                    <th className="text-left py-4 px-6 font-semibold text-slate-900">Opgavetype</th>
+                    <th className="text-left py-4 px-6 font-semibold text-slate-900">Estimeret pris</th>
+                    <th className="text-left py-4 px-6 font-semibold text-slate-900">Bemærkning</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  <tr className="hover:bg-slate-50">
+                    <td className="py-4 px-6 font-medium text-slate-900">Fast rengøring — lille bolig</td>
+                    <td className="py-4 px-6 text-slate-700">ca. 698 — 1.047 kr</td>
+                    <td className="py-4 px-6 text-slate-500 text-xs">2-3 arbejdstimer pr. besøg</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50">
+                    <td className="py-4 px-6 font-medium text-slate-900">Fast rengøring — almindelig bolig</td>
+                    <td className="py-4 px-6 text-slate-700">ca. 1.047 — 1.396 kr</td>
+                    <td className="py-4 px-6 text-slate-500 text-xs">3-4 arbejdstimer pr. besøg</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50">
+                    <td className="py-4 px-6 font-medium text-slate-900">Hovedrengøring</td>
+                    <td className="py-4 px-6 text-slate-700">typisk fra ca. 1.396 kr</td>
+                    <td className="py-4 px-6 text-slate-500 text-xs">Afhænger af boligens stand</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50">
+                    <td className="py-4 px-6 font-medium text-slate-900">Flytterengøring</td>
+                    <td className="py-4 px-6 text-slate-700">typisk fra ca. 2.010 kr</td>
+                    <td className="py-4 px-6 text-slate-500 text-xs">Afhænger af stand og omfang</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p className="text-xs text-slate-400 text-center mt-4">
+              Priserne er vejledende. Den endelige pris fastsættes ved et konkret tilbud baseret på
+              størrelse, stand, adgang, ønsket niveau og eventuelle tilvalg.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Logic */}
       <section className="py-24 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
@@ -94,6 +154,7 @@ export default function Pricing() {
                       <li>• {pricing.billingLogic.example1}</li>
                       <li>• {pricing.billingLogic.example2}</li>
                       <li>• {pricing.billingLogic.example3}</li>
+                      <li>• {pricing.billingLogic.example4}</li>
                     </ul>
                   </div>
                 </div>
