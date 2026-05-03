@@ -1,2 +1,23 @@
 /vinduespudsning /services 301
 /vinduespudsning/ /services 301
+
+/tjenester/ /services 301
+/tjenester /services 301
+
+/ugentlig-rengoring/ /services/fast-rengoering 301
+/ugentlig-rengoring /services/fast-rengoering 301
+
+/hovedrengoring/ /services/hovedrengoering 301
+/hovedrengoring /services/hovedrengoering 301
+
+/airbnb-rengoring/ /services/erhvervsrengoering 301
+/airbnb-rengoring /services/erhvervsrengoering 301
+
+/events-og-engangsopgaver/ /services 301
+/events-og-engangsopgaver /services 301
+
+/beredte-omrader/ /om-os 301
+/beredte-omrader /om-os 301
+
+/category/uncategorized/ / 301
+/category/uncategorized / 301
