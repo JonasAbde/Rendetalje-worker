@@ -18,8 +18,17 @@ import { faqs } from "@/content/faq";
 
 type FormState = "idle" | "submitting" | "submitted" | "error";
 
+const serviceTypes = [
+  { id: "fast", label: "Fast rengøring" },
+  { id: "flytte", label: "Flytterengøring" },
+  { id: "hoved", label: "Hovedrengøring" },
+  { id: "erhverv", label: "Erhverv" },
+  { id: "andet", label: "Andet" },
+];
+
 function QuickQuoteForm() {
   const [formState, setFormState] = useState<FormState>("idle");
+  const [serviceType, setServiceType] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +41,7 @@ function QuickQuoteForm() {
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, type: "quick-quote", description: message }),
+        body: JSON.stringify({ name, phone, email, type: serviceType, description: message }),
       });
       if (!response.ok) throw new Error("Noget gik galt");
       setFormState("submitted");
@@ -53,6 +62,27 @@ function QuickQuoteForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Service type selector */}
+      <div>
+        <p className="text-sm font-medium text-slate-700 mb-3">Hvilken type rengøring?</p>
+        <div className="flex flex-wrap gap-2">
+          {serviceTypes.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => setServiceType(s.id)}
+              disabled={formState === "submitting"}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+                serviceType === s.id
+                  ? "bg-green-600 text-white border-green-600"
+                  : "bg-white text-slate-700 border-slate-300 hover:border-green-400"
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <input
           type="text"
@@ -83,17 +113,16 @@ function QuickQuoteForm() {
         />
       </div>
       <textarea
-        placeholder="Fortæl kort om opgaven"
+        placeholder="Fortæl kort om opgaven (valgfri)"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         rows={3}
-        required
         disabled={formState === "submitting"}
         className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600 resize-none"
       />
       <button
         type="submit"
-        disabled={formState === "submitting"}
+        disabled={formState === "submitting" || serviceType === ""}
         className="w-full h-12 rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {formState === "submitting" ? "Sender..." : "Send forespørgsel"}
