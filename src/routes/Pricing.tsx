@@ -55,7 +55,13 @@ export default function Pricing() {
             </p>
           </div>
           <div className="max-w-2xl mx-auto">
-            <PriceCalculator />
+            <PriceCalculator
+              type="fast"
+              size="100"
+              frequency=""
+              onSizeChange={() => {}}
+              onFrequencyChange={() => {}}
+            />
           </div>
         </div>
       </section>

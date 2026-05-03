@@ -5,9 +5,6 @@ import {
   CheckCircle2,
   ArrowRight,
   ShieldCheck,
-  Sparkles,
-  Home as HomeIcon,
-  Building2,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
