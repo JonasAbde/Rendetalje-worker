@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { trackEvent } from "@/lib/analytics";
 
 interface PriceCalculatorProps {
   type: string;
@@ -47,6 +48,22 @@ export default function PriceCalculator({
 }: PriceCalculatorProps) {
   const [estimate, setEstimate] = useState({ min: 0, max: 0 });
   const sizeNum = parseInt(size) || 0;
+  const hasTracked = useRef(false);
+
+  // Track first complete calculator interaction
+  useEffect(() => {
+    if (type && sizeNum > 0 && frequency && !hasTracked.current) {
+      hasTracked.current = true;
+      const sizeRange =
+        sizeNum <= 50 ? "0-50" : sizeNum <= 100 ? "51-100" : sizeNum <= 150 ? "101-150" : sizeNum <= 200 ? "151-200" : "200+";
+      trackEvent("Price Calculator Used", {
+        service_type: type,
+        size_range: sizeRange,
+        frequency,
+        estimated_price_range: `${estimate.min}-${estimate.max} kr`,
+      });
+    }
+  }, [type, sizeNum, frequency, estimate.min, estimate.max]);
 
   useEffect(() => {
     const base = basePrices[type] || 400;

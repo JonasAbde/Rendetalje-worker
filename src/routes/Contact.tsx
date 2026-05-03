@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 
 import { company } from "@/content/company";
 import MultiStepForm from "@/components/contact/MultiStepForm";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -31,8 +32,10 @@ export default function Contact() {
       }
 
       setIsSubmitted(true);
+      trackEvent("Contact Form Submit", { form: "contact_multistep", service_type: String(data.type || ""), source: "contact_page" });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Der opstod en fejl. Prøv venligst igen.');
+      trackEvent("Form Error", { form: "contact_multistep", step: "2", error_type: "api_error" });
     } finally {
       setIsSubmitting(false);
     }

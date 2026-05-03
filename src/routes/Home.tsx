@@ -15,6 +15,7 @@ import { company, positioning, geography } from "@/content/company";
 import { pricing } from "@/content/pricing";
 import { coreServices } from "@/content/services";
 import { faqs } from "@/content/faq";
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = "idle" | "submitting" | "submitted" | "error";
 
@@ -45,8 +46,10 @@ function QuickQuoteForm() {
       });
       if (!response.ok) throw new Error("Noget gik galt");
       setFormState("submitted");
+      trackEvent("Quick Quote Submit", { form: "quick_quote", service_type: serviceType, source: "homepage" });
     } catch {
       setFormState("error");
+      trackEvent("Form Error", { form: "quick_quote", step: "0", error_type: "api_error" });
     }
   };
 
@@ -184,12 +187,14 @@ export default function Home() {
             >
               <Link
                 to="/kontakt"
+                onClick={() => trackEvent("CTA Click", { location: "hero", target: "/kontakt" })}
                 className="inline-flex h-14 items-center justify-center rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700"
               >
                 Få et tilbud
               </Link>
               <Link
                 to="/services"
+                onClick={() => trackEvent("CTA Click", { location: "hero", target: "/services" })}
                 className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-medium text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 transition-colors hover:bg-slate-50"
               >
                 Se vores services
@@ -262,12 +267,14 @@ export default function Home() {
                 <div className="flex flex-col gap-4">
                   <Link
                     to="/kontakt"
+                    onClick={() => trackEvent("CTA Click", { location: "price_block", target: "/kontakt" })}
                     className="inline-flex h-14 items-center justify-center rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700"
                   >
                     Få et tilbud <ArrowRight size={20} className="ml-2" />
                   </Link>
                   <Link
                     to="/priser"
+                    onClick={() => trackEvent("CTA Click", { location: "price_block", target: "/priser" })}
                     className="inline-flex h-14 items-center justify-center rounded-full border-2 border-green-600 px-8 text-base font-medium text-green-600 transition-colors hover:bg-green-50"
                   >
                     Se priser
@@ -354,6 +361,7 @@ export default function Home() {
               </p>
               <Link
                 to="/om-os"
+                onClick={() => trackEvent("CTA Click", { location: "why_choose_us", target: "/om-os" })}
                 className="inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-100"
               >
                 Læs mere om os
@@ -516,12 +524,14 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
               to="/kontakt"
+              onClick={() => trackEvent("CTA Click", { location: "final_cta", target: "/kontakt" })}
               className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-medium text-green-600 transition-colors hover:bg-slate-50"
             >
               Få et tilbud
             </Link>
             <a
               href={`tel:${company.phone.replace(/\s+/g, "")}`}
+              onClick={() => trackEvent("CTA Click", { location: "final_cta", target: "phone" })}
               className="inline-flex h-14 items-center justify-center rounded-full bg-transparent border-2 border-white px-8 text-base font-medium text-white transition-colors hover:bg-white/10"
             >
               Ring til os
