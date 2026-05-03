@@ -1,13 +1,15 @@
 declare global {
   interface Window {
-    plausible?: (event: string, opts?: { props?: Record<string, string> }) => void;
+    umami?: {
+      track: (event: string, data?: Record<string, unknown>) => void;
+    };
   }
 }
 
 export function trackEvent(name: string, props?: Record<string, string>) {
   try {
-    if (typeof window.plausible === "function") {
-      window.plausible(name, { props });
+    if (typeof window.umami?.track === "function") {
+      window.umami.track(name, props);
     }
   } catch {
     // Silent fail — tracking must never break the app
