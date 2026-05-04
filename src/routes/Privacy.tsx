@@ -8,7 +8,7 @@ export default function Privacy() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/privatlivspolitik" />
-        <title>Privatlivspolitik | {company.name}</title>
+        <title>{`Privatlivspolitik | ${company.name}`}</title>
         <meta
           name="description"
           content="Sådan behandler vi dine personoplysninger."

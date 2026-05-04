@@ -144,7 +144,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Helmet>
       <link rel="canonical" href="https://rendetalje.dk/" />
-        <title>{company.name} | Professionel rengøring i Aarhus</title>
+        <title>{`${company.name} | Professionel rengøring i Aarhus`}</title>
         <meta name="description" content={positioning.primary} />
       </Helmet>
 

@@ -13,9 +13,7 @@ export default function Flytterengoering() {
     <>
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/services/flytterengoering" />
-        <title>
-          {service.title} | {company.name}
-        </title>
+        <title>{`${service.title} | ${company.name}`}</title>
         <meta name="description" content={service.desc} />
       </Helmet>
       <ServicePageTemplate

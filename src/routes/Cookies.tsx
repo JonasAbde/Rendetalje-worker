@@ -8,7 +8,7 @@ export default function Cookies() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/cookiepolitik" />
-        <title>Cookiepolitik | {company.name}</title>
+        <title>{`Cookiepolitik | ${company.name}`}</title>
         <meta
           name="description"
           content="Information om vores brug af cookies."

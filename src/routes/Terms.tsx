@@ -9,7 +9,7 @@ export default function Terms() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/handelsbetingelser" />
-        <title>Handelsbetingelser | {company.name}</title>
+        <title>{`Handelsbetingelser | ${company.name}`}</title>
         <meta
           name="description"
           content="Læs vores handelsbetingelser for at forstå rammerne for vores samarbejde."

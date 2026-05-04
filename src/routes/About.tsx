@@ -10,7 +10,7 @@ export default function About() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/om-os" />
-        <title>Om {company.name} | Professionel rengøring</title>
+        <title>{`Om ${company.name} | Professionel rengøring`}</title>
         <meta
           name="description"
           content="Hos Rendetalje handler rengøring ikke bare om at komme hurtigt igennem. Det handler om at levere et ordentligt resultat og skabe tryghed for kunden."

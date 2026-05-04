@@ -11,7 +11,7 @@ export default function FAQ() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/faq" />
-        <title>FAQ | {company.name}</title>
+        <title>{`FAQ | ${company.name}`}</title>
         <meta
           name="description"
           content="Få svar på de mest almindelige spørgsmål om vores rengøringsservices, priser og praktiske forhold."

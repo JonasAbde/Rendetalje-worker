@@ -45,7 +45,7 @@ export default function Contact() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/kontakt" />
-        <title>Kontakt & Tilbud | {company.name}</title>
+        <title>{`Kontakt & Tilbud | ${company.name}`}</title>
         <meta
           name="description"
           content="Få et uforpligtende tilbud på rengøring. Udfyld vores formular, så vender vi tilbage hurtigst muligt."

@@ -12,7 +12,7 @@ export default function Pricing() {
     <div className="flex flex-col">
       <Helmet>
         <link rel="canonical" href="https://rendetalje.dk/priser" />
-        <title>Priser | {company.name}</title>
+        <title>{`Priser | ${company.name}`}</title>
         <meta
           name="description"
           content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 349 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring."

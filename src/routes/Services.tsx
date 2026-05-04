@@ -11,7 +11,7 @@ export default function Services() {
     <div className="flex flex-col">
       <Helmet>
 <link rel="canonical" href="https://rendetalje.dk/services" />
-        <title>Services | {company.name}</title>
+        <title>{`Services | ${company.name}`}</title>
         <meta
           name="description"
           content="Vi tilbyder professionel rengøring med fokus på detaljen til både private og erhverv i Aarhus og omegn."
