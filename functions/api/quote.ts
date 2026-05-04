@@ -48,19 +48,28 @@ type Env = {
   FROM_EMAIL?: string;
 };
 
-// Sanitize all object values
-function sanitizeObject(obj: Record<string, unknown>): QuoteData {
-  const sanitized: QuoteData = {};
-  for (const key in obj) {
-    const value = obj[key];
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeInput(value) as string;
-    } else {
-      sanitized[key] = value;
+// Sanitize all object values recursively
+function sanitizeValue(value: unknown): unknown {
+  if (typeof value === 'string') {
+    return sanitizeInput(value);
+  } else if (Array.isArray(value)) {
+    return value.map(sanitizeValue);
+  } else if (value !== null && typeof value === 'object') {
+    const sanitized: Record<string, unknown> = {};
+    for (const key in value as Record<string, unknown>) {
+      sanitized[key] = sanitizeValue((value as Record<string, unknown>)[key]);
     }
+    return sanitized;
   }
-  return sanitized;
+  return value;
 }
+
+function sanitizeObject(obj: Record<string, unknown>): QuoteData {
+  return sanitizeValue(obj) as QuoteData;
+}
+
+// Simple email validation regex
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Main handler - handles all methods
 export async function onRequest(context: EventContext<Env, string, unknown>): Promise<Response> {
@@ -95,6 +104,17 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    if (!EMAIL_REGEX.test(data.email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email format' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Prevent header injection by removing CRLF from inputs used in subject safely
+    const safeName = typeof data.name === 'string' ? data.name.replace(/[\r\n]/g, '') : '';
+    const safeType = typeof data.type === 'string' ? data.type.replace(/[\r\n]/g, '') : '';
 
     // Hent miljøvariabler fra Cloudflare
     const RESEND_API_KEY = context.env.RESEND_API_KEY;
@@ -141,7 +161,7 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       body: JSON.stringify({
         from: `Rendetalje <${FROM_EMAIL}>`,
         to: DESTINATION_EMAIL,
-        subject: `Ny forespørgsel: ${data.type} - ${data.name}`,
+        subject: `Ny forespørgsel: ${safeType} - ${safeName}`,
         html: emailHtml,
         reply_to: data.email
       })
