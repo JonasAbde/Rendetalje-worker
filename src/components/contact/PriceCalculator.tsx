@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -46,9 +46,22 @@ export default function PriceCalculator({
   onSizeChange,
   onFrequencyChange,
 }: PriceCalculatorProps) {
-  const [estimate, setEstimate] = useState({ min: 0, max: 0 });
   const sizeNum = parseInt(size) || 0;
   const hasTracked = useRef(false);
+
+  const estimate = useMemo(() => {
+    const base = basePrices[type] || 400;
+    const perSqm = perSqmRates[type] || 20;
+    const sizeCost = sizeNum * perSqm;
+    const subtotal = base + sizeCost;
+    const discount = subtotal * (frequencyDiscounts[frequency] || 0);
+    const total = subtotal - discount;
+
+    return {
+      min: Math.round(total * 0.85),
+      max: Math.round(total * 1.15),
+    };
+  }, [type, sizeNum, frequency]);
 
   // Track first complete calculator interaction
   useEffect(() => {
@@ -64,20 +77,6 @@ export default function PriceCalculator({
       });
     }
   }, [type, sizeNum, frequency, estimate.min, estimate.max]);
-
-  useEffect(() => {
-    const base = basePrices[type] || 400;
-    const perSqm = perSqmRates[type] || 20;
-    const sizeCost = sizeNum * perSqm;
-    const subtotal = base + sizeCost;
-    const discount = subtotal * (frequencyDiscounts[frequency] || 0);
-    const total = subtotal - discount;
-    
-    setEstimate({
-      min: Math.round(total * 0.85),
-      max: Math.round(total * 1.15),
-    });
-  }, [type, sizeNum, frequency]);
 
   return (
     <div className="space-y-6">
