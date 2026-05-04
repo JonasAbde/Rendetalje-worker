@@ -52,11 +52,11 @@ const services = [
 export default function ServiceSelector({ selected, onSelect }: ServiceSelectorProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-slate-900 mb-6">
+      <h3 id="service-selector-label" className="text-lg font-semibold text-slate-900 mb-6">
         Hvilken type rengøring har du brug for?
       </h3>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div role="radiogroup" aria-labelledby="service-selector-label" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {services.map((service, index) => {
           const Icon = service.icon;
           const isSelected = selected === service.id;
@@ -65,8 +65,10 @@ export default function ServiceSelector({ selected, onSelect }: ServiceSelectorP
             <motion.button
               key={service.id}
               type="button"
+              role="radio"
+              aria-checked={isSelected}
               onClick={() => onSelect(service.id)}
-              className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 ${
+              className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500 ${
                 isSelected ? service.activeColor : service.color
               }`}
               initial={{ opacity: 0, y: 20 }}

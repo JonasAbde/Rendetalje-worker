@@ -1,0 +1,3 @@
+## 2024-05-04 - Explicit ARIA Radiogroups for Custom Controls
+**Learning:** Custom input groups acting as radio buttons (like button-based selection arrays) are not inherently connected by standard HTML linkage (`htmlFor`). They require explicit ARIA grouping using `role="radiogroup"` and `aria-labelledby` on the container, and `role="radio"` and `aria-checked` on the items to ensure screen reader users understand the relationship and state of the options.
+**Action:** Always apply `role="radiogroup"`, `aria-labelledby`, `role="radio"`, and `aria-checked` to custom button-based selection options instead of relying on standard inputs, and pair this with clear `focus-visible` styling for keyboard navigators.
