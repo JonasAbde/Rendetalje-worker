@@ -27,6 +27,71 @@ const serviceTypes = [
   { id: "andet", label: "Andet" },
 ];
 
+const trustStripItems = [
+  "Klare aftaler",
+  "Svanemærkede produkter",
+  "Fast rengøring og engangsopgaver",
+  "Aarhus og omegn",
+];
+
+const serviceImgMap: Record<string, string> = {
+  "fast-rengoering": "/images/service-fast.webp",
+  "flytterengoering": "/images/service-flyt.webp",
+  "hovedrengoering": "/images/service-hoved.webp",
+  "erhvervsrengoering": "/images/service-erhverv.webp",
+};
+
+const whyChooseUsFeatures = [
+  {
+    title: "Fokus på detaljen",
+    desc: "Vi springer ikke over hvor gærdet er lavest.",
+  },
+  {
+    title: "Klar kommunikation",
+    desc: "Du ved altid hvad du får, og hvad det koster.",
+  },
+  {
+    title: "Stabil kvalitet",
+    desc: "Samme høje standard hver gang vi besøger dig.",
+  },
+  {
+    title: "Lokal service",
+    desc: "Vi dækker Aarhus og omegn med stolthed.",
+  },
+];
+
+const trustCredentials = [
+  { title: "CVR-registreret", desc: "Rendetalje.dk ApS — CVR 45564096" },
+  { title: "Lokal service", desc: "Aarhus og omegn siden 2018" },
+  { title: "Svanemærkede produkter", desc: "Miljømærket rengøring uden unødig kemi" },
+  { title: "Klare aftaler", desc: "Du ved altid hvad du får, og hvad det koster" },
+  { title: "Fast & engangsopgaver", desc: "Både løbende rengøring og enkeltstående opgaver" },
+  { title: "Gennemskuelig prislogik", desc: "349 kr/time inkl. moms — ingen skjulte gebyrer" },
+];
+
+const howItWorksSteps = [
+  {
+    step: "01",
+    title: "Send forespørgsel",
+    desc: "Udfyld vores formular med detaljer om opgaven.",
+  },
+  {
+    step: "02",
+    title: "Vi vurderer",
+    desc: "Vi gennemgår din opgave og vender hurtigt tilbage.",
+  },
+  {
+    step: "03",
+    title: "Du får pris",
+    desc: "Du modtager en pris eller vi aftaler næste skridt.",
+  },
+  {
+    step: "04",
+    title: "Vi udfører",
+    desc: "Vi møder op og udfører arbejdet som aftalt.",
+  },
+];
+
 function QuickQuoteForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serviceType, setServiceType] = useState("");
@@ -208,12 +273,7 @@ export default function Home() {
       <section className="border-y border-slate-200 bg-white py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 gap-x-8">
-            {[
-              "Klare aftaler",
-              "Svanemærkede produkter",
-              "Fast rengøring og engangsopgaver",
-              "Aarhus og omegn",
-            ].map((text, i) => (
+            {trustStripItems.map((text, i) => (
               <div key={i} className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
                 <span className="text-sm font-medium text-slate-700">
@@ -301,13 +361,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coreServices.map((service, i) => {
               const Icon = service.icon;
-              const imgMap: Record<string, string> = {
-                "fast-rengoering": "/images/service-fast.webp",
-                "flytterengoering": "/images/service-flyt.webp",
-                "hovedrengoering": "/images/service-hoved.webp",
-                "erhvervsrengoering": "/images/service-erhverv.webp",
-              };
-              const imgSrc = imgMap[service.id];
+              const imgSrc = serviceImgMap[service.id];
               return (
                 <Link
                   key={i}
@@ -368,24 +422,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {[
-                {
-                  title: "Fokus på detaljen",
-                  desc: "Vi springer ikke over hvor gærdet er lavest.",
-                },
-                {
-                  title: "Klar kommunikation",
-                  desc: "Du ved altid hvad du får, og hvad det koster.",
-                },
-                {
-                  title: "Stabil kvalitet",
-                  desc: "Samme høje standard hver gang vi besøger dig.",
-                },
-                {
-                  title: "Lokal service",
-                  desc: "Vi dækker Aarhus og omegn med stolthed.",
-                },
-              ].map((feature, i) => (
+              {whyChooseUsFeatures.map((feature, i) => (
                 <div key={i}>
                   <ShieldCheck className="h-8 w-8 text-green-400 mb-4" />
                   <h3 className="text-lg font-semibold mb-2">
@@ -408,14 +445,7 @@ export default function Home() {
             Tillid & tryghed
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              { title: "CVR-registreret", desc: "Rendetalje.dk ApS — CVR 45564096" },
-              { title: "Lokal service", desc: "Aarhus og omegn siden 2018" },
-              { title: "Svanemærkede produkter", desc: "Miljømærket rengøring uden unødig kemi" },
-              { title: "Klare aftaler", desc: "Du ved altid hvad du får, og hvad det koster" },
-              { title: "Fast & engangsopgaver", desc: "Både løbende rengøring og enkeltstående opgaver" },
-              { title: "Gennemskuelig prislogik", desc: "349 kr/time inkl. moms — ingen skjulte gebyrer" },
-            ].map((item, i) => (
+            {trustCredentials.map((item, i) => (
               <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
                 <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
                 <div>
@@ -436,28 +466,7 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
             <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-slate-200 -z-10"></div>
-            {[
-              {
-                step: "01",
-                title: "Send forespørgsel",
-                desc: "Udfyld vores formular med detaljer om opgaven.",
-              },
-              {
-                step: "02",
-                title: "Vi vurderer",
-                desc: "Vi gennemgår din opgave og vender hurtigt tilbage.",
-              },
-              {
-                step: "03",
-                title: "Du får pris",
-                desc: "Du modtager en pris eller vi aftaler næste skridt.",
-              },
-              {
-                step: "04",
-                title: "Vi udfører",
-                desc: "Vi møder op og udfører arbejdet som aftalt.",
-              },
-            ].map((item, i) => (
+            {howItWorksSteps.map((item, i) => (
               <div key={i} className="relative text-center">
                 <div className="w-16 h-16 mx-auto bg-white border-2 border-green-600 text-green-600 rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-sm">
                   {item.step}
