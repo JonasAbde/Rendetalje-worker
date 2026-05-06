@@ -12,9 +12,15 @@ export default function FastRengoering() {
   return (
     <>
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/services/fast-rengoering" />
+        <link rel="canonical" href="https://rendetalje.dk/services/fast-rengoering" />
         <title>{`${service.title} | ${company.name}`}</title>
         <meta name="description" content={service.desc} />
+        <meta property="og:title" content={`${service.title} | ${company.name}`} />
+        <meta property="og:description" content={service.desc} />
+        <meta property="og:url" content="https://rendetalje.dk/services/fast-rengoering" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/images/service-fast.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
       <ServicePageTemplate
         title={service.title}

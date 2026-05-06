@@ -44,12 +44,18 @@ export default function Contact() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/kontakt" />
+        <link rel="canonical" href="https://rendetalje.dk/kontakt" />
         <title>{`Kontakt & Tilbud | ${company.name}`}</title>
         <meta
           name="description"
           content="Få et uforpligtende tilbud på rengøring. Udfyld vores formular, så vender vi tilbage hurtigst muligt."
         />
+        <meta property="og:title" content={`Kontakt & Tilbud | ${company.name}`} />
+        <meta property="og:description" content="Få et uforpligtende tilbud på rengøring i Aarhus. Udfyld formularen, så vender vi tilbage." />
+        <meta property="og:url" content="https://rendetalje.dk/kontakt" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">

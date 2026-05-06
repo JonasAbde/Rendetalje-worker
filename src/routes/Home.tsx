@@ -143,9 +143,18 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Helmet>
-      <link rel="canonical" href="https://rendetalje.dk/" />
+        <link rel="canonical" href="https://rendetalje.dk/" />
         <title>{`${company.name} | Professionel rengøring i Aarhus`}</title>
         <meta name="description" content={positioning.primary} />
+        <meta property="og:title" content={`${company.name} | Professionel rengøring i Aarhus`} />
+        <meta property="og:description" content={positioning.primary} />
+        <meta property="og:url" content="https://rendetalje.dk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${company.name} | Professionel rengøring i Aarhus`} />
+        <meta name="twitter:description" content={positioning.primary} />
       </Helmet>
 
       {/* Hero Section */}

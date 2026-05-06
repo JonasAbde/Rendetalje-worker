@@ -86,6 +86,8 @@ export default function MultiStepForm({
           formData.name !== "" &&
           formData.phone !== "" &&
           formData.email !== "" &&
+          formData.address !== "" &&
+          formData.city !== "" &&
           gdprAccepted
         );
       default:
@@ -202,26 +204,28 @@ export default function MultiStepForm({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="address" className="block text-sm font-medium text-slate-700">
-                    Adresse / Område (valgfri)
+                    Adresse *
                   </label>
                   <input
                     id="address"
                     type="text"
                     value={formData.address}
                     onChange={(e) => updateField("address", e.target.value)}
-                    placeholder="F.eks. Gammel Viborgvej 40"
+                    required
+                    placeholder="F.eks. Gammel Viborgvej 40, 8381 Tilst"
                     className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="city" className="block text-sm font-medium text-slate-700">
-                    Postnr. / By
+                    Postnr. / By *
                   </label>
                   <input
                     id="city"
                     type="text"
                     value={formData.city}
                     onChange={(e) => updateField("city", e.target.value)}
+                    required
                     placeholder="F.eks. 8381 Tilst"
                     className="w-full h-12 px-4 rounded-xl border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                   />
