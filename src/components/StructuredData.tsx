@@ -118,7 +118,7 @@ export default function StructuredData() {
               priceCurrency: "DKK",
               priceSpecification: {
                 "@type": "UnitPriceSpecification",
-                price: 349,
+                price: 399,
                 priceCurrency: "DKK",
                 unitText: "HOUR",
               },
@@ -144,7 +144,7 @@ export default function StructuredData() {
               priceCurrency: "DKK",
               priceSpecification: {
                 "@type": "UnitPriceSpecification",
-                price: 349,
+                price: 399,
                 priceCurrency: "DKK",
                 unitText: "HOUR",
               },
@@ -170,7 +170,7 @@ export default function StructuredData() {
               priceCurrency: "DKK",
               priceSpecification: {
                 "@type": "UnitPriceSpecification",
-                price: 349,
+                price: 399,
                 priceCurrency: "DKK",
                 unitText: "HOUR",
               },
@@ -196,7 +196,7 @@ export default function StructuredData() {
               priceCurrency: "DKK",
               priceSpecification: {
                 "@type": "UnitPriceSpecification",
-                price: 349,
+                price: 399,
                 priceCurrency: "DKK",
                 unitText: "HOUR",
               },
@@ -233,7 +233,7 @@ export default function StructuredData() {
     sameAs: ["https://www.instagram.com/rendetalje/"],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+45-22-65-02-26",
+      telephone: "+45 22 65 02 26",
       contactType: "customer service",
       availableLanguage: ["Danish"],
     },

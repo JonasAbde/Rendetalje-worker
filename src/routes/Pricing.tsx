@@ -5,7 +5,8 @@ import { Helmet } from "react-helmet-async";
 
 import { company } from "../content/company";
 import { pricing } from "../content/pricing";
-import PriceCalculator from "../components/contact/PriceCalculator";
+// PriceCalculator is rendered inside the contact form instead of here,
+// as it requires service type/size/frequency state that isn't available on this page
 
 export default function Pricing() {
   return (
@@ -193,26 +194,6 @@ export default function Pricing() {
             >
               📄 Download prisliste
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Price Calculator */}
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Få et estimat på forventede arbejdstimer og pris
-            </h2>
-            <p className="text-lg text-slate-600 mb-3">
-              Beregn et estimat baseret på din opgaves type, størrelse og tilvalg
-            </p>
-            <p className="text-sm text-amber-600 font-medium">
-              ⓘ Estimat — ikke et bindende tilbud. Endelig pris fastsættes ved konkret vurdering.
-            </p>
-          </div>
-          <div className="max-w-2xl mx-auto">
-            <PriceCalculator />
           </div>
         </div>
       </section>

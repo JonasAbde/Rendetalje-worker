@@ -11,11 +11,11 @@ interface PriceCalculatorProps {
 }
 
 const basePrices: Record<string, number> = {
-  fast: 350,
-  flytte: 900,
-  hoved: 700,
-  erhverv: 600,
-  andet: 500,
+  fast: 399,
+  flytte: 399,
+  hoved: 399,
+  erhverv: 399,
+  andet: 399,
 };
 
 const perSqmRates: Record<string, number> = {

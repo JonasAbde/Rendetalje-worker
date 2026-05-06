@@ -552,7 +552,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
               { title: "CVR-registreret", desc: "Rendetalje.dk ApS — CVR 45564096" },
-              { title: "Lokal service", desc: "Aarhus og omegn siden 2018" },
+              { title: "Lokal service", desc: "Aarhus og omegn" },
               { title: "Svanemærkede produkter", desc: "Miljømærket rengøring uden unødig kemi" },
               { title: "Klare aftaler", desc: "Du ved altid hvad du får, og hvad det koster" },
               { title: "Fast & engangsopgaver", desc: "Både løbende rengøring og enkeltstående opgaver" },

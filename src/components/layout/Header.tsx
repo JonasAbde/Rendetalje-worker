@@ -50,11 +50,11 @@ export default function Header() {
             </Link>
           ))}
           <a
-            href="tel:+4522650226"
+            href={`tel:${company.phone.replace(/\s+/g, "")}`}
             className="inline-flex items-center gap-1.5 text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
           >
             <Phone size={16} />
-            22 65 02 26
+            {company.phone.replace("+45 ", "")}
           </a>
           <Link
             to="/kontakt"

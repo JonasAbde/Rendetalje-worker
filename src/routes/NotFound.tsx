@@ -11,7 +11,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-300px)]">
       <Helmet>
-        <link rel="canonical" href="https://rendetalje.dk/404" />
+        <link rel="canonical" href={window.location.href} />
         <title>{`Siden blev ikke fundet | ${company.name}`}</title>
         <meta
           name="description"

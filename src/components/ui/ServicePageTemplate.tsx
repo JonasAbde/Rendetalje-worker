@@ -183,11 +183,11 @@ export default function ServicePageTemplate({
                 </Link>
                 <p className="mt-6 text-sm text-green-200 text-center">
                   Eller ring til os på{" "}
-                  <a
-                    href="tel:+4522650226"
+                    <a
+                    href={`tel:${company.phone.replace(/\s+/g, "")}`}
                     className="text-white hover:underline"
                   >
-                    +45 22 65 02 26
+                    {company.phone}
                   </a>
                 </p>
               </div>
