@@ -9,7 +9,7 @@ export const pricing = {
   // ============================================
 
   billingLogic: {
-    formula: "Pris = fakturerbare arbejdstimer × 349 kr",
+    formula: "Pris = fakturerbare arbejdstimer × 399 kr",
     workHours: "Fakturerbare arbejdstimer = antal medarbejdere × tid på stedet",
     example1: "1 person × 2 timer = 2 arbejdstimer = 698 kr",
     example2: "2 personer × 1,5 time = 3 arbejdstimer = 1.047 kr",
@@ -52,10 +52,10 @@ export const pricing = {
   // ============================================
 
   defaultEstimates: {
-    standard: { hours: "1.0-2.0", price: "349-698 kr", note: "Historisk median 2.0h" },
+    standard: { hours: "1.0-2.0", price: "399-698 kr", note: "Historisk median 2.0h" },
     deep: { hours: "2.0-4.5", price: "698-1.571 kr", note: "Historisk median 3.0h, Q1-Q3 3.0-5.0h" },
     moveOut: { hours: "2.5-7.0", price: "873-2.443 kr", note: "Historisk median 5.0h, Q1-Q3 4.0-7.0h" },
-    commercial: { hours: "1.0-2.0", price: "349-698 kr", note: "Historisk median 1.5h" },
+    commercial: { hours: "1.0-2.0", price: "399-698 kr", note: "Historisk median 1.5h" },
     firstCleaning: { multiplier: 1.3, note: "Første gang tager ca. 30% længere" },
   },
 
@@ -97,7 +97,7 @@ export const pricing = {
   calculator: {
     available: true,
     description:
-      "Vores prisberegner giver dig et øjeblikkeligt estimat baseret på boligtype, størrelse, rengøringstype og eventuelle tilvalg. Estimatet tager udgangspunkt i vores timepris på 349 kr. inkl. moms og de historiske data fra over 370 udførte opgaver.",
+      "Vores prisberegner giver dig et øjeblikkeligt estimat baseret på boligtype, størrelse, rengøringstype og eventuelle tilvalg. Estimatet tager udgangspunkt i vores timepris på 399 kr. inkl. moms og de historiske data fra over 370 udførte opgaver.",
     howToUse:
       "Vælg rengøringstype (fast rengøring, hovedrengøring, flytterengøring eller erhvervsrengøring), indtast din boligs størrelse i m², vælg eventuelle tilvalg, og beregneren giver dig et estimat med det samme. Ved fast rengøring viser beregneren også prisen for første rengøring (ca. 30% mere) og efterfølgende besøg.",
   },
@@ -149,7 +149,7 @@ export const pricing = {
   // ============================================
 
   wording:
-    "Vores timepris er 349 kr inkl. moms, og minimumsprisen er 698 kr inkl. moms (svarende til 2 timer). Vi estimerer først opgaven ud fra type, størrelse, tilstand, frekvens og eventuelle tilvalg. Den endelige pris beregnes derefter ud fra de faktiske fakturerbare arbejdstimer. Når flere medarbejdere er på opgaven samtidig, regnes den samlede arbejdstid sammen. Hvis to medarbejdere arbejder 2 timer på stedet, svarer det til 4 arbejdstimer i alt. Ved fast rengøring skelner vi typisk mellem første grundige rengøring og efterfølgende vedligeholdelse. Prisberegneren giver derfor et estimat — og ved større eller mere særlige opgaver giver vi altid et konkret tilbud på forhånd.",
+    "Vores timepris er 399 kr inkl. moms, og minimumsprisen er 698 kr inkl. moms (svarende til 2 timer). Vi estimerer først opgaven ud fra type, størrelse, tilstand, frekvens og eventuelle tilvalg. Den endelige pris beregnes derefter ud fra de faktiske fakturerbare arbejdstimer. Når flere medarbejdere er på opgaven samtidig, regnes den samlede arbejdstid sammen. Hvis to medarbejdere arbejder 2 timer på stedet, svarer det til 4 arbejdstimer i alt. Ved fast rengøring skelner vi typisk mellem første grundige rengøring og efterfølgende vedligeholdelse. Prisberegneren giver derfor et estimat — og ved større eller mere særlige opgaver giver vi altid et konkret tilbud på forhånd.",
 
   estimateNote:
     "Dette er et estimat baseret på forventet samlet arbejdstid. Den endelige pris afhænger af faktisk omfang, tilstand og eventuelle ekstra behov på opgaven. Ved hoved- og flytterengøring kan omfanget variere afhængigt af boligens stand og eventuelle ekstraopgaver (ovn, køleskab, vinduer, kalk).",

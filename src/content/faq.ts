@@ -1,7 +1,7 @@
 export const faqs = [
   {
     q: "Hvordan beregner I prisen?",
-    a: "Prisen afhænger af opgavens type, størrelse og niveau. Vores timepris er 349 kr. inkl. moms, og minimumsprisen er 698 kr. inkl. moms. Du kan få et estimat via vores prisberegner på hjemmesiden eller et konkret tilbud ved at kontakte os.",
+    a: "Prisen afhænger af opgavens type, størrelse og niveau. Vores timepris er 399 kr. inkl. moms, og minimumsprisen er 698 kr. inkl. moms. Du kan få et estimat via vores prisberegner på hjemmesiden eller et konkret tilbud ved at kontakte os.",
   },
   {
     q: "Hvilke områder dækker I?",

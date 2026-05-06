@@ -506,6 +506,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Student Discount */}
+      <section className="py-16 bg-amber-50 border-y border-amber-200">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">🎓 Studerende i Aarhus?</h3>
+              <p className="text-slate-700">
+                Vi tilbyder <strong className="text-amber-700">10% rabat</strong> på første rengøring
+                til studerende. Fra 628 kr for en 2-timers rengøring.
+              </p>
+            </div>
+            <a
+              href={`tel:${company.phone.replace(/\s+/g, "")}`}
+              className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-amber-600 px-8 text-sm font-medium text-white transition-colors hover:bg-amber-700"
+            >
+              Ring og book — {company.phone}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Price Match Guarantee */}
+      <section className="py-12 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-3 text-slate-700 text-center">
+            <span className="text-2xl">🏆</span>
+            <p className="text-sm">
+              <strong>Prisgaranti:</strong> Find et billigere skriftligt tilbud på samme opgave?
+              Vi matcher prisen.{" "}
+              <a href={`tel:${company.phone.replace(/\s+/g, "")}`} className="text-green-600 hover:underline font-medium">
+                Ring 22 65 02 26
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Trust & Credentials */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
