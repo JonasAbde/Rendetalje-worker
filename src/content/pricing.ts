@@ -60,6 +60,49 @@ export const pricing = {
   },
 
   // ============================================
+  // TYPICAL PRICES BY HOME SIZE
+  // Based on real customer data from Aarhus-area jobs
+  // ============================================
+
+  typicalExamples: {
+    standard: [
+      { label: "2-værelses lejlighed (50-65 m²)", hours: "2,0", price: "698 kr", frequency: "Ugentlig eller 14. dag" },
+      { label: "3-værelses lejlighed (70-85 m²)", hours: "2,5", price: "873 kr", frequency: "Ugentlig eller 14. dag" },
+      { label: "Rækkehus 100 m²", hours: "3,0", price: "1.047 kr", frequency: "Ugentlig" },
+      { label: "Villa 120-140 m²", hours: "3,5", price: "1.222 kr", frequency: "Ugentlig" },
+      { label: "Større villa 150+ m²", hours: "4,0-5,0", price: "1.396-1.745 kr", frequency: "Ugentlig" },
+    ],
+    deep: [
+      { label: "2-værelses lejlighed (50-65 m²)", hours: "3,0-4,5", price: "1.047-1.571 kr", note: "+ evt. tilvalg" },
+      { label: "3-værelses lejlighed (70-85 m²)", hours: "4,0-6,0", price: "1.396-2.094 kr", note: "+ evt. tilvalg" },
+      { label: "Villa 120-140 m²", hours: "6,0-9,0", price: "2.094-3.141 kr", note: "+ evt. tilvalg" },
+    ],
+    moveOut: [
+      { label: "1-værelses/studiebolig (25-40 m²)", hours: "3,0-4,0", price: "1.047-1.396 kr", note: "Inkl. basis hvidevarer" },
+      { label: "2-værelses lejlighed (50-65 m²)", hours: "4,0-6,0", price: "1.396-2.094 kr", note: "Inkl. basis hvidevarer" },
+      { label: "3-værelses lejlighed (70-85 m²)", hours: "5,0-7,0", price: "1.745-2.443 kr", note: "Inkl. basis hvidevarer" },
+      { label: "Villa 120-140 m²", hours: "7,0-10,0", price: "2.443-3.490 kr", note: "Inkl. basis hvidevarer" },
+    ],
+    commercial: [
+      { label: "Kontor 50 m² (1 gang/uge)", hours: "2,0", price: "698 kr", frequency: "Ugentlig" },
+      { label: "Kontor 100 m² (2 gange/uge)", hours: "4,0", price: "1.396 kr", frequency: "2 gange om ugen" },
+      { label: "Showroom 150 m²", hours: "aftales", price: "Efter aftale", note: "Individuel vurdering" },
+    ],
+  },
+
+  // ============================================
+  // PRICE CALCULATOR INFO
+  // ============================================
+
+  calculator: {
+    available: true,
+    description:
+      "Vores prisberegner giver dig et øjeblikkeligt estimat baseret på boligtype, størrelse, rengøringstype og eventuelle tilvalg. Estimatet tager udgangspunkt i vores timepris på 349 kr. inkl. moms og de historiske data fra over 370 udførte opgaver.",
+    howToUse:
+      "Vælg rengøringstype (fast rengøring, hovedrengøring, flytterengøring eller erhvervsrengøring), indtast din boligs størrelse i m², vælg eventuelle tilvalg, og beregneren giver dig et estimat med det samme. Ved fast rengøring viser beregneren også prisen for første rengøring (ca. 30% mere) og efterfølgende besøg.",
+  },
+
+  // ============================================
   // RECURRING CLEANING PHASES
   // ============================================
 

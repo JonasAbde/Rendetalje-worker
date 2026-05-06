@@ -410,6 +410,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Referral Program */}
+      <section className="py-24 bg-green-600 text-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+            Anbefal os til en ven
+          </h2>
+          <p className="text-xl text-green-100 mb-4">
+            Hvis du kender nogen der kunne bruge professionel rengøring, er
+            du velkommen til at give dem vores kontakt. Både du og den nye
+            kunde får <strong className="text-white">100 kr i rabat</strong>{" "}
+            på næste besøg.
+          </p>
+          <p className="text-green-200 mb-10">
+            Sig du har sendt dem vores vej, så klarer vi resten.
+          </p>
+          <a
+            href={`tel:${company.phone.replace(/\s+/g, "")}`}
+            className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-medium text-green-600 transition-colors hover:bg-slate-50"
+          >
+            Ring og hør mere — {company.phone}
+          </a>
+        </div>
+      </section>
+
       {/* Trust & Credentials */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
