@@ -50,6 +50,140 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Fastpris-pakker */}
+      <section className="py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto mb-16 text-center">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Fastpris-pakker
+            </h2>
+            <p className="text-lg text-slate-600">
+              Vælg den pakke der passer bedst til dit behov — eller kontakt os for et skræddersyet tilbud
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Lille */}
+            <div className="relative flex flex-col bg-white rounded-3xl border border-slate-200 shadow-sm p-8 hover:shadow-md transition-shadow">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-slate-900 mb-1">Lille</h3>
+                <p className="text-sm text-slate-500">Anbefales til studier / 1-værelses</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-green-600">698 kr</span>
+                <span className="text-slate-500 text-sm ml-1">inkl. moms</span>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  2 timers rengøring
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Støvsugning, gulvvask, overflader
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Badeværelse
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-500 italic">
+                  ⭐ Populær hos studerende
+                </li>
+              </ul>
+              <Link
+                to="/kontakt"
+                className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700"
+              >
+                Få tilbud
+              </Link>
+            </div>
+
+            {/* Mellem — Most Popular */}
+            <div className="relative flex flex-col bg-white rounded-3xl border-2 border-green-500 shadow-md p-8 hover:shadow-lg transition-shadow">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs font-bold px-4 py-1.5 rounded-full">
+                Mest populær
+              </div>
+              <div className="mb-6 mt-2">
+                <h3 className="text-xl font-bold text-slate-900 mb-1">Mellem</h3>
+                <p className="text-sm text-slate-500">Perfekt til 2-3 værelses</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-green-600">1.047 kr</span>
+                <span className="text-slate-500 text-sm ml-1">inkl. moms</span>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  3 timers rengøring
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Det hele + køkken + paneler
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Inkl. støvsugning, gulvvask, overflader
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Badeværelse
+                </li>
+              </ul>
+              <Link
+                to="/kontakt"
+                className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700"
+              >
+                Få tilbud
+              </Link>
+            </div>
+
+            {/* Stor */}
+            <div className="relative flex flex-col bg-white rounded-3xl border border-slate-200 shadow-sm p-8 hover:shadow-md transition-shadow">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-slate-900 mb-1">Stor</h3>
+                <p className="text-sm text-slate-500">Til villaer og store hjem</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-green-600">1.745 kr</span>
+                <span className="text-slate-500 text-sm ml-1">inkl. moms</span>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  5 timers rengøring
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Det hele + skabe + vinduer mulighed
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Inkl. støvsugning, gulvvask, overflader
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-700">
+                  <span className="text-green-600 font-bold mt-0.5">✓</span>
+                  Badeværelse og køkken
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-500 italic">
+                  ⭐ Bedste værdi for pengene
+                </li>
+              </ul>
+              <Link
+                to="/kontakt"
+                className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700"
+              >
+                Få tilbud
+              </Link>
+            </div>
+          </div>
+
+          <p className="text-xs text-slate-400 text-center mt-8 max-w-xl mx-auto">
+            Priserne er vejledende. Den endelige pris fastsættes ved et konkret tilbud baseret på
+            størrelse, stand, adgang og eventuelle tilvalg.
+          </p>
+        </div>
+      </section>
+
       {/* Price Calculator */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
@@ -49,6 +49,13 @@ export default function Header() {
               {link.name}
             </Link>
           ))}
+          <a
+            href="tel:+4522650226"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
+          >
+            <Phone size={16} />
+            22 65 02 26
+          </a>
           <Link
             to="/kontakt"
             className="inline-flex h-10 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"

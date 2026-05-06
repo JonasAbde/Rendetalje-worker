@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, HelpCircle } from "lucide-react";
+import { CheckCircle2, HelpCircle, Phone } from "lucide-react";
 
 interface FAQ {
   q: string;
@@ -148,6 +148,25 @@ export default function ServicePageTemplate({
 
             {/* Sticky Sidebar CTA */}
             <div className="lg:col-span-1">
+              {/* Urgent CTA Banner */}
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-6">
+                <div className="flex items-start gap-3">
+                  <Phone className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-amber-800 mb-1">Haster det?</p>
+                    <p className="text-sm text-amber-700 mb-3">
+                      Vi kan ofte komme med kort varsel. Ring til os.
+                    </p>
+                    <a
+                      href="tel:+4522650226"
+                      className="inline-flex items-center gap-1.5 text-lg font-bold text-amber-900 hover:text-amber-700 transition-colors"
+                    >
+                      <Phone size={18} />
+                      22 65 02 26
+                    </a>
+                  </div>
+                </div>
+              </div>
               <div className="sticky top-32 bg-green-600 rounded-3xl p-8 text-white shadow-lg">
                 <h3 className="text-2xl font-bold mb-4">
                   Klar til at få et tilbud?

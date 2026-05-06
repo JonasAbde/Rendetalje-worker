@@ -1,5 +1,5 @@
 export const pricing = {
-  hourlyRate: 349,
+  hourlyRate: 399,
   minimumPrice: 698,
   currency: "kr",
   taxIncluded: true,
