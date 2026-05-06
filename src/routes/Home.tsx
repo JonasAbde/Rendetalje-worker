@@ -164,6 +164,7 @@ export default function Home() {
           <img
             src="/images/hero-bg.webp"
             alt=""
+            loading="eager"
             className="h-full w-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40" />
@@ -328,6 +329,7 @@ export default function Home() {
                       <img
                         src={imgSrc}
                         alt={service.title}
+                        loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
@@ -406,6 +408,56 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Before/After Gallery */}
+      <section className="py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              Før & efter — vores arbejde
+            </h2>
+            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+              Se selv forskellen. Klik for at booke et uforpligtende tilbud.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { before: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600", after: "https://images.unsplash.com/photo-1584622650111-994a3f5f7e3f?w=600", label: "Køkken & badeværelse" },
+              { before: "https://images.unsplash.com/photo-1586105251261-72a756497a9f?w=600", after: "https://images.unsplash.com/photo-1563453395-1a0e7a6246a6?w=600", label: "Stue & overflader" },
+            ].map((pair, i) => (
+              <div key={i} className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
+                <div className="p-3 pb-2">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{pair.label}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-0.5 bg-slate-300">
+                  <div className="relative">
+                    <div className="absolute top-2 left-2 z-10 bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                      Før
+                    </div>
+                    <img
+                      src={pair.before}
+                      alt={`Før - ${pair.label}`}
+                      loading="lazy"
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+                  <div className="relative">
+                    <div className="absolute top-2 left-2 z-10 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                      Efter
+                    </div>
+                    <img
+                      src={pair.after}
+                      alt={`Efter - ${pair.label}`}
+                      loading="lazy"
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
