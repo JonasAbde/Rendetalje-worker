@@ -207,7 +207,7 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
             <p>Hvis du har brug for akut hjælp, er du velkommen til at ringe på <strong>22 65 02 26</strong>.</p>
             <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;" />
             <p style="font-size: 14px; color: #666; margin-bottom: 5px;">Med venlig hilsen</p>
-            <p style="font-size: 15px; color: #16a34a; font-weight: bold; margin: 0;">Jonas</p>
+            <p style="font-size: 15px; color: #16a34a; font-weight: bold; margin: 0;">Rendetalje</p>
             <p style="font-size: 13px; color: #666; margin: 2px 0;">Rendetalje</p>
             <p style="font-size: 13px; color: #666; margin: 2px 0;">T: 22 65 02 26</p>
           </div>
