@@ -7,12 +7,18 @@ export default function Privacy() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/privatlivspolitik" />
+        <link rel="canonical" href="https://rendetalje.dk/privatlivspolitik" />
         <title>{`Privatlivspolitik | ${company.name}`}</title>
         <meta
           name="description"
-          content="Sådan behandler vi dine personoplysninger."
+          content="Sådan behandler vi dine personoplysninger hos Rendetalje. Læs vores privatlivspolitik for at forstå, hvordan vi indsamler, opbevarer og beskytter dine data."
         />
+        <meta property="og:title" content={`Privatlivspolitik | ${company.name}`} />
+        <meta property="og:description" content="Sådan behandler vi dine personoplysninger hos Rendetalje. Læs vores privatlivspolitik for at forstå, hvordan vi indsamler, opbevarer og beskytter dine data." />
+        <meta property="og:url" content="https://rendetalje.dk/privatlivspolitik" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">

@@ -9,12 +9,18 @@ export default function About() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/om-os" />
-        <title>{`Om ${company.name} | Professionel rengøring`}</title>
+        <link rel="canonical" href="https://rendetalje.dk/om-os" />
+        <title>{`Om os | ${company.name}`}</title>
         <meta
           name="description"
           content="Hos Rendetalje handler rengøring ikke bare om at komme hurtigt igennem. Det handler om at levere et ordentligt resultat og skabe tryghed for kunden."
         />
+        <meta property="og:title" content={`Om os | ${company.name}`} />
+        <meta property="og:description" content="Hos Rendetalje handler rengøring ikke bare om at komme hurtigt igennem. Det handler om at levere et ordentligt resultat og skabe tryghed for kunden." />
+        <meta property="og:url" content="https://rendetalje.dk/om-os" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       {/* Hero Section */}

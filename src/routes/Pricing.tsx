@@ -18,6 +18,12 @@ export default function Pricing() {
           content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 349 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring."
         />
         <meta name="keywords" content="rengøring pris Aarhus, privat rengøring pris, flytterengøring pris Aarhus, hvad koster rengøring" />
+        <meta property="og:title" content={`Priser | ${company.name}`} />
+        <meta property="og:description" content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 349 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring." />
+        <meta property="og:url" content="https://rendetalje.dk/priser" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">

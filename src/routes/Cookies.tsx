@@ -7,12 +7,18 @@ export default function Cookies() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/cookiepolitik" />
+        <link rel="canonical" href="https://rendetalje.dk/cookiepolitik" />
         <title>{`Cookiepolitik | ${company.name}`}</title>
         <meta
           name="description"
-          content="Information om vores brug af cookies."
+          content="Information om vores brug af cookies på Rendetalje.dk. Læs om nødvendige cookies, statistik og dine valgmuligheder."
         />
+        <meta property="og:title" content={`Cookiepolitik | ${company.name}`} />
+        <meta property="og:description" content="Information om vores brug af cookies på Rendetalje.dk. Læs om nødvendige cookies, statistik og dine valgmuligheder." />
+        <meta property="og:url" content="https://rendetalje.dk/cookiepolitik" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">

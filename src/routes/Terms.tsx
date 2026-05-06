@@ -8,12 +8,18 @@ export default function Terms() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/handelsbetingelser" />
+        <link rel="canonical" href="https://rendetalje.dk/handelsbetingelser" />
         <title>{`Handelsbetingelser | ${company.name}`}</title>
         <meta
           name="description"
-          content="Læs vores handelsbetingelser for at forstå rammerne for vores samarbejde."
+          content="Læs vores handelsbetingelser for at forstå rammerne for vores samarbejde om rengøring — priser, betaling, afbud, reklamation og forsikring."
         />
+        <meta property="og:title" content={`Handelsbetingelser | ${company.name}`} />
+        <meta property="og:description" content="Læs vores handelsbetingelser for at forstå rammerne for vores samarbejde om rengøring — priser, betaling, afbud, reklamation og forsikring." />
+        <meta property="og:url" content="https://rendetalje.dk/handelsbetingelser" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">

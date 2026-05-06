@@ -10,12 +10,18 @@ export default function Services() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/services" />
+        <link rel="canonical" href="https://rendetalje.dk/services" />
         <title>{`Services | ${company.name}`}</title>
         <meta
           name="description"
           content="Vi tilbyder professionel rengøring med fokus på detaljen til både private og erhverv i Aarhus og omegn."
         />
+        <meta property="og:title" content={`Services | ${company.name}`} />
+        <meta property="og:description" content="Vi tilbyder professionel rengøring med fokus på detaljen til både private og erhverv i Aarhus og omegn." />
+        <meta property="og:url" content="https://rendetalje.dk/services" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">

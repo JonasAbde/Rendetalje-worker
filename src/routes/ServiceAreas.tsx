@@ -68,12 +68,18 @@ export default function ServiceAreas() {
   return (
     <div className="flex flex-col">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/service-omraade" />
-        <title>{`Serviceområde | ${company.name} - Rengøring i Aarhus og omegn`}</title>
+        <link rel="canonical" href="https://rendetalje.dk/service-omraade" />
+        <title>{`Serviceområder | ${company.name}`}</title>
         <meta
           name="description"
-          content={`Vi tilbyder rengøring i hele Aarhus og omegn. Tilst, Risskov, Viby, Højbjerg, Brabrand, Tranbjerg, Egå og mange flere områder. Kontakt os for et tilbud.`}
+          content="Vi tilbyder rengøring i hele Aarhus og omegn. Tilst, Risskov, Viby, Højbjerg, Brabrand, Tranbjerg, Egå og mange flere områder. Kontakt os for et tilbud."
         />
+        <meta property="og:title" content={`Serviceområder | ${company.name}`} />
+        <meta property="og:description" content="Vi tilbyder rengøring i hele Aarhus og omegn. Tilst, Risskov, Viby, Højbjerg, Brabrand, Tranbjerg, Egå og mange flere områder. Kontakt os for et tilbud." />
+        <meta property="og:url" content="https://rendetalje.dk/service-omraade" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       {/* Hero */}

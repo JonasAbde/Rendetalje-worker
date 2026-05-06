@@ -11,12 +11,18 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-300px)]">
       <Helmet>
-<link rel="canonical" href="https://rendetalje.dk/404" />
-        <title>{`Side ikke fundet | ${company.name}`}</title>
+        <link rel="canonical" href="https://rendetalje.dk/404" />
+        <title>{`Siden blev ikke fundet | ${company.name}`}</title>
         <meta
           name="description"
           content="Den side du leder efter findes ikke. Gå tilbage til forsiden eller se vores ydelser."
         />
+        <meta property="og:title" content={`Siden blev ikke fundet | ${company.name}`} />
+        <meta property="og:description" content="Den side du leder efter findes ikke. Gå tilbage til forsiden eller se vores ydelser." />
+        <meta property="og:url" content="https://rendetalje.dk/404" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
+        <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       <section className="flex-grow flex items-center justify-center py-24 px-4">
