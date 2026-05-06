@@ -71,6 +71,18 @@ function sanitizeObject(obj: Record<string, unknown>): QuoteData {
 // Simple email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// In-memory rate limiter configuration
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 5;
+const MAX_MAP_SIZE = 1000; // Prevent memory leak
+
+interface RateLimitInfo {
+  count: number;
+  resetTime: number;
+}
+
+const rateLimitMap = new Map<string, RateLimitInfo>();
+
 // Main handler - handles all methods
 export async function onRequest(context: EventContext<Env, string, unknown>): Promise<Response> {
   const request = context.request;
@@ -83,6 +95,37 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       status: 204,
       headers: corsHeaders,
     });
+  }
+
+  // Rate Limiting (apply after OPTIONS preflight)
+  const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const now = Date.now();
+
+  // Cleanup if the map gets too big
+  if (rateLimitMap.size > MAX_MAP_SIZE) {
+    rateLimitMap.clear();
+  }
+
+  let rateInfo = rateLimitMap.get(clientIp);
+
+  if (!rateInfo || now > rateInfo.resetTime) {
+    // New window
+    rateInfo = { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS };
+    rateLimitMap.set(clientIp, rateInfo);
+  } else {
+    // Existing window
+    rateInfo.count += 1;
+    if (rateInfo.count > MAX_REQUESTS_PER_WINDOW) {
+      return new Response(JSON.stringify({ error: 'Too many requests, please try again later.' }), {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+          'Retry-After': String(Math.ceil((rateInfo.resetTime - now) / 1000))
+        }
+      });
+    }
+    rateLimitMap.set(clientIp, rateInfo);
   }
 
   // Only allow POST
