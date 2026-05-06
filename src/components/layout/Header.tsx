@@ -12,6 +12,7 @@ export default function Header() {
     { name: "Om os", path: "/om-os" },
     { name: "Services", path: "/services" },
     { name: "Priser", path: "/priser" },
+    { name: "Guide", path: "/guides/saadan-bestaar-du-dit-flyttesyn" },
     { name: "FAQ", path: "/faq" },
   ];
 
