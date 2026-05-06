@@ -13,6 +13,7 @@ const Hovedrengoering = React.lazy(() => import("./routes/services/Hovedrengoeri
 const Erhvervsrengoering = React.lazy(() => import("./routes/services/Erhvervsrengoering"));
 const Pricing = React.lazy(() => import("./routes/Pricing"));
 const ServiceAreas = React.lazy(() => import("./routes/ServiceAreas"));
+const FlyttesynGuide = React.lazy(() => import("./routes/FlyttesynGuide"));
 const FAQ = React.lazy(() => import("./routes/FAQ"));
 const Contact = React.lazy(() => import("./routes/Contact"));
 const Terms = React.lazy(() => import("./routes/Terms"));
@@ -58,6 +59,10 @@ export default function App() {
             />
             <Route path="priser" element={<Pricing />} />
             <Route path="service-omraade" element={<ServiceAreas />} />
+            <Route
+              path="guides/saadan-bestaar-du-dit-flyttesyn"
+              element={<FlyttesynGuide />}
+            />
             <Route path="faq" element={<FAQ />} />
             <Route path="kontakt" element={<Contact />} />
             <Route path="handelsbetingelser" element={<Terms />} />

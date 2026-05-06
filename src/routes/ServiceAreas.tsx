@@ -3,65 +3,72 @@ import { MapPin, Phone, ArrowRight, CheckCircle2, Navigation } from "lucide-reac
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-import { company } from "../content/company";
+import { company } from "@/content/company";
 
 const serviceAreas = [
   {
     name: "Aarhus C",
-    postalCodes: ["8000", "8210"],
-    description: "Midtbyen, Frederiksbjerg, Vesterbro, Trøjborg",
-    travelTime: "0-15 min",
+    postalCode: "8000",
+    description:
+      "Aarhus Centrum er hjerte af byen med tæt bebyggelse af lejligheder, ungdomsboliger og studerende. Her er der stor efterspørgsel på flytterengøring, da mange unge flytter til og fra byen hvert semester.",
+    popular: "Flytterengøring og hovedrengøring",
+  },
+  {
+    name: "Aarhus N",
+    postalCode: "8200",
+    description:
+      "Universitetsområdet med kollegier, nyere lejlighedskomplekser og villakvarterer. Vi udfører både fast rengøring for travle studerende og familier samt grundige flytterengøringer ved semesterstart.",
+    popular: "Fast rengøring og flytterengøring",
+  },
+  {
+    name: "Aarhus V",
+    postalCode: "8210",
+    description:
+      "Brabrand-området med parcelhuskvarterer, rækkehuse og større boligforeninger. Populært blandt børnefamilier, der sætter pris på stabil og pålidelig hjemmerengøring.",
+    popular: "Fast rengøring og hovedrengøring",
   },
   {
     name: "Risskov",
-    postalCodes: ["8240"],
-    description: "Vejlby, Risskov, Vejlby-Risskov",
-    travelTime: "10-20 min",
-  },
-  {
-    name: "Tilst",
-    postalCodes: ["8381", "8382"],
-    description: "Vores hjembase - Tilst, Kasted, Hvilsted",
-    travelTime: "0 min",
-    isHome: true,
-  },
-  {
-    name: "Viby J",
-    postalCodes: ["8260"],
-    description: "Viby, Rårsup, Ormslev",
-    travelTime: "15-25 min",
+    postalCode: "8240",
+    description:
+      "Strandkvarteret nord for Aarhus med store villaer, rækkehuse og lejligheder. Risskov er kendt for sine større boliger med havestuer og moderne køkkener, der kræver grundig pleje.",
+    popular: "Fast rengøring og hovedrengøring",
   },
   {
     name: "Højbjerg",
-    postalCodes: ["8270"],
-    description: "Højbjerg, Skåde, Frederikshøj",
-    travelTime: "20-30 min",
+    postalCode: "8270",
+    description:
+      "Eksklusivt villakvarter med skovområder og dyre boliger. Vi hjælper både med løbende vedligehold og dybdegående rengøring i Højbjergs mange større hjem.",
+    popular: "Fast rengøring og erhvervsrengøring",
+  },
+  {
+    name: "Viby J",
+    postalCode: "8260",
+    description:
+      "Stor bydel med en blanding af lejligheder, rækkehuse og parcelhuse. Viby J har et bredt udvalg af boligtyper, og vi udfører alt fra hurtig rengøring til omfattende flytterengøring.",
+    popular: "Flytterengøring og fast rengøring",
+  },
+  {
+    name: "Tilst",
+    postalCode: "8381",
+    description:
+      "Vores hjembase og et område med billigere boliger, tæt på motorvej og med gode forbindelser til resten af Aarhus. Her betjener vi mange familier og pendlere.",
+    popular: "Fast rengøring og hovedrengøring",
   },
   {
     name: "Brabrand",
-    postalCodes: ["8220", "8229"],
-    description: "Brabrand, Gellerup, Skejby",
-    travelTime: "15-25 min",
+    postalCode: "8220",
+    description:
+      "Børnefamiliekvarter med parcelhuse, tæt på Årslev Engsø og naturskønne omgivelser. Vi tilbyder pålidelig hjemmerengøring til de lokale familier.",
+    popular: "Fast rengøring og hovedrengøring",
   },
   {
-    name: "Tranbjerg",
-    postalCodes: ["8310"],
-    description: "Tranbjerg, Mårslet, Beder-Malling",
-    travelTime: "25-35 min",
+    name: "Hasselager",
+    postalCode: "8361",
+    description:
+      "Nybyggeri og moderne parcelhuse, populært blandt børnefamilier og førstegangskøbere. Her er der især brug for grundig rengøring i de nyere boliger.",
+    popular: "Fast rengøring og hovedrengøring",
   },
-  {
-    name: "Egå",
-    postalCodes: ["8250"],
-    description: "Egå, Skæring, Mejlby",
-    travelTime: "20-30 min",
-  },
-];
-
-const nearbyAreas = [
-  { name: "Odder", description: "Ved større opgaver eller faste aftaler" },
-  { name: "Lystrup", description: "Erhvervsrengøring efter aftale" },
-  { name: "Skanderborg", description: "Ved faste aftaler" },
-  { name: "Horsens", description: "Kun større erhvervsopgaver" },
 ];
 
 export default function ServiceAreas() {
@@ -69,97 +76,114 @@ export default function ServiceAreas() {
     <div className="flex flex-col">
       <Helmet>
         <link rel="canonical" href="https://rendetalje.dk/service-omraade" />
-        <title>{`Serviceområder | ${company.name}`}</title>
+        <title>
+          Serviceområder — {company.name} dækker hele Aarhus
+        </title>
         <meta
           name="description"
-          content="Vi tilbyder rengøring i hele Aarhus og omegn. Tilst, Risskov, Viby, Højbjerg, Brabrand, Tranbjerg, Egå og mange flere områder. Kontakt os for et tilbud."
+          content="Rendetalje tilbyder professionel rengøring i hele Aarhus — Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager. Få et tilbud i dag."
         />
-        <meta property="og:title" content={`Serviceområder | ${company.name}`} />
-        <meta property="og:description" content="Vi tilbyder rengøring i hele Aarhus og omegn. Tilst, Risskov, Viby, Højbjerg, Brabrand, Tranbjerg, Egå og mange flere områder. Kontakt os for et tilbud." />
-        <meta property="og:url" content="https://rendetalje.dk/service-omraade" />
+        <meta
+          property="og:title"
+          content={`Serviceområder — ${company.name} dækker hele Aarhus`}
+        />
+        <meta
+          property="og:description"
+          content="Rendetalje tilbyder professionel rengøring i hele Aarhus — Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager."
+        />
+        <meta
+          property="og:url"
+          content="https://rendetalje.dk/service-omraade"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
         <meta property="og:locale" content="da_DK" />
       </Helmet>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-slate-50 pt-24 pb-24">
+      <section className="relative overflow-hidden bg-slate-900 pt-24 pb-28">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-green-900/30" />
+        </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-800 text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-900/50 text-green-300 text-sm font-medium mb-6 border border-green-700/50"
             >
               <Navigation className="w-4 h-4" />
-              Lokaleksperter i Aarhus
+              Serviceområder
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6"
             >
-              Vi kører i hele Aarhus og omegn
+              Serviceområder — {company.name} dækker hele Aarhus
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl text-slate-600 leading-relaxed"
+              className="text-xl text-slate-300 leading-relaxed"
             >
-              Med base i Tilst dækker vi hele Aarhus-området. Jo tættere du er på 
-              vores base, desto hurtigere kan vi være hos dig.
+              Med base i Tilst kører vi til alle hjørner af Aarhus. Uanset om
+              du bor i centrum, ved stranden i Risskov eller i nybyggeriet i
+              Hasselager — så er vi klar til at hjælpe dig.
             </motion.p>
           </div>
         </div>
       </section>
 
       {/* Service Areas Grid */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Hvor vi kører</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Områder vi betjener
+            </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Vi tilbyder rengøring i følgende områder. 
-              <span className="text-green-600 font-medium"> Ingen transporttillæg</span> inden for Aarhus.
+              Vi dækker alle større bydele i Aarhus.
+              <span className="text-green-600 font-medium">
+                {" "}Ingen transporttillæg
+              </span>{" "}
+              inden for byen.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceAreas.map((area, index) => (
               <motion.div
                 key={area.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className={`relative p-6 rounded-2xl border-2 transition-all hover:shadow-lg ${
-                  area.isHome
-                    ? "border-green-600 bg-green-50"
-                    : "border-slate-200 hover:border-green-300 bg-white"
-                }`}
+                className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-green-200 transition-all"
               >
-                {area.isHome && (
-                  <div className="absolute -top-3 left-4 px-3 py-1 bg-green-600 text-white text-xs font-medium rounded-full">
-                    Vores base
-                  </div>
-                )}
-                <div className="flex items-start gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    area.isHome ? "bg-green-200" : "bg-slate-100"
-                  }`}>
-                    <MapPin className={`w-5 h-5 ${area.isHome ? "text-green-700" : "text-slate-600"}`} />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900">{area.name}</h3>
-                    <p className="text-sm text-slate-500">{area.postalCodes.join(", ")}</p>
+                    <h3 className="font-bold text-slate-900 text-lg">
+                      {area.name}
+                    </h3>
+                    <p className="text-sm text-slate-500">
+                      {area.postalCode}
+                    </p>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mb-3">{area.description}</p>
-                <div className="flex items-center gap-2 text-sm">
-                  <Navigation className="w-4 h-4 text-slate-400" />
-                  <span className="text-slate-500">{area.travelTime} fra base</span>
+                <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                  {area.description}
+                </p>
+                <div className="flex items-center gap-2 pt-3 border-t border-slate-100">
+                  <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
+                  <span className="text-xs text-slate-500">
+                    Populært: {area.popular}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -167,71 +191,32 @@ export default function ServiceAreas() {
         </div>
       </section>
 
-      {/* Nearby Areas */}
-      <section className="py-24 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Også i omegnen</h2>
-              <p className="text-lg text-slate-600 mb-8">
-                Ved større opgaver eller faste rengøringsaftaler kører vi også gerne 
-                uden for Aarhus. Vi vurderer hver opgave individuelt.
-              </p>
-              <ul className="space-y-4">
-                {nearbyAreas.map((area) => (
-                  <li key={area.name} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-                    <div>
-                      <span className="font-semibold text-slate-900">{area.name}</span>
-                      <span className="text-slate-600"> — {area.description}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">
-                Er du i tvivl om vi kører til dig?
-              </h3>
-              <p className="text-slate-600 mb-6">
-                Kontakt os og fortæl hvor du bor. Vi finder en løsning, også hvis du 
-                ligger lidt uden for vores normale område.
-              </p>
-              <div className="flex flex-col gap-3">
-                <a
-                  href={`tel:${company.phone.replace(/\s+/g, "")}`}
-                  className="flex items-center justify-center gap-2 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors"
-                >
-                  <Phone className="w-5 h-5" />
-                  Ring til os
-                </a>
-                <Link
-                  to="/kontakt"
-                  className="flex items-center justify-center gap-2 py-3 border-2 border-slate-300 text-slate-700 font-medium rounded-xl hover:border-slate-400 transition-colors"
-                >
-                  Skriv til os
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-24 bg-green-600 text-white text-center">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-6">Klar til at få et tilbud?</h2>
+          <h2 className="text-3xl font-bold mb-6">
+            Klar til at få et tilbud?
+          </h2>
           <p className="text-xl text-green-100 mb-10">
-            Uanset om du er i Tilst, Aarhus C eller et af de omkringliggende områder, 
-            så er vi klar til at hjælpe dig.
+            Uanset om du er i Aarhus C, Tilst eller et af de omkringliggende
+            områder, så er vi klar til at hjælpe dig med professionel
+            rengøring.
           </p>
-          <Link
-            to="/kontakt"
-            className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-medium text-green-600 transition-colors hover:bg-slate-50"
-          >
-            Få et tilbud
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link
+              to="/kontakt"
+              className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-medium text-green-600 transition-colors hover:bg-slate-50"
+            >
+              Få et tilbud
+            </Link>
+            <a
+              href={`tel:${company.phone.replace(/\s+/g, "")}`}
+              className="inline-flex h-14 items-center justify-center rounded-full bg-transparent border-2 border-white px-8 text-base font-medium text-white transition-colors hover:bg-white/10"
+            >
+              <Phone size={20} className="mr-2" />
+              Ring til os
+            </a>
+          </div>
         </div>
       </section>
     </div>
