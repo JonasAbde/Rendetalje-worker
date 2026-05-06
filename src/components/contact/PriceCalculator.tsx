@@ -1,50 +1,30 @@
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { trackEvent } from "@/lib/analytics";
-import { pricing } from "@/content/pricing";
 
 interface PriceCalculatorProps {
-  type?: string;
-  size?: string;
-  frequency?: string;
-  onTypeChange?: (value: string) => void;
-  onSizeChange?: (value: string) => void;
-  onFrequencyChange?: (value: string) => void;
+  type: string;
+  size: string;
+  frequency: string;
+  onSizeChange: (value: string) => void;
+  onFrequencyChange: (value: string) => void;
 }
 
-const HOURLY_RATE = pricing.hourlyRate; // 349
-const MINIMUM_PRICE = pricing.minimumPrice; // 698
-const MINIMUM_HOURS = 2;
-
-const serviceTypes: Record<string, { label: string; description: string }> = {
-  fast: { label: "Fast rengøring", description: "Standard vedligeholdelse" },
-  hoved: { label: "Hovedrengøring", description: "Dybdegående rengøring" },
-  flytte: { label: "Flytterengøring", description: "Ved fraflytning" },
-  erhverv: { label: "Erhvervsrengøring", description: "Kontor & erhverv" },
+const basePrices: Record<string, number> = {
+  fast: 350,
+  flytte: 900,
+  hoved: 700,
+  erhverv: 600,
+  andet: 500,
 };
 
-/** Calculate estimated hours based on service type and m² */
-function estimateHours(type: string, m2: number): number {
-  if (m2 <= 0) return 0;
-  let hours: number;
-  switch (type) {
-    case "fast":
-      hours = m2 / 25;
-      break;
-    case "hoved":
-      hours = m2 / 20 + 2;
-      break;
-    case "flytte":
-      hours = m2 / 18 + 3;
-      break;
-    case "erhverv":
-      hours = m2 / 25;
-      break;
-    default:
-      hours = m2 / 25;
-  }
-  return Math.max(hours, MINIMUM_HOURS);
-}
+const perSqmRates: Record<string, number> = {
+  fast: 18,
+  flytte: 28,
+  hoved: 22,
+  erhverv: 14,
+  andet: 20,
+};
 
 const frequencyDiscounts: Record<string, number> = {
   ugentlig: 0.15,
@@ -59,118 +39,47 @@ const frequencyLabels: Record<string, string> = {
   månedlig: "Månedlig",
 };
 
-/** Round to one decimal place */
-function round1(n: number): number {
-  return Math.round(n * 10) / 10;
-}
-
 export default function PriceCalculator({
-  type: externalType,
-  size: externalSize,
-  frequency: externalFrequency,
-  onTypeChange,
+  type,
+  size,
+  frequency,
   onSizeChange,
   onFrequencyChange,
 }: PriceCalculatorProps) {
-  // Internal state for standalone mode (no props provided)
-  const [internalType, setInternalType] = useState("fast");
-  const [internalSize, setInternalSize] = useState("");
-  const [internalFrequency, setInternalFrequency] = useState("");
-
-  const isControlled = externalType !== undefined;
-  const type = isControlled ? externalType : internalType;
-  const size = isControlled ? externalSize ?? internalSize : internalSize;
-  const frequency = isControlled ? externalFrequency ?? internalFrequency : internalFrequency;
-
   const sizeNum = parseInt(size) || 0;
   const hasTracked = useRef(false);
 
-  const handleTypeChange = (value: string) => {
-    if (onTypeChange) onTypeChange(value);
-    else setInternalType(value);
-  };
-
-  const handleSizeChange = (value: string) => {
-    if (onSizeChange) onSizeChange(value);
-    else setInternalSize(value);
-  };
-
-  const handleFrequencyChange = (value: string) => {
-    if (onFrequencyChange) onFrequencyChange(value);
-    else setInternalFrequency(value);
-  };
-
   const estimate = useMemo(() => {
-    const rawHours = estimateHours(type, sizeNum);
-    const discount = frequencyDiscounts[frequency] || 0;
-    // For recurring, apply discount to hours estimate
-    const discountedHours = rawHours * (1 - discount);
-    // Ensure minimum
-    const finalHours = Math.max(discountedHours, MINIMUM_HOURS);
-    const totalPrice = Math.round(finalHours * HOURLY_RATE);
+    const base = basePrices[type] || 400;
+    const perSqm = perSqmRates[type] || 20;
+    const sizeCost = sizeNum * perSqm;
+    const subtotal = base + sizeCost;
+    const discount = subtotal * (frequencyDiscounts[frequency] || 0);
+    const total = subtotal - discount;
 
     return {
-      hours: round1(finalHours),
-      rawHours: round1(rawHours),
-      price: Math.max(totalPrice, MINIMUM_PRICE),
-      discount,
-      hourlyRate: HOURLY_RATE,
+      min: Math.round(total * 0.85),
+      max: Math.round(total * 1.15),
     };
   }, [type, sizeNum, frequency]);
 
   // Track first complete calculator interaction
   useEffect(() => {
-    if (type && sizeNum > 0 && !hasTracked.current) {
+    if (type && sizeNum > 0 && frequency && !hasTracked.current) {
       hasTracked.current = true;
       const sizeRange =
-        sizeNum <= 50
-          ? "0-50"
-          : sizeNum <= 100
-            ? "51-100"
-            : sizeNum <= 150
-              ? "101-150"
-              : sizeNum <= 200
-                ? "151-200"
-                : "200+";
+        sizeNum <= 50 ? "0-50" : sizeNum <= 100 ? "51-100" : sizeNum <= 150 ? "101-150" : sizeNum <= 200 ? "151-200" : "200+";
       trackEvent("Price Calculator Used", {
         service_type: type,
         size_range: sizeRange,
-        frequency: frequency || "none",
-        estimated_price: `${estimate.price} kr`,
+        frequency,
+        estimated_price_range: `${estimate.min}-${estimate.max} kr`,
       });
     }
-  }, [type, sizeNum, frequency, estimate.price]);
+  }, [type, sizeNum, frequency, estimate.min, estimate.max]);
 
   return (
     <div className="space-y-6">
-      {/* Service type selector (only in standalone mode) */}
-      {!isControlled && (
-        <div className="space-y-3">
-          <label className="block text-sm font-medium text-slate-700">
-            Rengøringstype
-          </label>
-          <div className="grid grid-cols-2 gap-3">
-            {Object.entries(serviceTypes).map(([value, info]) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => handleTypeChange(value)}
-                className={`py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all text-left ${
-                  type === value
-                    ? "border-green-500 bg-green-50 text-green-700"
-                    : "border-slate-200 hover:border-slate-300 text-slate-600"
-                }`}
-              >
-                <span className="block font-semibold">{info.label}</span>
-                <span className="block text-xs text-slate-500 mt-0.5">
-                  {info.description}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Size input */}
       <div className="space-y-3">
         <label htmlFor="size" className="block text-sm font-medium text-slate-700">
@@ -183,14 +92,14 @@ export default function PriceCalculator({
             min="0"
             max="300"
             value={sizeNum}
-            onChange={(e) => handleSizeChange(e.target.value)}
+            onChange={(e) => onSizeChange(e.target.value)}
             className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-green-600"
           />
           <div className="w-24">
             <input
               type="number"
               value={size}
-              onChange={(e) => handleSizeChange(e.target.value)}
+              onChange={(e) => onSizeChange(e.target.value)}
               placeholder="m²"
               className="w-full h-12 px-3 rounded-xl border border-slate-300 text-center font-semibold"
             />
@@ -213,7 +122,7 @@ export default function PriceCalculator({
               type="button"
               role="radio"
               aria-checked={frequency === value}
-              onClick={() => handleFrequencyChange(value)}
+              onClick={() => onFrequencyChange(value)}
               className={`py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all ${
                 frequency === value
                   ? "border-green-500 bg-green-50 text-green-700"
@@ -226,15 +135,14 @@ export default function PriceCalculator({
         </div>
         {frequency && (
           <p className="text-xs text-green-600 font-medium">
-            Du sparer {Math.round(frequencyDiscounts[frequency] * 100)}% ved{" "}
-            {frequencyLabels[frequency].toLowerCase()} rengøring
+            Du sparer {Math.round(frequencyDiscounts[frequency] * 100)}% ved {frequencyLabels[frequency].toLowerCase()} rengøring
           </p>
         )}
       </div>
 
       {/* Price estimate */}
       <AnimatePresence mode="wait">
-        {sizeNum > 0 && estimate.hours > 0 && (
+        {estimate.min > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -242,33 +150,16 @@ export default function PriceCalculator({
             className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200"
           >
             <div className="text-center">
-              <p className="text-sm text-slate-600 mb-1">Estimeret pris</p>
-              <p className="text-xs text-slate-500 mb-3">
-                {HOURLY_RATE} kr/time inkl. moms
-              </p>
+              <p className="text-sm text-slate-600 mb-2">Estimeret pris</p>
               <motion.div
-                key={estimate.price}
+                key={estimate.min}
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 className="text-4xl font-bold text-green-700 mb-2"
               >
-                {estimate.price.toLocaleString("da-DK")} kr
+                {estimate.min.toLocaleString("da-DK")} - {estimate.max.toLocaleString("da-DK")} kr
               </motion.div>
-              <div className="text-sm text-slate-600 space-y-1">
-                <p>
-                  Estimeret tid: <strong>{estimate.hours} timer</strong>
-                </p>
-                {estimate.discount > 0 && (
-                  <p className="text-green-600">
-                    ({estimate.rawHours} timer × {HOURLY_RATE} kr) −{" "}
-                    {Math.round(estimate.discount * 100)}% rabat
-                  </p>
-                )}
-              </div>
-              <p className="text-xs text-slate-400 mt-3">
-                Min. {MINIMUM_HOURS} timer ({MINIMUM_PRICE.toLocaleString("da-DK")} kr)
-              </p>
-              <p className="text-sm text-slate-500 mt-3">
+              <p className="text-sm text-slate-500">
                 Få en fast pris når vi ringer dig op
               </p>
             </div>
