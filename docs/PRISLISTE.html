@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prisliste 2026 — Rendetalje</title>
+  <style>
+    /* A4 print-friendly styles */
+    @page {
+      size: A4;
+      margin: 15mm;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #333;
+      background: #f5f5f5;
+      padding: 30px 20px;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #fff;
+      padding: 40px 40px 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .header .subtitle {
+      font-size: 14px;
+      color: #e6f7e6;
+      margin-top: 4px;
+    }
+
+    .header .tagline {
+      font-size: 13px;
+      color: #d4edda;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Content */
+    .content {
+      padding: 35px 40px 40px;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #16a34a;
+      border-bottom: 2px solid #16a34a;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    /* Pricing highlight box */
+    .price-hero {
+      background: #f0fdf4;
+      border: 2px solid #16a34a;
+      border-radius: 8px;
+      padding: 20px 25px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .price-hero .rate {
+      font-size: 36px;
+      font-weight: 800;
+      color: #16a34a;
+    }
+
+    .price-hero .rate-label {
+      font-size: 14px;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    .price-hero .min-note {
+      font-size: 13px;
+      color: #777;
+      margin-top: 4px;
+    }
+
+    /* Table styles */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .price-table th {
+      background: #f0fdf4;
+      color: #166534;
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 2px solid #16a34a;
+    }
+
+    .price-table th:last-child {
+      text-align: right;
+    }
+
+    .price-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .price-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .price-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price-table .note-row td {
+      font-size: 11px;
+      color: #888;
+      font-style: italic;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .price-table .note-row td:last-child {
+      font-weight: normal;
+    }
+
+    /* Contact footer */
+    .contact-footer {
+      background: #166534;
+      color: #fff;
+      padding: 25px 40px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .contact-footer strong {
+      color: #fff;
+    }
+
+    .contact-footer a {
+      color: #bbf7d0;
+      text-decoration: none;
+    }
+
+    .contact-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-footer .name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      padding: 15px 40px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .page {
+        box-shadow: none;
+        border-radius: 0;
+      }
+      .header {
+        padding-top: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Rendetalje — Prisliste 2026</h1>
+    <p class="subtitle">Professionel rengøring i Aarhus-området</p>
+    <p class="tagline">Ærlig pris &middot; Grundig service &middot; Tydelig aftale</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- HERO: Hourly Rate -->
+    <div class="price-hero">
+      <div class="rate">349 kr</div>
+      <div class="rate-label">pr. time inkl. moms</div>
+      <div class="min-note">Minimumspris: 698 kr inkl. moms (svarende til 2 timer)</div>
+    </div>
+
+    <!-- STANDARD CLEANING -->
+    <div class="section">
+      <h2 class="section-title">Fast rengøring</h2>
+      <p class="section-subtitle">Ugentlig eller hver 14. dag — prisen er pr. besøg</p>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Boligtype</th>
+            <th>Anslået tid</th>
+            <th>Pris pr. gang</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2-værelses lejlighed (50-65 m²)</td>
+            <td>2,0 timer</td>
+            <td>698 kr</td>
+          </tr>
+          <tr>
+            <td>3-værelses lejlighed (70-85 m²)</td>
+            <td>2,5 timer</td>
+            <td>873 kr</td>
+          </tr>
+          <tr>
+            <td>Rækkehus (100 m²)</td>
+            <td>3,0 timer</td>
+            <td>1.047 kr</td>
+          </tr>
+          <tr>
+            <td>Villa (120-140 m²)</td>
+            <td>3,5 timer</td>
+            <td>1.222 kr</td>
+          </tr>
+          <tr>
+            <td>Større villa (150+ m²)</td>
+            <td>4,0-5,0 timer</td>
+            <td>1.396-1.745 kr</td>
+          </tr>
+          <tr class="note-row">
+            <td colspan="3">Første gangs rengøring tager ca. 30% længere og koster tilsvarende mere.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MOVE-OUT CLEANING -->
+    <div class="section">
+      <h2 class="section-title">Flytterengøring</h2>
+      <p class="section-subtitle">Inklusiv basis rengøring af hvidevarer — engangspris</p>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Boligtype</th>
+            <th>Anslået tid</th>
+            <th>Pris</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1-værelses / studiebolig (25-40 m²)</td>
+            <td>3,0-4,0 timer</td>
+            <td>1.047-1.396 kr</td>
+          </tr>
+          <tr>
+            <td>2-værelses lejlighed (50-65 m²)</td>
+            <td>4,0-6,0 timer</td>
+            <td>1.396-2.094 kr</td>
+          </tr>
+          <tr>
+            <td>3-værelses lejlighed (70-85 m²)</td>
+            <td>5,0-7,0 timer</td>
+            <td>1.745-2.443 kr</td>
+          </tr>
+          <tr>
+            <td>Villa (120-140 m²)</td>
+            <td>7,0-10,0 timer</td>
+            <td>2.443-3.490 kr</td>
+          </tr>
+          <tr class="note-row">
+            <td colspan="3">Tilvalg: Ovn +0,5 time | Køleskab +0,5 time | Vinduer +1 time pr. 30 m² | Afkalkning +1-2 timer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DEEP CLEANING -->
+    <div class="section">
+      <h2 class="section-title">Hovedrengøring</h2>
+      <p class="section-subtitle">Grundig gennemgang af hele boligen — engangspris</p>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Boligtype</th>
+            <th>Anslået tid</th>
+            <th>Pris</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2-værelses lejlighed (50-65 m²)</td>
+            <td>3,0-4,5 timer</td>
+            <td>1.047-1.571 kr</td>
+          </tr>
+          <tr>
+            <td>3-værelses lejlighed (70-85 m²)</td>
+            <td>4,0-6,0 timer</td>
+            <td>1.396-2.094 kr</td>
+          </tr>
+          <tr>
+            <td>Villa (120-140 m²)</td>
+            <td>6,0-9,0 timer</td>
+            <td>2.094-3.141 kr</td>
+          </tr>
+          <tr class="note-row">
+            <td colspan="3">Tilvalg: Ovn +0,5 time | Køleskab +0,5 time | Vinduer +1 time pr. 30 m² | Skabe +0,5 time</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- COMMERCIAL CLEANING -->
+    <div class="section">
+      <h2 class="section-title">Erhvervsrengøring</h2>
+      <p class="section-subtitle">Skræddersyet løsning til din virksomhed</p>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Anslået tid</th>
+            <th>Pris</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kontor 50 m² (1 gang/uge)</td>
+            <td>2,0 timer</td>
+            <td>698 kr</td>
+          </tr>
+          <tr>
+            <td>Kontor 100 m² (2 gange/uge)</td>
+            <td>4,0 timer</td>
+            <td>1.396 kr</td>
+          </tr>
+          <tr>
+            <td>Showroom 150 m²</td>
+            <td>Efter aftale</td>
+            <td>Efter aftale</td>
+          </tr>
+          <tr class="note-row">
+            <td colspan="3">Større eller specialiserede opgaver tilbydes efter individuel vurdering.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NOTE -->
+    <p style="font-size: 12px; color: #888; font-style: italic; margin-top: 25px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
+      Prisen er vejledende og afhænger af opgavens omfang, boligens stand og eventuelle tilvalg. Den endelige pris beregnes ud fra de faktiske fakturerbare arbejdstimer. Ved flere medarbejdere på samme opgave lægges timerne sammen (f.eks. 2 personer × 2 timer = 4 arbejdstimer). Ved fast rengøring faktureres typisk månedligt. Ved engangsopgaver faktureres senest 24 timer efter udført opgave.
+    </p>
+
+  </div>
+
+  <!-- CONTACT FOOTER -->
+  <div class="contact-footer">
+    <div class="name">Jonas</div>
+    <div>Rendetalje</div>
+    <div>T: <strong>+45 22 65 02 26</strong></div>
+    <div>E: <a href="mailto:info@rendetalje.dk">info@rendetalje.dk</a></div>
+    <div>W: <a href="https://rendetalje.dk">rendetalje.dk</a></div>
+    <div style="margin-top: 4px; font-size: 12px; opacity: 0.8;">CVR: 45564096</div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    Rendetalje &middot; Rengøring i Aarhus &middot; CVR 45564096
+  </div>
+
+</div>
+
+</body>
+</html>

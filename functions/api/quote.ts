@@ -192,6 +192,45 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       throw new Error('Kunne ikke sende email via Resend');
     }
 
+    // Send auto-reply to the customer (non-blocking — wrapped in try/catch)
+    try {
+      const autoReplyHtml = `
+        <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+          <div style="background: #16a34a; padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0;">
+            <h1 style="color: #fff; margin: 0; font-size: 24px;">Rendetalje</h1>
+            <p style="color: #e6f7e6; margin: 5px 0 0; font-size: 14px;">Rengøring i Aarhus</p>
+          </div>
+          <div style="background: #fff; padding: 30px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
+            <p style="font-size: 16px; margin-top: 0;">Hej ${safeName},</p>
+            <p>Tak for din forespørgsel om <strong>${safeType}</strong>.</p>
+            <p>Vi har modtaget dine oplysninger og vender tilbage inden for 2 timer i dagtimerne med et uforpligtende tilbud eller for at aftale nærmere.</p>
+            <p>Hvis du har brug for akut hjælp, er du velkommen til at ringe på <strong>22 65 02 26</strong>.</p>
+            <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;" />
+            <p style="font-size: 14px; color: #666; margin-bottom: 5px;">Med venlig hilsen</p>
+            <p style="font-size: 15px; color: #16a34a; font-weight: bold; margin: 0;">Jonas</p>
+            <p style="font-size: 13px; color: #666; margin: 2px 0;">Rendetalje</p>
+            <p style="font-size: 13px; color: #666; margin: 2px 0;">T: 22 65 02 26</p>
+          </div>
+        </div>
+      `;
+
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: `Rendetalje <${FROM_EMAIL}>`,
+          to: data.email,
+          subject: 'Vi har modtaget din forespørgsel — Rendetalje',
+          html: autoReplyHtml,
+        }),
+      });
+    } catch {
+      // Auto-reply failure should not break the main flow — silently ignored
+    }
+
     return new Response(JSON.stringify({ success: true, message: 'Email sendt succesfuldt' }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
