@@ -94,7 +94,24 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
   }
 
   try {
-    const rawData = await request.json() as Record<string, unknown>;
+    // Parse JSON safely — SyntaxError → 400, not 500
+    // Also limit body size to prevent abuse (100KB)
+    const contentLength = request.headers.get('Content-Length');
+    if (contentLength && parseInt(contentLength) > 102400) {
+      return new Response(JSON.stringify({ error: 'Request body too large' }), {
+        status: 413,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+    let rawData: Record<string, unknown>;
+    try {
+      rawData = await request.json() as Record<string, unknown>;
+    } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
     const data = sanitizeObject(rawData);
     
     // Basic validation
@@ -151,7 +168,9 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       });
     }
 
-    // Send email via Resend API
+    // Send email via Resend API with 15s timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -164,8 +183,10 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         subject: `Ny forespørgsel: ${safeType} - ${safeName}`,
         html: emailHtml,
         reply_to: data.email
-      })
+      }),
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error('Kunne ikke sende email via Resend');
