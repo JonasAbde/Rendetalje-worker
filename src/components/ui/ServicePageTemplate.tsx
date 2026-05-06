@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, HelpCircle, Phone } from "lucide-react";
+import { company } from "@/content/company";
 
 interface FAQ {
   q: string;
