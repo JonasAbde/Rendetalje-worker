@@ -15,11 +15,11 @@ export default function Pricing() {
         <title>{`Priser | ${company.name}`}</title>
         <meta
           name="description"
-          content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 349 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring."
+          content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 399 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring."
         />
         <meta name="keywords" content="rengøring pris Aarhus, privat rengøring pris, flytterengøring pris Aarhus, hvad koster rengøring" />
         <meta property="og:title" content={`Priser | ${company.name}`} />
-        <meta property="og:description" content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 349 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring." />
+        <meta property="og:description" content="Gennemskuelige priser på professionel rengøring i Aarhus. Timepris 399 kr. inkl. moms — fast rengøring, flytterengøring og hovedrengøring." />
         <meta property="og:url" content="https://rendetalje.dk/priser" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
@@ -168,12 +168,12 @@ export default function Pricing() {
                   ⭐ Bedste værdi for pengene
                 </li>
               </ul>
-              <Link
-                to="/kontakt"
-                className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700"
-              >
-                Få tilbud
-              </Link>
+          <Link
+            to="/kontakt"
+            className="flex w-full h-12 items-center justify-center rounded-full bg-green-600 px-6 text-sm font-medium text-white transition-colors hover:bg-green-700"
+          >
+            Få tilbud
+          </Link>
             </div>
           </div>
 
@@ -181,6 +181,19 @@ export default function Pricing() {
             Priserne er vejledende. Den endelige pris fastsættes ved et konkret tilbud baseret på
             størrelse, stand, adgang og eventuelle tilvalg.
           </p>
+
+          <div className="mt-10 text-center">
+            <p className="text-slate-600 mb-4">
+              Download vores prisliste og gem til senere
+            </p>
+            <a
+              href="/docs/PRISLISTE.html"
+              target="_blank"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-white border-2 border-green-600 px-6 text-sm font-medium text-green-600 transition-colors hover:bg-green-50"
+            >
+              📄 Download prisliste
+            </a>
+          </div>
         </div>
       </section>
 

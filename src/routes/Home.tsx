@@ -555,6 +555,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust Badges */}
+      <section className="py-16 bg-white border-b border-slate-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { icon: "🛡️", title: "CVR-registreret", desc: "Rendetalje.dk ApS — 45564096" },
+              { icon: "🧹", title: "Svanemærkede produkter", desc: "Miljøvenlig rengøring" },
+              { icon: "📋", title: "Ansvarsforsikring", desc: "Fuld forsikringsdækning" },
+              { icon: "⭐", title: "Klare aftaler", desc: "Ingen skjulte gebyrer" },
+            ].map((badge, i) => (
+              <div key={i} className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                <span className="text-3xl mb-3">{badge.icon}</span>
+                <h3 className="font-semibold text-slate-900 text-sm mb-1">{badge.title}</h3>
+                <p className="text-xs text-slate-500">{badge.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trust & Credentials */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

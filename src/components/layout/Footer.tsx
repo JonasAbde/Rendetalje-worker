@@ -44,34 +44,34 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <Link
-                  to="/services"
+                  to="/services/flytterengoering"
                   className="text-slate-600 hover:text-green-600 transition-colors"
                 >
-                  Services
+                  Flytterengøring
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/priser"
+                  to="/services/fast-rengoering"
                   className="text-slate-600 hover:text-green-600 transition-colors"
                 >
-                  Priser
+                  Fast rengøring
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/faq"
+                  to="/service-omraade"
                   className="text-slate-600 hover:text-green-600 transition-colors"
                 >
-                  FAQ
+                  Serviceområder
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/kontakt"
+                  to="/guides/saadan-bestaar-du-dit-flyttesyn"
                   className="text-slate-600 hover:text-green-600 transition-colors"
                 >
-                  Kontakt
+                  Guide: Bestå flyttesyn
                 </Link>
               </li>
             </ul>
