@@ -21,3 +21,7 @@
 
 /category/uncategorized/ / 301
 /category/uncategorized / 301
+
+# Old WordPress paths
+/tag/agency/ / 301
+/tag/agency / 301
