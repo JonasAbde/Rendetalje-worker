@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   CheckCircle2,
@@ -35,7 +36,7 @@ function QuickQuoteForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setFormState("submitting");
     try {
@@ -67,15 +68,17 @@ function QuickQuoteForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Service type selector */}
       <div>
-        <p className="text-sm font-medium text-slate-700 mb-3">Hvilken type rengøring?</p>
-        <div className="flex flex-wrap gap-2">
+        <p id="service-type-label" className="text-sm font-medium text-slate-700 mb-3">Hvilken type rengøring?</p>
+        <div className="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="service-type-label">
           {serviceTypes.map((s) => (
             <button
               key={s.id}
               type="button"
+              role="radio"
+              aria-checked={serviceType === s.id}
               onClick={() => setServiceType(s.id)}
               disabled={formState === "submitting"}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 ${
                 serviceType === s.id
                   ? "bg-green-600 text-white border-green-600"
                   : "bg-white text-slate-700 border-slate-300 hover:border-green-400"
@@ -89,6 +92,7 @@ function QuickQuoteForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <input
           type="text"
+          aria-label="Navn"
           placeholder="Navn"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -98,6 +102,7 @@ function QuickQuoteForm() {
         />
         <input
           type="tel"
+          aria-label="Telefon"
           placeholder="Telefon"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
@@ -107,6 +112,7 @@ function QuickQuoteForm() {
         />
         <input
           type="email"
+          aria-label="Email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -116,6 +122,7 @@ function QuickQuoteForm() {
         />
       </div>
       <textarea
+        aria-label="Fortæl kort om opgaven (valgfri)"
         placeholder="Fortæl kort om opgaven (valgfri)"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -126,7 +133,7 @@ function QuickQuoteForm() {
       <button
         type="submit"
         disabled={formState === "submitting" || serviceType === ""}
-        className="w-full h-12 rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full h-12 rounded-full bg-green-600 px-8 text-base font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
       >
         {formState === "submitting" ? "Sender..." : "Send forespørgsel"}
       </button>
