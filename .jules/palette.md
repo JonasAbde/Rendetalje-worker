@@ -1,0 +1,3 @@
+## 2025-05-07 - Accessibility of Custom Input Components
+**Learning:** Form inputs that rely only on placeholders need `aria-label` attributes to be accessible. Furthermore, custom components acting as radio buttons (like a button-based list for service selection) need explicit ARIA grouping (`role="radiogroup"` and `aria-labelledby`) and element states (`role="radio"`, `aria-checked`) to function correctly with screen readers.
+**Action:** Always ensure that inputs have either a visible associated label (`htmlFor`) or an `aria-label` if only a placeholder is used. Apply appropriate ARIA roles and states when building custom form controls like radio groups from non-native elements.
