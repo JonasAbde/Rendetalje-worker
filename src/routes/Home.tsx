@@ -425,49 +425,78 @@ export default function Home() {
       {/* Before/After Gallery */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Før & efter — vores arbejde
+              Før og efter rengøring
             </h2>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-              Se selv forskellen. Klik for at booke et uforpligtende tilbud.
+              Se hvordan en grundig gennemgang løfter de rum, der bliver brugt
+              mest i hverdagen.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
-              { before: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600", after: "https://images.unsplash.com/photo-1584622650111-994a3f5f7e3f?w=600", label: "Køkken & badeværelse" },
-              { before: "https://images.unsplash.com/photo-1586105251261-72a756497a9f?w=600", after: "https://images.unsplash.com/photo-1563453395-1a0e7a6246a6?w=600", label: "Stue & overflader" },
+              {
+                before: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&auto=format&fit=crop&q=80",
+                after: "https://images.unsplash.com/photo-1584622650111-994a3f5f7e3f?w=700&auto=format&fit=crop&q=80",
+                label: "Køkken og badeværelse",
+                description: "Afkalkning, aftørring af fronter og grundig rengøring af de flader, hvor snavs hurtigt sætter sig.",
+              },
+              {
+                before: "https://images.unsplash.com/photo-1586105251261-72a756497a9f?w=700&auto=format&fit=crop&q=80",
+                after: "https://images.unsplash.com/photo-1563453395-1a0e7a6246a6?w=700&auto=format&fit=crop&q=80",
+                label: "Stue og overflader",
+                description: "Støv, pletter og daglig brug fjernes, så rummet føles roligt, rent og klar til brug igen.",
+              },
             ].map((pair, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
-                <div className="p-3 pb-2">
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{pair.label}</p>
-                </div>
-                <div className="grid grid-cols-2 gap-0.5 bg-slate-300">
-                  <div className="relative">
-                    <div className="absolute top-2 left-2 z-10 bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+              <article
+                key={i}
+                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+                aria-label={`Før og efter: ${pair.label}`}
+              >
+                <div className="grid grid-cols-2 bg-slate-200">
+                  <figure className="relative min-h-64">
+                    <span className="absolute left-3 top-3 z-10 rounded-full bg-slate-950/75 px-3 py-1 text-xs font-semibold text-white">
                       Før
-                    </div>
+                    </span>
                     <img
                       src={pair.before}
-                      alt={`Før - ${pair.label}`}
+                      alt=""
                       loading="lazy"
-                      className="w-full h-48 object-cover"
+                      className="h-64 w-full object-cover"
                     />
-                  </div>
-                  <div className="relative">
-                    <div className="absolute top-2 left-2 z-10 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                  </figure>
+                  <figure className="relative min-h-64 border-l border-white">
+                    <span className="absolute left-3 top-3 z-10 rounded-full bg-green-600 px-3 py-1 text-xs font-semibold text-white">
                       Efter
-                    </div>
+                    </span>
                     <img
                       src={pair.after}
-                      alt={`Efter - ${pair.label}`}
+                      alt=""
                       loading="lazy"
-                      className="w-full h-48 object-cover"
+                      className="h-64 w-full object-cover"
                     />
-                  </div>
+                  </figure>
                 </div>
-              </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold text-slate-900">
+                    {pair.label}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {pair.description}
+                  </p>
+                </div>
+              </article>
             ))}
+          </div>
+          <div className="mt-10 flex justify-center">
+            <Link
+              to="/kontakt"
+              onClick={() => trackEvent("CTA Click", { location: "before_after", target: "/kontakt" })}
+              className="inline-flex h-12 items-center justify-center rounded-full bg-green-600 px-7 text-sm font-semibold text-white transition-colors hover:bg-green-700"
+            >
+              Book et uforpligtende tilbud
+            </Link>
           </div>
         </div>
       </section>
