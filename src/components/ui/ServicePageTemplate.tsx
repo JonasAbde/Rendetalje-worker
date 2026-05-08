@@ -2,10 +2,16 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, HelpCircle, Phone } from "lucide-react";
 import { company } from "@/content/company";
+import AreaServiceGrid from "./AreaServiceGrid";
 
 interface FAQ {
   q: string;
   a: string;
+}
+
+interface Area {
+  city: string;
+  text: string;
 }
 
 interface ServicePageProps {
@@ -17,6 +23,7 @@ interface ServicePageProps {
   pricingLogic: string;
   process: { step: string; desc: string }[];
   faqs: FAQ[];
+  areas?: Area[];
 }
 
 export default function ServicePageTemplate({
@@ -28,6 +35,7 @@ export default function ServicePageTemplate({
   pricingLogic,
   process,
   faqs,
+  areas,
 }: ServicePageProps) {
   return (
     <div className="flex flex-col">
@@ -92,6 +100,11 @@ export default function ServicePageTemplate({
                 </h2>
                 <p className="text-slate-600 leading-relaxed">{whoIsItFor}</p>
               </div>
+
+              {/* Områder vi dækker */}
+              {areas && areas.length > 0 && (
+                <AreaServiceGrid areas={areas} serviceTitle={title} />
+              )}
 
               {/* Hvordan pris vurderes */}
               <div>

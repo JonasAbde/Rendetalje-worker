@@ -67,6 +67,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://rendetalje.dk/guides/hvad-koster-rengoering</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://rendetalje.dk/kontakt</loc>
     <lastmod>2026-05-08</lastmod>
     <changefreq>weekly</changefreq>

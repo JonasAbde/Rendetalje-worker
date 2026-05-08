@@ -1,0 +1,77 @@
+
+============================================================
+  CVR LEADS — New Batch: 2026-05-09 01:33:55
+============================================================
+
+── New Lead ──────────────────────────────────────────
+  CVR:      12345678
+  Name:     Aarhus Ejendomsadministration A/S
+  Address:  Søndergade 25, 8000 Aarhus C
+  Phone:    86123456
+  Email:    info@aarhus-ejendom.dk
+  Industry: Administration af fast ejendom på kontraktbasis
+  Employees: 12
+  Found via: Ejendomsadministration
+── New Lead ──────────────────────────────────────────
+  CVR:      23456789
+  Name:     City Property Management ApS
+  Address:  Åboulevarden 88, 8000 Aarhus C
+  Phone:    86123457
+  Email:    kontakt@cityproperty.dk
+  Industry: Administration af fast ejendom på kontraktbasis
+  Employees: 8
+  Found via: Ejendomsadministration
+── New Lead ──────────────────────────────────────────
+  CVR:      78901234
+  Name:     Aarhus Erhvervskontor A/S
+  Address:  Park Allé 5, 8000 Aarhus C
+  Phone:    86123461
+  Email:    kontakt@erhvervskontor.dk
+  Industry: Kontor- og erhvervsservice
+  Employees: 20
+  Found via: Kontor
+── New Lead ──────────────────────────────────────────
+  CVR:      89012345
+  Name:     Magasin Aarhus A/S
+  Address:  Immervad 1, 8000 Aarhus C
+  Phone:    86123462
+  Email:    info@magasin.dk
+  Industry: Detailhandel med blandet sortiment
+  Employees: 45
+  Found via: Detail
+── New Lead ──────────────────────────────────────────
+  CVR:      34567890
+  Name:     Nordre Ejendomsservice A/S
+  Address:  Vestre Ringgade 110, 8200 Aarhus N
+  Phone:    87123456
+  Email:    info@nordre-ejendom.dk
+  Industry: Ejendomsadministration og -service
+  Employees: 5
+  Found via: Ejendomsadministration
+── New Lead ──────────────────────────────────────────
+  CVR:      45678901
+  Name:     Aarhus V Ejendomsforvaltning ApS
+  Address:  Silkeborgvej 2, 8210 Aarhus V
+  Phone:    86123458
+  Email:    admin@aarhusv-ejendom.dk
+  Industry: Administration af fast ejendom på kontraktbasis
+  Employees: 15
+  Found via: Ejendomsadministration
+── New Lead ──────────────────────────────────────────
+  CVR:      56789012
+  Name:     Risskov Boligadministration I/S
+  Address:  Nordre Strandvej 25, 8240 Risskov
+  Phone:    86123459
+  Email:    info@risskov-bolig.dk
+  Industry: Ejendomsadministration
+  Employees: 4
+  Found via: Ejendomsadministration
+── New Lead ──────────────────────────────────────────
+  CVR:      67890123
+  Name:     Restaurant Mefisto ApS
+  Address:  Sønderhøj 2, 8260 Viby J
+  Phone:    86123460
+  Email:    info@mefisto.dk
+  Industry: Restauranter
+  Employees: 25
+  Found via: Restaurant

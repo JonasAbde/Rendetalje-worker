@@ -547,16 +547,16 @@ export default function Home() {
       <section className="py-24 bg-green-600 text-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-            Anbefal os til en ven
+            Anbefal os og få 200 kr rabat
           </h2>
           <p className="text-xl text-green-100 mb-4">
-            Hvis du kender nogen der kunne bruge professionel rengøring, er
-            du velkommen til at give dem vores kontakt. Både du og den nye
-            kunde får <strong className="text-white">100 kr i rabat</strong>{" "}
+            Kender du nogen der kunne bruge professionel rengøring? Anbefal os
+            til en ven, kollega eller nabo — så får <strong className="text-white">I begge 200 kr i rabat</strong>{" "}
             på næste besøg.
           </p>
           <p className="text-green-200 mb-10">
-            Sig du har sendt dem vores vej, så klarer vi resten.
+            Sig du har sendt dem vores vej, så klarer vi resten. Rabatten
+            gælder både dig der anbefaler og den nye kunde.
           </p>
           <a
             href={`tel:${company.phone.replace(/\s+/g, "")}`}

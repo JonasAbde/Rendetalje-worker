@@ -14,9 +14,9 @@ export default function Erhvervsrengoering() {
       <Helmet>
         <link rel="canonical" href="https://rendetalje.dk/services/erhvervsrengoering" />
         <title>{`${service.title} | ${company.name}`}</title>
-        <meta name="description" content={service.desc} />
+        <meta name="description" content={`${service.desc} — vi servicerer Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager.`} />
         <meta property="og:title" content={`${service.title} | ${company.name}`} />
-        <meta property="og:description" content={service.desc} />
+        <meta property="og:description" content={`${service.desc} — vi servicerer Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager.`} />
         <meta property="og:url" content="https://rendetalje.dk/services/erhvervsrengoering" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://rendetalje.dk/images/service-erhverv.webp" />
@@ -31,6 +31,7 @@ export default function Erhvervsrengoering() {
         pricingLogic={service.pricingLogic}
         process={service.process}
         faqs={service.faqs}
+        areas={service.areas}
       />
     </>
   );

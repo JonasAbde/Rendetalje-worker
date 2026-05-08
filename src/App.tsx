@@ -14,6 +14,7 @@ const Erhvervsrengoering = React.lazy(() => import("./routes/services/Erhvervsre
 const Pricing = React.lazy(() => import("./routes/Pricing"));
 const ServiceAreas = React.lazy(() => import("./routes/ServiceAreas"));
 const FlyttesynGuide = React.lazy(() => import("./routes/FlyttesynGuide"));
+const RengoeringPriser = React.lazy(() => import("./routes/guides/RengoeringPriser"));
 const FAQ = React.lazy(() => import("./routes/FAQ"));
 const Contact = React.lazy(() => import("./routes/Contact"));
 const Terms = React.lazy(() => import("./routes/Terms"));
@@ -62,6 +63,10 @@ export default function App() {
             <Route
               path="guides/saadan-bestaar-du-dit-flyttesyn"
               element={<FlyttesynGuide />}
+            />
+            <Route
+              path="guides/hvad-koster-rengoering"
+              element={<RengoeringPriser />}
             />
             <Route path="faq" element={<FAQ />} />
             <Route path="kontakt" element={<Contact />} />

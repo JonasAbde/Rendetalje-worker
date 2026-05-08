@@ -44,6 +44,17 @@ export const coreServices = [
         desc: "Vi kommer fast som aftalt. Betaling sker typisk via en månedlig samlet faktura.",
       },
     ],
+    areas: [
+      { city: "Aarhus C", text: "Bor du i en studiebolig på Frederiksbjerg eller en ejerlejlighed ved Vennelystparken? Vores faste rengøring i Aarhus C holder din bolig i topform med jævn ugentlig eller 14-dages service." },
+      { city: "Aarhus N", text: "Fast rengøring i Aarhus N er ideel til både studieboliger og familieboliger i områder som Trøjborg og Universitetsparken. Vi sikrer, at dit hjem altid står rent og indbydende." },
+      { city: "Aarhus V", text: "Fra lejligheder i Hasle til rækkehuse ved Brabrandstien — vores faste rengøring i Aarhus V tilpasser sig din boligtype og dine behov." },
+      { city: "Risskov", text: "Villaer og parcelhuse i Risskov kræver løbende vedligeholdelse. Vores faste rengøring i Risskov sikrer, at både stue, køkken og badeværelse altid er klar til hverdagen." },
+      { city: "Højbjerg", text: "Fast rengøring i Højbjerg til villaer og parcelhuse — vi kommer fast hver uge eller hver 14. dag og holder dit hjem skinnende rent, så du kan fokusere på familien." },
+      { city: "Viby J", text: "Vores faste rengøring i Viby J dækker alt fra lejligheder ved Viby Torv til parcelhuse i de rolige villaveje. Få en fast aftale, der passer til din hverdag." },
+      { city: "Tilst", text: "Som lokalt rengøringsfirma med base i Tilst er vi hurtigt hos dig. Fast rengøring i Tilst til både rækkehuse, parcelhuse og lejligheder." },
+      { city: "Brabrand", text: "Fast rengøring i Brabrand er perfekt til familier i rækkehuse og parcelhuse. Vi tilpasser frekvensen, så det passer ind i jeres travle hverdag." },
+      { city: "Hasselager", text: "Få en pålidelig fast rengøring i Hasselager til dit parcelhus eller rækkehus. Vi kommer som aftalt og sikrer en stabil, høj kvalitet hver gang." },
+    ],
     faqs: [
       {
         q: "Skal jeg være hjemme?",
@@ -109,6 +120,17 @@ export const coreServices = [
         step: "Afslutning",
         desc: "Du modtager en faktura med betalingsfrist senest 24 timer efter udført opgave.",
       },
+    ],
+    areas: [
+      { city: "Aarhus C", text: "Skal du fraflytte en lejlighed i Aarhus C og vil være sikker på at få hele dit depositum retur? Vores flytterengøring i Aarhus C dækker alt fra studieboliger på Frederiksbjerg til større ejerlejligheder ved Vennelystparken." },
+      { city: "Aarhus N", text: "Flytterengøring i Aarhus N til studieboliger og familielejligheder i områder som Trøjborg og Universitetsparken. Vi sikrer, at boligen står helt klar til overlevering." },
+      { city: "Aarhus V", text: "Når du fraflytter en lejlighed i Aarhus V, er en professionel flytterengøring vejen til at få dit depositum tilbage. Vi gør grundigt rent i alle rum inklusiv hvidevarer." },
+      { city: "Risskov", text: "Flytterengøring i Risskov til villaer og parcelhuse — vi sikrer en komplet rengøring, så du kan overdrage dit hus til nye ejere i skinnende stand." },
+      { city: "Højbjerg", text: "Skal du fraflytte et hus i Højbjerg? Vores flytterengøring i Højbjerg omfatter alle rum, paneler, hvidevarer og vinduer — intet overlades til tilfældighederne." },
+      { city: "Viby J", text: "Få professionel flytterengøring i Viby J til både lejligheder og parcelhuse. Vi giver et fast tilbud på forhånd, så du ved præcis, hvad det koster." },
+      { city: "Tilst", text: "Som lokalt rengøringsfirma med base i Tilst udfører vi flytterengøring i hele området — fra lejligheder til parcelhuse med garanti for et grundigt resultat." },
+      { city: "Brabrand", text: "Flytterengøring i Brabrand til rækkehuse og parcelhuse. Vi tager os af rengøringen, så du kan koncentrere dig om selve flytningen." },
+      { city: "Hasselager", text: "Book professionel flytterengøring i Hasselager og vær sikker på at bestå dit flyttesyn. Vi rengør alle rum grundigt inklusiv ovn, køleskab og skabe." },
     ],
     faqs: [
       {
@@ -176,6 +198,17 @@ export const coreServices = [
         desc: "Vi sikrer os, at du er tilfreds med resultatet. Betaling sker efterfølgende.",
       },
     ],
+    areas: [
+      { city: "Aarhus C", text: "Trænger din lejlighed i Aarhus C til en grundig omgang? Vores hovedrengøring i Aarhus C dækker paneler, døre, karme og afkalkning — perfekt til både studieboliger og større lejligheder." },
+      { city: "Aarhus N", text: "Hovedrengøring i Aarhus N til både gamle lejligheder med paneler og lister samt nyere familieboliger. Vi fjerner ophobet støv og giver dit hjem en frisk start." },
+      { city: "Aarhus V", text: "Få en komplet hovedrengøring i Aarhus V — vi går i dybden med alle rum, afkalker badeværelset og rengør køkkenet grundigt. Perfekt op til højtider eller som opstart på fast rengøring." },
+      { city: "Risskov", text: "Villaer i Risskov fortjener en grundig hovedrengøring mindst et par gange om året. Vi rengør alle rum i dybden inklusiv paneler, lister og svært tilgængelige steder." },
+      { city: "Højbjerg", text: "Hovedrengøring i Højbjerg til parcelhuse og villaer — vi sørger for, at dit hjem står skinnende rent fra kælder til kvist. Perfekt inden gæster eller efter en travl periode." },
+      { city: "Viby J", text: "Vores hovedrengøring i Viby J er ideel til både lejligheder og huse. Vi går i dybden med alle overflader og sikrer et resultat, du kan mærke og se." },
+      { city: "Tilst", text: "Som lokalt rengøringsfirma i Tilst tilbyder vi grundig hovedrengøring til parcelhuse og rækkehuse. Perfekt som engangsydelse eller forberedelse til en fast ordning." },
+      { city: "Brabrand", text: "Hovedrengøring i Brabrand til familier der har brug for en grundig rengøring. Vi kommer og giver dit hjem en frisk start med fokus på detaljen." },
+      { city: "Hasselager", text: "Book en professionel hovedrengøring i Hasselager når der trænger til en ekstra grundig omgang. Vi rengør alle rum med svanemærkede produkter." },
+    ],
     faqs: [
       {
         q: "Hvad er forskellen på hovedrengøring og fast rengøring?",
@@ -241,6 +274,17 @@ export const coreServices = [
         step: "Fast rytme",
         desc: "Vi udfører rengøringen som aftalt. Fakturering sker typisk månedligt.",
       },
+    ],
+    areas: [
+      { city: "Aarhus C", text: "Har du kontorlokaler i Aarhus C, der har brug for regelmæssig rengøring? Vores erhvervsrengøring i Aarhus C sikrer et rent og professionelt miljø for dine medarbejdere og kunder." },
+      { city: "Aarhus N", text: "Erhvervsrengøring i Aarhus N til kontorer, showrooms og klinikker i områder som Trøjborg og Universitetsparken. Vi tilpasser os jeres åbningstider." },
+      { city: "Aarhus V", text: "Vi tilbyder erhvervsrengøring i Aarhus V til mindre virksomheder og kontorfællesskaber. Fleksible aftaler med rengøring før eller efter arbejdstid." },
+      { city: "Risskov", text: "Klinikker, praksis og kontorer i Risskov får professionel erhvervsrengøring med fokus på hygiejne og diskretion. Vi kommer uden for åbningstid." },
+      { city: "Højbjerg", text: "Erhvervsrengøring i Højbjerg til kontorer og showrooms. Vi sikrer et sundt og rent arbejdsmiljø med svanemærkede produkter og faste ugentlige aftaler." },
+      { city: "Viby J", text: "Få pålidelig erhvervsrengøring i Viby J til kontorlokaler og mindre produktionsarealer. Vi laver en skræddersyet aftale baseret på jeres specifikke behov." },
+      { city: "Tilst", text: "Som lokalt rengøringsfirma med base i Tilst tilbyder vi erhvervsrengøring til virksomheder i området. Hurtig respons og fleksible aftaler." },
+      { city: "Brabrand", text: "Erhvervsrengøring i Brabrand til kontorer, værksteder og showrooms. Vi tilpasser rengøringen efter jeres åbningstider og behov." },
+      { city: "Hasselager", text: "Vi udfører erhvervsrengøring i Hasselager til mindre og mellemstore virksomheder. Faste aftaler med månedlig faktura og stabil kvalitet." },
     ],
     faqs: [
       {
