@@ -1,0 +1,3 @@
+## 2024-06-12 - Mobile Menu Accessibility State
+**Learning:** Mobile menus often rely solely on visual cues or DOM presence. Screen readers need explicit state communication via `aria-expanded` and semantic linkage via `aria-controls` to understand that a button toggles a region. Additionally, keyboard navigation users require the `Escape` key to easily dismiss the menu.
+**Action:** Always pair mobile menu toggle buttons with `aria-expanded` reflecting state, `aria-controls` pointing to the menu container's ID, and an `Escape` key listener on the window/document to ensure keyboard accessibility when adding custom mobile navigation patterns.
