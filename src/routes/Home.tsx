@@ -437,14 +437,12 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                before: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&auto=format&fit=crop&q=80",
-                after: "https://images.unsplash.com/photo-1584622650111-994a3f5f7e3f?w=700&auto=format&fit=crop&q=80",
+                image: "/images/before-after-kitchen-bath.webp",
                 label: "Køkken og badeværelse",
                 description: "Afkalkning, aftørring af fronter og grundig rengøring af de flader, hvor snavs hurtigt sætter sig.",
               },
               {
-                before: "https://images.unsplash.com/photo-1586105251261-72a756497a9f?w=700&auto=format&fit=crop&q=80",
-                after: "https://images.unsplash.com/photo-1563453395-1a0e7a6246a6?w=700&auto=format&fit=crop&q=80",
+                image: "/images/before-after-living-surfaces.webp",
                 label: "Stue og overflader",
                 description: "Støv, pletter og daglig brug fjernes, så rummet føles roligt, rent og klar til brug igen.",
               },
@@ -454,30 +452,22 @@ export default function Home() {
                 className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
                 aria-label={`Før og efter: ${pair.label}`}
               >
-                <div className="grid grid-cols-2 bg-slate-200">
-                  <figure className="relative min-h-64">
-                    <span className="absolute left-3 top-3 z-10 rounded-full bg-slate-950/75 px-3 py-1 text-xs font-semibold text-white">
+                <figure className="relative bg-slate-100">
+                  <div className="absolute inset-x-0 top-3 z-10 grid grid-cols-2 px-3">
+                    <span className="justify-self-start rounded-full bg-slate-950/75 px-3 py-1 text-xs font-semibold text-white">
                       Før
                     </span>
-                    <img
-                      src={pair.before}
-                      alt=""
-                      loading="lazy"
-                      className="h-64 w-full object-cover"
-                    />
-                  </figure>
-                  <figure className="relative min-h-64 border-l border-white">
-                    <span className="absolute left-3 top-3 z-10 rounded-full bg-green-600 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="justify-self-start rounded-full bg-green-600 px-3 py-1 text-xs font-semibold text-white">
                       Efter
                     </span>
-                    <img
-                      src={pair.after}
-                      alt=""
-                      loading="lazy"
-                      className="h-64 w-full object-cover"
-                    />
-                  </figure>
-                </div>
+                  </div>
+                  <img
+                    src={pair.image}
+                    alt={`Før og efter rengøring: ${pair.label}`}
+                    loading="lazy"
+                    className="h-72 w-full object-cover"
+                  />
+                </figure>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-slate-900">
                     {pair.label}
