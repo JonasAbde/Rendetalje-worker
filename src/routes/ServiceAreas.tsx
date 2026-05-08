@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { MapPin, Phone, ArrowRight, CheckCircle2, Navigation } from "lucide-react";
+import { MapPin, Phone, CheckCircle2, Navigation } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 

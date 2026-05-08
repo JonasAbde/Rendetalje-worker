@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Helmet } from "react-helmet-async";

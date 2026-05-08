@@ -25,3 +25,6 @@
 # Old WordPress paths
 /tag/agency/ / 301
 /tag/agency / 301
+
+# Client-side routes
+/* /index.html 200

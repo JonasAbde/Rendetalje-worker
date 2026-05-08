@@ -9,13 +9,13 @@ import SuccessAnimation from "./SuccessAnimation";
 const FORM_DRAFT_KEY = "rendetalje_contact_draft";
 
 interface MultiStepFormProps {
-  onSubmit: (data: FormData) => Promise<void>;
+  onSubmit: (data: globalThis.FormData) => Promise<void>;
   isSubmitting: boolean;
   isSubmitted: boolean;
   error: string | null;
 }
 
-interface FormData {
+interface ContactFormFields {
   type: string;
   date: string;
   description: string;
@@ -24,7 +24,20 @@ interface FormData {
   email: string;
   address: string;
   city: string;
+  companyWebsite: string;
 }
+
+const emptyFormData: ContactFormFields = {
+  type: "",
+  date: "",
+  description: "",
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  city: "",
+  companyWebsite: "",
+};
 
 export default function MultiStepForm({
   onSubmit,
@@ -34,16 +47,16 @@ export default function MultiStepForm({
 }: MultiStepFormProps) {
   const [step, setStep] = useState(0);
   const [gdprAccepted, setGdprAccepted] = useState(false);
-  const [formData, setFormData] = useState<FormData>(() => {
+  const [formData, setFormData] = useState<ContactFormFields>(() => {
     // Restore draft from sessionStorage on mount
     try {
       const draft = sessionStorage.getItem(FORM_DRAFT_KEY);
       if (draft) {
         const parsed = JSON.parse(draft);
-        return { ...{ type: "", date: "", description: "", name: "", phone: "", email: "", address: "", city: "" }, ...parsed };
+        return { ...emptyFormData, ...parsed };
       }
     } catch {}
-    return { type: "", date: "", description: "", name: "", phone: "", email: "", address: "", city: "" };
+    return emptyFormData;
   });
 
   // Persist form draft to sessionStorage
@@ -53,7 +66,7 @@ export default function MultiStepForm({
     } catch {}
   }, [formData]);
 
-  const updateField = (field: keyof FormData, value: string) => {
+  const updateField = (field: keyof ContactFormFields, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -67,7 +80,7 @@ export default function MultiStepForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = new FormData();
+    const data = new globalThis.FormData();
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
@@ -114,6 +127,18 @@ export default function MultiStepForm({
       )}
 
       <form onSubmit={step === 1 ? handleSubmit : (e) => e.preventDefault()}>
+        <div className="sr-only" aria-hidden="true">
+          <label htmlFor="companyWebsite">Website</label>
+          <input
+            id="companyWebsite"
+            type="text"
+            value={formData.companyWebsite}
+            onChange={(e) => updateField("companyWebsite", e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <AnimatePresence mode="wait">
           {/* Step 1: Service Selection */}
           {step === 0 && (

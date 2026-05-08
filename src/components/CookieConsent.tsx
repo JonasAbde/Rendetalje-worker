@@ -11,6 +11,7 @@ interface CookiePreferences {
 }
 
 const CONSENT_KEY = 'rendetalje_cookie_consent';
+const CONSENT_CHANGE_EVENT = 'rendetalje:cookie-consent-change';
 
 const defaultPreferences: CookiePreferences = {
   necessary: true, // Always required
@@ -20,6 +21,15 @@ const defaultPreferences: CookiePreferences = {
   timestamp: new Date().toISOString(),
 };
 
+function readStoredConsent(): CookiePreferences | null {
+  try {
+    const stored = localStorage.getItem(CONSENT_KEY);
+    return stored ? JSON.parse(stored) as CookiePreferences : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -27,11 +37,11 @@ export default function CookieConsent() {
 
   useEffect(() => {
     // Check if user has already given consent
-    const stored = localStorage.getItem(CONSENT_KEY);
+    const stored = readStoredConsent();
     if (!stored) {
       setIsVisible(true);
     } else {
-      setPreferences(JSON.parse(stored));
+      setPreferences(stored);
     }
   }, []);
 
@@ -39,6 +49,7 @@ export default function CookieConsent() {
     localStorage.setItem(CONSENT_KEY, JSON.stringify(newPreferences));
     setPreferences(newPreferences);
     setIsVisible(false);
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGE_EVENT, { detail: newPreferences }));
   };
 
   const handleAcceptAll = () => {
@@ -83,7 +94,7 @@ export default function CookieConsent() {
     return (
       <button
         onClick={handleWithdrawConsent}
-        className="fixed bottom-4 left-4 z-40 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-20 left-4 z-40 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow md:bottom-4"
         title="Administrer cookies"
         aria-label="Administrer cookies"
       >
@@ -99,7 +110,7 @@ export default function CookieConsent() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-2xl"
+          className="fixed bottom-16 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-2xl md:bottom-0"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex items-start justify-between gap-4">
@@ -248,10 +259,14 @@ export function useCookieConsent() {
   const [consent, setConsent] = useState<CookiePreferences | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem(CONSENT_KEY);
-    if (stored) {
-      setConsent(JSON.parse(stored));
-    }
+    setConsent(readStoredConsent());
+
+    const handleChange = (event: Event) => {
+      setConsent((event as CustomEvent<CookiePreferences>).detail);
+    };
+
+    window.addEventListener(CONSENT_CHANGE_EVENT, handleChange);
+    return () => window.removeEventListener(CONSENT_CHANGE_EVENT, handleChange);
   }, []);
 
   const hasConsent = (type: keyof Omit<CookiePreferences, 'timestamp'>) => {

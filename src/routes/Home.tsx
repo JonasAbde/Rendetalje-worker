@@ -5,9 +5,6 @@ import {
   CheckCircle2,
   ArrowRight,
   ShieldCheck,
-  Sparkles,
-  Home as HomeIcon,
-  Building2,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
@@ -34,6 +31,7 @@ function QuickQuoteForm() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +40,7 @@ function QuickQuoteForm() {
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, type: serviceType, description: message }),
+        body: JSON.stringify({ name, phone, email, type: serviceType, description: message, companyWebsite }),
       });
       if (!response.ok) throw new Error("Noget gik galt");
       setFormState("submitted");
@@ -65,6 +63,18 @@ function QuickQuoteForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor="quick-company-website">Website</label>
+        <input
+          id="quick-company-website"
+          type="text"
+          value={companyWebsite}
+          onChange={(e) => setCompanyWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       {/* Service type selector */}
       <div>
         <p className="text-sm font-medium text-slate-700 mb-3">Hvilken type rengøring?</p>

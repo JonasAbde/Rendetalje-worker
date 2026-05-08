@@ -2,10 +2,24 @@ import { Outlet, Link } from "react-router-dom";
 import { Phone, MessageSquare } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
-import CookieConsent from "../CookieConsent";
+import CookieConsent, { useCookieConsent } from "../CookieConsent";
 import StructuredData from "../StructuredData";
+import { loadAnalytics, unloadAnalytics } from "../../lib/analytics";
+import { useEffect } from "react";
 
 export default function Layout() {
+  const { hasConsent } = useCookieConsent();
+  const analyticsConsent = hasConsent("analytics");
+
+  useEffect(() => {
+    if (analyticsConsent) {
+      loadAnalytics();
+      return;
+    }
+
+    unloadAnalytics();
+  }, [analyticsConsent]);
+
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 font-sans selection:bg-green-100 selection:text-green-900">
       <StructuredData />
