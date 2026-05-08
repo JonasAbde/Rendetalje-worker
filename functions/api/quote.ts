@@ -71,6 +71,11 @@ function sanitizeObject(obj: Record<string, unknown>): QuoteData {
 // Simple email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Basic in-memory rate limiting map
+const rateLimitMap = new Map<string, { count: number, timestamp: number }>();
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+
 // Main handler - handles all methods
 export async function onRequest(context: EventContext<Env, string, unknown>): Promise<Response> {
   const request = context.request;
@@ -83,6 +88,29 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
       status: 204,
       headers: corsHeaders,
     });
+  }
+
+  // Rate Limiting (Evaluate after OPTIONS to avoid counting preflights)
+  const clientIP = request.headers.get('CF-Connecting-IP');
+  if (clientIP) {
+    const now = Date.now();
+    const limitData = rateLimitMap.get(clientIP);
+
+    if (limitData && now - limitData.timestamp < RATE_LIMIT_WINDOW_MS) {
+      if (limitData.count >= RATE_LIMIT_MAX_REQUESTS) {
+        return new Response(JSON.stringify({ error: 'Too many requests, please try again later.' }), {
+          status: 429,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      }
+      limitData.count += 1;
+    } else {
+      // Prevent memory leaks in long-lived isolates by clearing if it grows too large
+      if (rateLimitMap.size > 1000) {
+        rateLimitMap.clear();
+      }
+      rateLimitMap.set(clientIP, { count: 1, timestamp: now });
+    }
   }
 
   // Only allow POST
