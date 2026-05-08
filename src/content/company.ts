@@ -9,7 +9,7 @@ export const company = {
   phone: "+45 22 65 02 26",
   email: "info@rendetalje.dk",
   domain: "rendetalje.dk",
-  url: "https://www.rendetalje.dk",
+  url: "https://rendetalje.dk",
   founded: 2024,
   description:
     "Rendetalje er et professionelt rengøringsfirma i Aarhus, der tilbyder fast rengøring, flytterengøring, hovedrengøring og erhvervsrengøring i hele Aarhus og omegn.",
@@ -36,6 +36,21 @@ export const geography = {
   wording:
     "Vi hjælper kunder i Aarhus og omegn — herunder Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager. Ved større eller faste opgaver kører vi også uden for Aarhus efter aftale.",
 };
+
+export const seoKeywords = [
+  "rengøring Aarhus",
+  "rengøringsfirma Aarhus",
+  "privat rengøring Aarhus",
+  "fast rengøring Aarhus",
+  "flytterengøring Aarhus",
+  "hovedrengøring Aarhus",
+  "erhvervsrengøring Aarhus",
+  "rengøring Tilst",
+  "rengøring Risskov",
+  "rengøring Højbjerg",
+  "rengøring Viby J",
+  "rengøring Brabrand",
+];
 
 export const policies = {
   equipment: "Vi medbringer selv udstyr og svanemærkede rengøringsprodukter.",

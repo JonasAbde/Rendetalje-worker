@@ -77,15 +77,15 @@ export default function ServiceAreas() {
       <Helmet>
         <link rel="canonical" href="https://rendetalje.dk/service-omraade" />
         <title>
-          Serviceområder — {company.name} dækker hele Aarhus
+          Rengøring Aarhus C, N, V, Risskov og Tilst | {company.name}
         </title>
         <meta
           name="description"
-          content="Rendetalje tilbyder professionel rengøring i hele Aarhus — Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager. Få et tilbud i dag."
+          content="Lokalt rengøringsfirma i Aarhus. Vi tilbyder rengøring i Aarhus C, Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Tilst, Brabrand og Hasselager."
         />
         <meta
           property="og:title"
-          content={`Serviceområder — ${company.name} dækker hele Aarhus`}
+          content={`Rengøring i Aarhus og omegn | ${company.name}`}
         />
         <meta
           property="og:description"
@@ -187,6 +187,28 @@ export default function ServiceAreas() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+            Rengøring tæt på dig
+          </h2>
+          <div className="mt-5 space-y-4 text-base leading-7 text-slate-600">
+            <p>
+              Når du søger efter rengøring i Aarhus, handler det ofte om mere
+              end pris. Det handler om at finde et lokalt rengøringsfirma, der
+              kan møde op til tiden, forstå boligens eller virksomhedens behov
+              og levere en stabil standard hver gang.
+            </p>
+            <p>
+              Derfor beskriver vi vores serviceområder tydeligt: kunder i både
+              centrum, nordbyen, vestbyen og de omkringliggende bydele kan få
+              hjælp til fast rengøring, flytterengøring, hovedrengøring og
+              erhvervsrengøring.
+            </p>
           </div>
         </div>
       </section>

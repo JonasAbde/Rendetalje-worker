@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { company } from "@/content/company";
-import { geography } from "@/content/company";
+import { company, geography, seoKeywords } from "@/content/company";
 
 // --- Breadcrumb mapping: path segment → label ---
 const breadcrumbLabels: Record<string, string> = {
@@ -64,6 +63,7 @@ export default function StructuredData() {
     priceRange: "$$",
     description:
       "Professionel rengøring i Aarhus med fokus på detaljen. Fast rengøring, flytterengøring, hovedrengøring og erhvervsrengøring.",
+    keywords: seoKeywords.join(", "),
     address: {
       "@type": "PostalAddress",
       streetAddress: "Gammel Viborgvej 40",
@@ -82,10 +82,14 @@ export default function StructuredData() {
       opens: "08:00",
       closes: "16:00",
     },
-    areaServed: {
+    areaServed: areaNames.map((city) => ({
       "@type": "City",
-      name: "Aarhus",
-    },
+      name: city,
+      containedInPlace: {
+        "@type": "AdministrativeArea",
+        name: "Aarhus Kommune",
+      },
+    })),
     serviceArea: {
       "@type": "GeoCircle",
       geoMidpoint: {
@@ -213,14 +217,7 @@ export default function StructuredData() {
     "@type": "WebSite",
     name: company.name,
     url: SITE_URL,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
+    inLanguage: "da-DK",
   };
 
   const organizationSchema = {
@@ -230,6 +227,8 @@ export default function StructuredData() {
     legalName: company.legalName,
     url: SITE_URL,
     logo: "https://rendetalje.dk/logo.webp",
+    foundingDate: String(company.founded),
+    taxID: company.cvr,
     sameAs: ["https://www.instagram.com/rendetalje/"],
     contactPoint: {
       "@type": "ContactPoint",

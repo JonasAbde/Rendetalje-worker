@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
-import { company, positioning, geography } from "@/content/company";
+import { company, positioning, geography, seoKeywords } from "@/content/company";
 import { pricing } from "@/content/pricing";
 import { coreServices } from "@/content/services";
 import { faqs } from "@/content/faq";
@@ -156,6 +156,7 @@ export default function Home() {
         <link rel="canonical" href="https://rendetalje.dk/" />
         <title>{`${company.name} | Professionel rengøring i Aarhus`}</title>
         <meta name="description" content={positioning.primary} />
+        <meta name="keywords" content={seoKeywords.join(", ")} />
         <meta property="og:title" content={`${company.name} | Professionel rengøring i Aarhus`} />
         <meta property="og:description" content={positioning.primary} />
         <meta property="og:url" content="https://rendetalje.dk" />
@@ -241,6 +242,57 @@ export default function Home() {
                 </span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Quote Form */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+                Rengøringsfirma i Aarhus med lokal dækning
+              </h2>
+              <div className="mt-5 space-y-4 text-base leading-7 text-slate-600">
+                <p>
+                  Rendetalje hjælper private hjem og virksomheder med rengøring
+                  i Aarhus og omegn. Vi udfører fast rengøring, flytterengøring,
+                  hovedrengøring og erhvervsrengøring med klare aftaler og
+                  stabil kvalitet.
+                </p>
+                <p>
+                  Vi har base i Tilst og kører blandt andet til Aarhus C,
+                  Aarhus N, Aarhus V, Risskov, Højbjerg, Viby J, Brabrand og
+                  Hasselager. Det gør det nemt at få professionel rengøring
+                  uden lange svartider eller uklare transporttillæg.
+                </p>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <h3 className="font-semibold text-slate-900">
+                Populære søgninger vi matcher
+              </h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {seoKeywords.slice(0, 8).map((keyword) => (
+                  <Link
+                    key={keyword}
+                    to={
+                      keyword.includes("flytte")
+                        ? "/services/flytterengoering"
+                        : keyword.includes("hoved")
+                          ? "/services/hovedrengoering"
+                          : keyword.includes("erhverv")
+                            ? "/services/erhvervsrengoering"
+                            : "/services/fast-rengoering"
+                    }
+                    className="rounded-full bg-white px-3 py-1.5 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-colors hover:text-green-700 hover:ring-green-200"
+                  >
+                    {keyword}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

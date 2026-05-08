@@ -11,13 +11,13 @@ export default function Services() {
     <div className="flex flex-col">
       <Helmet>
         <link rel="canonical" href="https://rendetalje.dk/services" />
-        <title>{`Services | ${company.name}`}</title>
+        <title>{`Rengøring Aarhus | Fast, flytte, hoved og erhverv | ${company.name}`}</title>
         <meta
           name="description"
-          content="Vi tilbyder professionel rengøring med fokus på detaljen til både private og erhverv i Aarhus og omegn."
+          content="Rengøring i Aarhus og omegn. Rendetalje tilbyder fast rengøring, flytterengøring, hovedrengøring og erhvervsrengøring til private og erhverv."
         />
-        <meta property="og:title" content={`Services | ${company.name}`} />
-        <meta property="og:description" content="Vi tilbyder professionel rengøring med fokus på detaljen til både private og erhverv i Aarhus og omegn." />
+        <meta property="og:title" content={`Rengøring Aarhus | ${company.name}`} />
+        <meta property="og:description" content="Fast rengøring, flytterengøring, hovedrengøring og erhvervsrengøring i Aarhus og omegn." />
         <meta property="og:url" content="https://rendetalje.dk/services" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://rendetalje.dk/logo.webp" />
@@ -50,6 +50,18 @@ export default function Services() {
 
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-14 max-w-4xl">
+            <h2 className="text-2xl font-bold text-slate-900">
+              Professionel rengøring i Aarhus og omegn
+            </h2>
+            <p className="mt-4 text-slate-600 leading-7">
+              Leder du efter et rengøringsfirma i Aarhus, der kan hjælpe med
+              både faste aftaler og enkeltstående opgaver? Vi dækker hele
+              Aarhus-området og tilpasser opgaven efter bolig, lokaler,
+              frekvens og ønsket niveau. Herunder finder du de rengøringsydelser,
+              kunder oftest kontakter os for.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
             {coreServices.map((service, i) => {
               const Icon = service.icon;
