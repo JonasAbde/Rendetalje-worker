@@ -27,6 +27,15 @@ const serviceTypes = [
   { id: "andet", label: "Andet" },
 ];
 
+// ⚡ Bolt: Extract static image mapping outside of the component.
+// This prevents the object from being re-allocated on every iteration in the .map() loop, saving unnecessary memory allocation during render.
+const SERVICE_IMAGES_MAP: Record<string, string> = {
+  "fast-rengoering": "/images/service-fast.webp",
+  "flytterengoering": "/images/service-flyt.webp",
+  "hovedrengoering": "/images/service-hoved.webp",
+  "erhvervsrengoering": "/images/service-erhverv.webp",
+};
+
 function QuickQuoteForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serviceType, setServiceType] = useState("");
@@ -311,13 +320,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coreServices.map((service, i) => {
               const Icon = service.icon;
-              const imgMap: Record<string, string> = {
-                "fast-rengoering": "/images/service-fast.webp",
-                "flytterengoering": "/images/service-flyt.webp",
-                "hovedrengoering": "/images/service-hoved.webp",
-                "erhvervsrengoering": "/images/service-erhverv.webp",
-              };
-              const imgSrc = imgMap[service.id];
+              const imgSrc = SERVICE_IMAGES_MAP[service.id];
               return (
                 <Link
                   key={i}
