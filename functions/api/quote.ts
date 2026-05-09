@@ -54,6 +54,11 @@ function getClientIp(headers: HeaderReader): string {
 }
 
 function isRateLimited(headers: HeaderReader): boolean {
+  // Prevent memory leak in long-lived isolate
+  if (rateLimitHits.size > 1000) {
+    rateLimitHits.clear();
+  }
+
   const key = getClientIp(headers);
   const now = Date.now();
   const recentHits = (rateLimitHits.get(key) || []).filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
@@ -221,6 +226,15 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    // Prevent unhandled 500 crashes if rawData is null or not an object
+    if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+      return new Response(JSON.stringify({ error: 'Invalid JSON payload format' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = sanitizeObject(rawData);
     
     const validationError = getValidationError(data);
