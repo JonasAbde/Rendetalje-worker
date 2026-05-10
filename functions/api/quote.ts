@@ -221,6 +221,14 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+      return new Response(JSON.stringify({ error: 'JSON body must be an object' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = sanitizeObject(rawData);
     
     const validationError = getValidationError(data);
