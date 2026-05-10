@@ -4,18 +4,18 @@ import { Menu, X, Phone } from "lucide-react";
 import { company } from "@/content/company";
 import { cn } from "@/lib/utils";
 
+const navLinks = [
+  { name: "Forside", path: "/" },
+  { name: "Om os", path: "/om-os" },
+  { name: "Services", path: "/services" },
+  { name: "Priser", path: "/priser" },
+  { name: "Guide", path: "/guides/saadan-bestaar-du-dit-flyttesyn" },
+  { name: "FAQ", path: "/faq" },
+];
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  const navLinks = [
-    { name: "Forside", path: "/" },
-    { name: "Om os", path: "/om-os" },
-    { name: "Services", path: "/services" },
-    { name: "Priser", path: "/priser" },
-    { name: "Guide", path: "/guides/saadan-bestaar-du-dit-flyttesyn" },
-    { name: "FAQ", path: "/faq" },
-  ];
 
   const isActive = (path: string) => {
     if (path === "/" && location.pathname !== "/") return false;
