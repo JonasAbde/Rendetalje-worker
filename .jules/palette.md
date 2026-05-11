@@ -1,0 +1,3 @@
+## 2024-05-18 - Mobile Menu Accessibility Pattern
+**Learning:** Adding an `Escape` key listener via `useEffect`, setting `aria-expanded` reflecting state, setting `aria-controls` to match the target element's ID (`id="mobile-menu"`) ensures correct screen reader and keyboard functionality. This ensures the component supports accessibility gracefully without needing third-party libraries for dialog interactions.
+**Action:** When creating any mobile menu or expanding navigation component, always implement these exact attributes (`aria-expanded`, `aria-controls`, `id` on target, and `Escape` key logic) to guarantee robust accessibility immediately.
