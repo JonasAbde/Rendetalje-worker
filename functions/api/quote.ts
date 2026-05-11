@@ -215,6 +215,9 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
     let rawData: Record<string, unknown>;
     try {
       rawData = await request.json() as Record<string, unknown>;
+      if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+        throw new Error('JSON is not an object');
+      }
     } catch {
       return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
         status: 400,
