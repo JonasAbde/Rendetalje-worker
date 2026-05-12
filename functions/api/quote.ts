@@ -56,6 +56,19 @@ function getClientIp(headers: HeaderReader): string {
 function isRateLimited(headers: HeaderReader): boolean {
   const key = getClientIp(headers);
   const now = Date.now();
+
+  // Prevent memory leaks by selectively cleaning up expired entries when map gets large
+  if (rateLimitHits.size > 1000) {
+    for (const [k, hits] of rateLimitHits.entries()) {
+      const validHits = hits.filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
+      if (validHits.length === 0) {
+        rateLimitHits.delete(k);
+      } else {
+        rateLimitHits.set(k, validHits);
+      }
+    }
+  }
+
   const recentHits = (rateLimitHits.get(key) || []).filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
 
   if (recentHits.length >= RATE_LIMIT_MAX_REQUESTS) {
@@ -221,6 +234,15 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    // Prevent 500 crashes from null or array payloads masquerading as objects
+    if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body format' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = sanitizeObject(rawData);
     
     const validationError = getValidationError(data);
