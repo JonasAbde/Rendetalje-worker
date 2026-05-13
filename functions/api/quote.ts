@@ -54,6 +54,17 @@ function getClientIp(headers: HeaderReader): string {
 }
 
 function isRateLimited(headers: HeaderReader): boolean {
+  // Prevent memory leak in long-lived isolates by cleaning up stale entries
+  // Crucial: avoid clear() which resets rate limits for all current users and causes bypass
+  if (rateLimitHits.size > 1000) {
+    const now = Date.now();
+    for (const [k, hits] of rateLimitHits.entries()) {
+      const validHits = hits.filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
+      if (validHits.length === 0) rateLimitHits.delete(k);
+      else rateLimitHits.set(k, validHits);
+    }
+  }
+
   const key = getClientIp(headers);
   const now = Date.now();
   const recentHits = (rateLimitHits.get(key) || []).filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
