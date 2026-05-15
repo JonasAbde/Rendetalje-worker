@@ -75,3 +75,26 @@
   Industry: Restauranter
   Employees: 25
   Found via: Restaurant
+
+============================================================
+  CVR LEADS — New Batch: 2026-05-11 08:02:29
+============================================================
+
+── New Lead ──────────────────────────────────────────
+  CVR:      N/A
+  Name:     Kolding Ejendomsadministration ApS
+  Address:  Platinvej 26B, 6000 Kolding
+  Phone:    26289989
+  Email:    kontakt@ke-admin.dk
+  Industry: Administration af fast ejendom på kontraktbasis
+  Employees: 5
+  Found via: Ejendomsadministration
+── New Lead ──────────────────────────────────────────
+  CVR:      N/A
+  Name:     DETAIL ApS
+  Address:  Asnæs Centret 3-5, 4550 Asnæs
+  Phone:    None
+  Email:    None
+  Industry: Detailhandel med tøj
+  Employees: 9
+  Found via: Detail
