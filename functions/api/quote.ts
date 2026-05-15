@@ -53,9 +53,27 @@ function getClientIp(headers: HeaderReader): string {
     'unknown';
 }
 
+// Rate limit configuration
+const MAX_MAP_ENTRIES = 1000;
+let lastCleanup = Date.now();
+
 function isRateLimited(headers: HeaderReader): boolean {
   const key = getClientIp(headers);
   const now = Date.now();
+
+  // Cleanup memory leak when map gets too large, but throttle the cleanup to avoid O(N) CPU exhaustion DoS
+  if (rateLimitHits.size > MAX_MAP_ENTRIES && now - lastCleanup > RATE_LIMIT_WINDOW_MS) {
+    lastCleanup = now;
+    for (const [ipKey, hits] of rateLimitHits.entries()) {
+      const validHits = hits.filter(hit => now - hit < RATE_LIMIT_WINDOW_MS);
+      if (validHits.length === 0) {
+        rateLimitHits.delete(ipKey);
+      } else {
+        rateLimitHits.set(ipKey, validHits);
+      }
+    }
+  }
+
   const recentHits = (rateLimitHits.get(key) || []).filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
 
   if (recentHits.length >= RATE_LIMIT_MAX_REQUESTS) {
@@ -221,6 +239,14 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body: expected an object' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = sanitizeObject(rawData);
     
     const validationError = getValidationError(data);
