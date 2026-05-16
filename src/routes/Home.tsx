@@ -16,6 +16,13 @@ import { trackEvent } from "@/lib/analytics";
 
 type FormState = "idle" | "submitting" | "submitted" | "error";
 
+const serviceImageMap: Record<string, string> = {
+  "fast-rengoering": "/images/service-fast.webp",
+  "flytterengoering": "/images/service-flyt.webp",
+  "hovedrengoering": "/images/service-hoved.webp",
+  "erhvervsrengoering": "/images/service-erhverv.webp",
+};
+
 const serviceTypes = [
   { id: "fast", label: "Fast rengøring" },
   { id: "flytte", label: "Flytterengøring" },
@@ -373,13 +380,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coreServices.map((service, i) => {
               const Icon = service.icon;
-              const imgMap: Record<string, string> = {
-                "fast-rengoering": "/images/service-fast.webp",
-                "flytterengoering": "/images/service-flyt.webp",
-                "hovedrengoering": "/images/service-hoved.webp",
-                "erhvervsrengoering": "/images/service-erhverv.webp",
-              };
-              const imgSrc = imgMap[service.id];
+              const imgSrc = serviceImageMap[service.id];
               return (
                 <Link
                   key={i}
