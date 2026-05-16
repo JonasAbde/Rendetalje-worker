@@ -221,6 +221,15 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    // Prevent Type Confusion / DoS: Ensure rawData is actually an object and not null/array
+    if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+      return new Response(JSON.stringify({ error: 'Invalid JSON structure' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = sanitizeObject(rawData);
     
     const validationError = getValidationError(data);
