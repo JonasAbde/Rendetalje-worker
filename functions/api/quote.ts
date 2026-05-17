@@ -18,6 +18,7 @@ const allowedOrigins = [
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 3;
 const MAX_BODY_BYTES = 25_000;
+let lastCleanup = Date.now();
 const MAX_FIELD_LENGTHS = {
   name: 120,
   phone: 40,
@@ -56,6 +57,20 @@ function getClientIp(headers: HeaderReader): string {
 function isRateLimited(headers: HeaderReader): boolean {
   const key = getClientIp(headers);
   const now = Date.now();
+
+  // Periodically clean up expired entries to prevent memory leaks in isolates
+  if (now - lastCleanup > RATE_LIMIT_WINDOW_MS) {
+    for (const [ip, hits] of rateLimitHits.entries()) {
+      const validHits = hits.filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
+      if (validHits.length === 0) {
+        rateLimitHits.delete(ip);
+      } else {
+        rateLimitHits.set(ip, validHits);
+      }
+    }
+    lastCleanup = now;
+  }
+
   const recentHits = (rateLimitHits.get(key) || []).filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
 
   if (recentHits.length >= RATE_LIMIT_MAX_REQUESTS) {
