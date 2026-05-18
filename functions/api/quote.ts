@@ -294,7 +294,7 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
 
     // HTML skabelon til emailen
     const emailHtml = `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+      <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto;">
         <h2 style="color: #16a34a;">Ny forespørgsel fra Rendetalje.dk</h2>
         <p>Du har modtaget en ny henvendelse via hjemmesidens kontaktformular.</p>
         
