@@ -24,11 +24,7 @@ const serviceTypes = [
   { id: "andet", label: "Andet" },
 ];
 
-// ⚡ Bolt Optimization: Moved static image mapping out of component render
-// What: Extracted imgMap from inside coreServices.map()
-// Why: Prevents re-allocating this object on every render cycle and array iteration
-// Impact: Reduces garbage collection pressure and saves memory allocation time
-// Measurement: Profile React renders - array iteration will be slightly faster
+// ⚡ Bolt: Moved mapping out of render loop to prevent re-allocation
 const SERVICE_IMAGE_MAP: Record<string, string> = {
   "fast-rengoering": "/images/service-fast.webp",
   "flytterengoering": "/images/service-flyt.webp",
