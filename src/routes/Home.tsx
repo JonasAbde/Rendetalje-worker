@@ -24,6 +24,18 @@ const serviceTypes = [
   { id: "andet", label: "Andet" },
 ];
 
+// ⚡ Bolt Optimization: Moved static image mapping out of component render
+// What: Extracted imgMap from inside coreServices.map()
+// Why: Prevents re-allocating this object on every render cycle and array iteration
+// Impact: Reduces garbage collection pressure and saves memory allocation time
+// Measurement: Profile React renders - array iteration will be slightly faster
+const SERVICE_IMAGE_MAP: Record<string, string> = {
+  "fast-rengoering": "/images/service-fast.webp",
+  "flytterengoering": "/images/service-flyt.webp",
+  "hovedrengoering": "/images/service-hoved.webp",
+  "erhvervsrengoering": "/images/service-erhverv.webp",
+};
+
 function QuickQuoteForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serviceType, setServiceType] = useState("");
@@ -373,13 +385,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coreServices.map((service, i) => {
               const Icon = service.icon;
-              const imgMap: Record<string, string> = {
-                "fast-rengoering": "/images/service-fast.webp",
-                "flytterengoering": "/images/service-flyt.webp",
-                "hovedrengoering": "/images/service-hoved.webp",
-                "erhvervsrengoering": "/images/service-erhverv.webp",
-              };
-              const imgSrc = imgMap[service.id];
+              const imgSrc = SERVICE_IMAGE_MAP[service.id];
               return (
                 <Link
                   key={i}
