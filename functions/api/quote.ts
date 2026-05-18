@@ -42,6 +42,8 @@ const ALLOWED_TYPES = new Set([
   'Erhvervsrengøring',
 ]);
 const rateLimitHits = new Map<string, number[]>();
+let lastCleanupTime = Date.now();
+const CLEANUP_INTERVAL_MS = 60_000;
 
 type HeaderReader = {
   get(name: string): string | null;
@@ -54,8 +56,23 @@ function getClientIp(headers: HeaderReader): string {
 }
 
 function isRateLimited(headers: HeaderReader): boolean {
-  const key = getClientIp(headers);
   const now = Date.now();
+
+  // Time-throttled cleanup to prevent memory leaks in the Map
+  // without O(N) traversal on every request.
+  if (now - lastCleanupTime > CLEANUP_INTERVAL_MS) {
+    for (const [k, hits] of rateLimitHits.entries()) {
+      const validHits = hits.filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
+      if (validHits.length === 0) {
+        rateLimitHits.delete(k);
+      } else {
+        rateLimitHits.set(k, validHits);
+      }
+    }
+    lastCleanupTime = now;
+  }
+
+  const key = getClientIp(headers);
   const recentHits = (rateLimitHits.get(key) || []).filter((hit) => now - hit < RATE_LIMIT_WINDOW_MS);
 
   if (recentHits.length >= RATE_LIMIT_MAX_REQUESTS) {
@@ -221,6 +238,14 @@ export async function onRequest(context: EventContext<Env, string, unknown>): Pr
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
+
+    if (!rawData || typeof rawData !== 'object' || Array.isArray(rawData)) {
+      return new Response(JSON.stringify({ error: 'Invalid payload format' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = sanitizeObject(rawData);
     
     const validationError = getValidationError(data);
