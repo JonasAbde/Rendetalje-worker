@@ -4,7 +4,9 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 
-const Home = React.lazy(() => import("./routes/Home"));
+// Eagerly load the initial route to improve First Contentful Paint (FCP)
+// by avoiding an unnecessary network roundtrip on initial load.
+import Home from "./routes/Home";
 const About = React.lazy(() => import("./routes/About"));
 const Services = React.lazy(() => import("./routes/Services"));
 const FastRengoering = React.lazy(() => import("./routes/services/FastRengoering"));
