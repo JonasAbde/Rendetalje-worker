@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
+import Home from "./routes/Home"; // ⚡ Bolt: Eagerly imported to improve FCP
 
-const Home = React.lazy(() => import("./routes/Home"));
 const About = React.lazy(() => import("./routes/About"));
 const Services = React.lazy(() => import("./routes/Services"));
 const FastRengoering = React.lazy(() => import("./routes/services/FastRengoering"));
