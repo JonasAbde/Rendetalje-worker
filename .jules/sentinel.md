@@ -12,3 +12,8 @@
 **Vulnerability:** A missing type check for JSON payloads returned by `request.json()` caused 500 Internal Server errors when iterating over objects like `null` or `Array`, and a missing mechanism to clean up the `rateLimitHits` Map caused infinite memory growth resulting in a DoS vulnerability.
 **Learning:** Type validation is necessary for payloads parsed through `request.json()`, and in-memory Map rate limiters need a time-throttled cleanup mechanism.
 **Prevention:** Verify JSON payload types `if (!data || typeof data !== 'object' || Array.isArray(data))` before destructuring/object iteration. Use a time-throttled approach like `if (Date.now() - lastCleanupTime > interval)` to selectively clean up Map rate limiters without introducing high CPU utilization vulnerabilities.
+
+## 2026-06-01 - [Fix Rate Limit Bypass via IP Spoofing]
+**Vulnerability:** The rate limiting logic was using `X-Forwarded-For` as a fallback when `CF-Connecting-IP` was absent. Attackers could spoof this header to bypass the in-memory rate limiter on Cloudflare workers.
+**Learning:** Only trust Cloudflare-provided headers like `CF-Connecting-IP` for security controls like rate limiting. `X-Forwarded-For` can be modified by the client.
+**Prevention:** Remove fallback logic and exclusively use `CF-Connecting-IP` when hosted on Cloudflare. If absent, fallback safely to `'unknown'`.
