@@ -1,26 +1,26 @@
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 
-const Home = React.lazy(() => import("./routes/Home"));
-const About = React.lazy(() => import("./routes/About"));
-const Services = React.lazy(() => import("./routes/Services"));
-const FastRengoering = React.lazy(() => import("./routes/services/FastRengoering"));
-const Flytterengoering = React.lazy(() => import("./routes/services/Flytterengoering"));
-const Hovedrengoering = React.lazy(() => import("./routes/services/Hovedrengoering"));
-const Erhvervsrengoering = React.lazy(() => import("./routes/services/Erhvervsrengoering"));
-const Pricing = React.lazy(() => import("./routes/Pricing"));
-const ServiceAreas = React.lazy(() => import("./routes/ServiceAreas"));
-const FlyttesynGuide = React.lazy(() => import("./routes/FlyttesynGuide"));
-const RengoeringPriser = React.lazy(() => import("./routes/guides/RengoeringPriser"));
-const FAQ = React.lazy(() => import("./routes/FAQ"));
-const Contact = React.lazy(() => import("./routes/Contact"));
-const Terms = React.lazy(() => import("./routes/Terms"));
-const Privacy = React.lazy(() => import("./routes/Privacy"));
-const Cookies = React.lazy(() => import("./routes/Cookies"));
-const NotFound = React.lazy(() => import("./routes/NotFound"));
+import Home from "./routes/Home"; // Eagerly import critical initial route to eliminate network roundtrip and improve First Contentful Paint (FCP)
+const About = lazy(() => import("./routes/About"));
+const Services = lazy(() => import("./routes/Services"));
+const FastRengoering = lazy(() => import("./routes/services/FastRengoering"));
+const Flytterengoering = lazy(() => import("./routes/services/Flytterengoering"));
+const Hovedrengoering = lazy(() => import("./routes/services/Hovedrengoering"));
+const Erhvervsrengoering = lazy(() => import("./routes/services/Erhvervsrengoering"));
+const Pricing = lazy(() => import("./routes/Pricing"));
+const ServiceAreas = lazy(() => import("./routes/ServiceAreas"));
+const FlyttesynGuide = lazy(() => import("./routes/FlyttesynGuide"));
+const RengoeringPriser = lazy(() => import("./routes/guides/RengoeringPriser"));
+const FAQ = lazy(() => import("./routes/FAQ"));
+const Contact = lazy(() => import("./routes/Contact"));
+const Terms = lazy(() => import("./routes/Terms"));
+const Privacy = lazy(() => import("./routes/Privacy"));
+const Cookies = lazy(() => import("./routes/Cookies"));
+const NotFound = lazy(() => import("./routes/NotFound"));
 
 const Loading = () => (
   <div className="flex items-center justify-center min-h-screen">
