@@ -50,9 +50,8 @@ type HeaderReader = {
 };
 
 function getClientIp(headers: HeaderReader): string {
-  return headers.get('CF-Connecting-IP') ||
-    headers.get('X-Forwarded-For')?.split(',')[0]?.trim() ||
-    'unknown';
+  // Prevent IP spoofing attacks by relying exclusively on Cloudflare's secure header
+  return headers.get('CF-Connecting-IP') || 'unknown';
 }
 
 function isRateLimited(headers: HeaderReader): boolean {
