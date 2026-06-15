@@ -50,9 +50,10 @@ type HeaderReader = {
 };
 
 function getClientIp(headers: HeaderReader): string {
-  return headers.get('CF-Connecting-IP') ||
-    headers.get('X-Forwarded-For')?.split(',')[0]?.trim() ||
-    'unknown';
+  // CF-Connecting-IP is the trusted header in Cloudflare Pages/Workers.
+  // We explicitly avoid falling back to X-Forwarded-For as it can be easily
+  // spoofed by clients to bypass rate-limiting.
+  return headers.get('CF-Connecting-IP') || 'unknown';
 }
 
 function isRateLimited(headers: HeaderReader): boolean {
