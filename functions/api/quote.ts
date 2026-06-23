@@ -50,9 +50,9 @@ type HeaderReader = {
 };
 
 function getClientIp(headers: HeaderReader): string {
-  return headers.get('CF-Connecting-IP') ||
-    headers.get('X-Forwarded-For')?.split(',')[0]?.trim() ||
-    'unknown';
+  // 🛡️ Security: Rely exclusively on CF-Connecting-IP to prevent IP spoofing
+  // via X-Forwarded-For headers which can be manipulated by attackers.
+  return headers.get('CF-Connecting-IP') || 'unknown';
 }
 
 function isRateLimited(headers: HeaderReader): boolean {
