@@ -9,3 +9,7 @@
 ## 2024-05-01 - Accessible Navigation and Danish Localization
 **Learning:** Using `focus-visible` classes ensures that keyboard users still receive focus rings while mouse users do not, which improves the UX by preventing unwanted rings on click. Additionally, accessibility attributes like `aria-label` must be localized properly (e.g., from 'Toggle menu' to 'Åbn menu'/'Luk menu' in Danish) to ensure screen readers communicate properly in the application's locale.
 **Action:** Use `focus-visible` classes instead of generic `focus` classes for all newly added interactive elements, and verify that ARIA strings match the application's native language context.
+
+## 2024-05-04 - Accessible Placeholder Inputs
+**Learning:** Inputs that lack standard `<label>` tags and rely entirely on placeholders (like compact quote forms) are completely silent to screen readers. Furthermore, generic "focus" states can be disruptive to mouse users, but without them, keyboard users are lost.
+**Action:** Always add explicit `aria-label`s to inputs that only use placeholders, visually mark required fields with an asterisk (`*`) in the placeholder, and ensure all interactive elements use `focus-visible` to support keyboard navigation gracefully.
