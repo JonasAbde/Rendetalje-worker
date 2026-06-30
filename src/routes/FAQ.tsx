@@ -28,7 +28,7 @@ export default function FAQ() {
                 text: faq.a,
               },
             })),
-          })}
+          }).replace(/</g, '\\u003c')}
         </script>
       </Helmet>
 

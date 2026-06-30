@@ -16,4 +16,10 @@
 ## 2026-06-29 - [High] Fix IP Spoofing Vulnerability in Rate Limiter
 **Vulnerability:** The rate limiter was using `X-Forwarded-For` as a fallback for the client IP address. Since `X-Forwarded-For` is a user-controlled header, an attacker could spoof their IP address to bypass rate limiting completely.
 **Learning:** In a Cloudflare Pages Functions environment, the client IP address is reliably provided via the `CF-Connecting-IP` header. Using `X-Forwarded-For` as a fallback introduces a security vulnerability.
+
 **Prevention:** Never use `X-Forwarded-For` for security controls (like rate limiting) unless running behind an explicit, trusted reverse proxy that guarantees it. In Cloudflare environments, rely exclusively on `CF-Connecting-IP` and fallback to a strictly shared identifier like 'unknown'.
+
+## 2026-06-30 - [High] Fix XSS Vulnerability in JSON-LD Script Tags
+**Vulnerability:** The application was serializing JSON data into `<script type="application/ld+json">` tags using `JSON.stringify()` without escaping the `<` character. If any part of the structured data (e.g., dynamically generated breadcrumbs or FAQ content derived from user input or URLs) contained malicious data like `</script><script>alert(1)</script>`, an attacker could break out of the JSON context and execute arbitrary JavaScript, resulting in Cross-Site Scripting (XSS).
+**Learning:** Modern web applications often inject structured data (JSON-LD) into the DOM for SEO. When doing so, `JSON.stringify()` alone is unsafe because the browser's HTML parser will interpret `</script>` inside the string as the end of the script block before the JavaScript engine even parses the JSON.
+**Prevention:** Always escape the `<` character when embedding JSON directly inside an HTML `<script>` block. This can be done by appending `.replace(/</g, '\u003c')` to the result of `JSON.stringify()`.
