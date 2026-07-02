@@ -94,7 +94,7 @@ export default function CookieConsent() {
     return (
       <button
         onClick={handleWithdrawConsent}
-        className="fixed bottom-20 left-4 z-40 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow md:bottom-4"
+        className="fixed bottom-20 left-4 z-40 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow md:bottom-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
         title="Administrer cookies"
         aria-label="Administrer cookies"
       >
@@ -125,7 +125,7 @@ export default function CookieConsent() {
                 </p>
                 <a 
                   href="/cookiepolitik" 
-                  className="text-green-600 text-sm hover:underline inline-flex items-center gap-1"
+                  className="text-green-600 text-sm hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500 rounded-sm"
                 >
                   Læs vores cookiepolitik
                 </a>
@@ -141,7 +141,7 @@ export default function CookieConsent() {
                     timestamp: new Date().toISOString(),
                   });
                 }}
-                className="p-1 hover:bg-slate-100 rounded-full transition-colors"
+                className="p-1 hover:bg-slate-100 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
                 aria-label="Luk cookie banner"
               >
                 <X className="w-5 h-5 text-slate-400" />
@@ -171,6 +171,7 @@ export default function CookieConsent() {
 
               {showDetails && (
                 <motion.div
+                  id="cookie-details"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   className="space-y-3"
@@ -221,19 +222,21 @@ export default function CookieConsent() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <button
                 onClick={handleAcceptAll}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+                className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
               >
                 Accepter alle
               </button>
               <button
                 onClick={handleRejectAll}
-                className="px-4 py-2 bg-white text-slate-700 border border-slate-300 rounded-lg font-medium hover:bg-slate-50 transition-colors"
+                className="px-4 py-2 bg-white text-slate-700 border border-slate-300 rounded-lg font-medium hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
               >
                 Afvis alle
               </button>
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="px-4 py-2 text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-2"
+                className="px-4 py-2 text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500 rounded-lg"
+                aria-expanded={showDetails}
+                aria-controls="cookie-details"
               >
                 <Settings className="w-4 h-4" />
                 {showDetails ? 'Skjul indstillinger' : 'Indstillinger'}
@@ -241,7 +244,7 @@ export default function CookieConsent() {
               {showDetails && (
                 <button
                   onClick={handleAcceptSelected}
-                  className="px-4 py-2 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-900 transition-colors"
+                  className="px-4 py-2 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
                 >
                   Gem valg
                 </button>
