@@ -9,3 +9,7 @@
 ## 2024-05-01 - Accessible Navigation and Danish Localization
 **Learning:** Using `focus-visible` classes ensures that keyboard users still receive focus rings while mouse users do not, which improves the UX by preventing unwanted rings on click. Additionally, accessibility attributes like `aria-label` must be localized properly (e.g., from 'Toggle menu' to 'Åbn menu'/'Luk menu' in Danish) to ensure screen readers communicate properly in the application's locale.
 **Action:** Use `focus-visible` classes instead of generic `focus` classes for all newly added interactive elements, and verify that ARIA strings match the application's native language context.
+
+## 2024-05-12 - [Accessibility for Mobile Menu Buttons]
+**Learning:** In React/Tailwind applications, simple icon-only mobile menu toggle buttons often lack structural ARIA attributes. A button merely toggling visual state isn't enough for screen readers. It needs `aria-expanded` and `aria-controls` explicitly tied to the menu element's ID to be accessible. Also, adding keyboard accessibility with the `Escape` key helps close modals/menus cleanly for non-mouse users.
+**Action:** When creating or modifying mobile menus or toggle buttons, always ensure `aria-expanded` is dynamically linked to state, `aria-controls` connects to the correct container `id`, and provide keyboard interaction (like Escape key closing) for a seamless experience.
