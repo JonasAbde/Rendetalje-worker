@@ -4,7 +4,12 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 
-const Home = React.lazy(() => import("./routes/Home"));
+// ⚡ Bolt Performance Optimization:
+// Eagerly import the initial route component (Home) instead of lazy loading it.
+// This eliminates an extra network roundtrip for the first chunk,
+// significantly improving the First Contentful Paint (FCP) time.
+import Home from "./routes/Home";
+
 const About = React.lazy(() => import("./routes/About"));
 const Services = React.lazy(() => import("./routes/Services"));
 const FastRengoering = React.lazy(() => import("./routes/services/FastRengoering"));
