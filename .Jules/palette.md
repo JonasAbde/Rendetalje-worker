@@ -9,3 +9,7 @@
 ## 2024-05-01 - Accessible Navigation and Danish Localization
 **Learning:** Using `focus-visible` classes ensures that keyboard users still receive focus rings while mouse users do not, which improves the UX by preventing unwanted rings on click. Additionally, accessibility attributes like `aria-label` must be localized properly (e.g., from 'Toggle menu' to 'Åbn menu'/'Luk menu' in Danish) to ensure screen readers communicate properly in the application's locale.
 **Action:** Use `focus-visible` classes instead of generic `focus` classes for all newly added interactive elements, and verify that ARIA strings match the application's native language context.
+
+## 2024-05-23 - Mobile Menu Accessibility and Keyboard UX
+**Learning:** A standard mobile menu toggle using `lucide-react` icons and a state boolean lacks full accessibility out of the box. Screen readers rely on `aria-expanded` to know the menu's state and `aria-controls` referencing the menu's `id` to understand the connection. Additionally, keyboard users expect to be able to close an overlay/menu by pressing the `Escape` key, which requires a global event listener when the menu is open.
+**Action:** When creating or updating toggleable mobile menus or overlays, always include `aria-expanded` and `aria-controls` on the toggle button, ensure the menu container has the corresponding `id`, and implement a `useEffect` hook to listen for the `Escape` keydown event to dismiss the menu.
