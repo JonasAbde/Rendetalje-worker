@@ -35,22 +35,7 @@ function getBreadcrumbItems(pathname: string) {
   return items;
 }
 
-export default function StructuredData() {
-  const { pathname } = useLocation();
-  const breadcrumbItems = getBreadcrumbItems(pathname);
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbItems.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: `${SITE_URL}${item.path}`,
-    })),
-  };
-
-  const areaNames = geography.areas.map((a) => a.city);
+const areaNames = geography.areas.map((a) => a.city);
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -236,6 +221,21 @@ export default function StructuredData() {
       contactType: "customer service",
       availableLanguage: ["Danish"],
     },
+  };
+
+  export default function StructuredData() {
+  const { pathname } = useLocation();
+  const breadcrumbItems = getBreadcrumbItems(pathname);
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
   };
 
   useEffect(() => {
