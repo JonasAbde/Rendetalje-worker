@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
+// Eagerly load the Home component to avoid an unnecessary network roundtrip and improve First Contentful Paint (FCP)
+import Home from "./routes/Home";
 
-const Home = React.lazy(() => import("./routes/Home"));
 const About = React.lazy(() => import("./routes/About"));
 const Services = React.lazy(() => import("./routes/Services"));
 const FastRengoering = React.lazy(() => import("./routes/services/FastRengoering"));
