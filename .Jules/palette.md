@@ -9,3 +9,7 @@
 ## 2024-05-01 - Accessible Navigation and Danish Localization
 **Learning:** Using `focus-visible` classes ensures that keyboard users still receive focus rings while mouse users do not, which improves the UX by preventing unwanted rings on click. Additionally, accessibility attributes like `aria-label` must be localized properly (e.g., from 'Toggle menu' to 'Åbn menu'/'Luk menu' in Danish) to ensure screen readers communicate properly in the application's locale.
 **Action:** Use `focus-visible` classes instead of generic `focus` classes for all newly added interactive elements, and verify that ARIA strings match the application's native language context.
+
+## 2026-06-27 - Mobile Menu Accessibility Enhancements
+**Learning:** Toggle buttons controlling expandable sections (like mobile menus) must include `aria-expanded` to reflect their current state and `aria-controls` pointing to the expandable container's ID. Additionally, to fully support keyboard users and screen readers, a mobile menu should include an `Escape` key listener to close the menu.
+**Action:** When creating or modifying mobile menus or expandable sections, always add `aria-expanded` and `aria-controls` attributes, and ensure there is an `Escape` key listener to close the expanded content.
